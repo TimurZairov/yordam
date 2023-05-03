@@ -1,17 +1,15 @@
 import React from 'react';
-import {Text, View} from 'react-native';
-import {Logo} from '../../assets/icons/index';
-
-const pressed = () => {
-  console.warn('pressed');
-};
+import {SafeAreaView, View} from 'react-native';
+import styles from './style';
+import Header from '../../Components/Header';
 
 const HomeScreen = () => {
   return (
-    <View>
-      <Text>Home</Text>
-      <Logo width={65} height={65} fill={'#6E64BD'} onPress={pressed} />
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <Header />
+      </View>
+    </SafeAreaView>
   );
 };
 
