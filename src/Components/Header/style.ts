@@ -24,6 +24,6 @@ export default StyleSheet.create({
   },
   userName: {
     // fontWeight: fonts.fontWeight.full,
-    fontFamily: 'OpenSans-Bold',
+    fontFamily: fonts.fontFamily.bold,
   },
 });
