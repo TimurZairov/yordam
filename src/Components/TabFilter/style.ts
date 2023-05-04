@@ -3,21 +3,22 @@ import {colors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
-  button: {
-    width: '48%',
+  filterButton: {
+    paddingHorizontal: 32,
     paddingVertical: 9,
     backgroundColor: colors.whiteColor,
+    borderRadius: 20,
     elevation: 2,
-    borderRadius: 50,
-    justifyContent: 'center',
-    alignItems: 'center',
+    alignSelf: 'flex-start',
+    marginRight: 10,
+    marginBottom: 2,
   },
-  tabScreenText: {
+  textActive: {
     color: colors.purpleColor,
     fontFamily: fonts.fontFamily.bold,
     fontSize: fonts.fontSize.md,
   },
-  tabScreenTextActive: {
+  text: {
     fontFamily: fonts.fontFamily.light,
     color: colors.darkGrayColor,
   },

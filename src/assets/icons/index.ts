@@ -12,6 +12,7 @@ import MessageIcon from './MessageIcon.svg';
 import MuLocationIcon from './MuLocationIcon.svg';
 import Notifications from './Notifications.svg';
 import ProfileIcon from './ProfileIcon.svg';
+import ArrowRightIcon from './ArrowRightIcon.svg';
 
 export {
   Logo,
@@ -28,4 +29,5 @@ export {
   GoogleIcon,
   HomeIcon,
   Notifications,
+  ArrowRightIcon,
 };

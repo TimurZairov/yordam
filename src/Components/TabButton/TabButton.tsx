@@ -1,5 +1,5 @@
 import React from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {Pressable, Text} from 'react-native';
 import styles from './style';
 
 interface ITabScreen {
@@ -9,14 +9,12 @@ interface ITabScreen {
 
 const TabButton = ({title, active}: ITabScreen) => {
   return (
-    <View style={styles.buttonContainer}>
-      <Pressable style={styles.button}>
-        <Text
-          style={[active ? styles.tabScreenText : styles.tabScreenTextActive]}>
-          {title}
-        </Text>
-      </Pressable>
-    </View>
+    <Pressable style={styles.button}>
+      <Text
+        style={[active ? styles.tabScreenText : styles.tabScreenTextActive]}>
+        {title}
+      </Text>
+    </Pressable>
   );
 };
 
