@@ -13,6 +13,7 @@ export default StyleSheet.create({
   },
   info: {
     flexDirection: 'row',
+    justifyContent: 'space-between',
   },
   userInfoContainer: {
     flexDirection: 'row',

@@ -3,8 +3,9 @@ import {SafeAreaView, Text, View} from 'react-native';
 import styles from './style';
 import Header from '../../Components/Header';
 import TabButton from '../../Components/TabButton';
-import Card from '../../Components/Card/';
 import TabFilter from '../../Components/TabFilter';
+
+import PostsList from '../../Components/PostsList';
 
 const HomeScreen = () => {
   return (
@@ -22,10 +23,8 @@ const HomeScreen = () => {
         <View style={styles.scrollView}>
           <TabFilter />
         </View>
-        {/*Card*/}
-        <Card />
-        <Card />
-        <Card />
+        {/*Posts*/}
+        <PostsList />
       </View>
     </SafeAreaView>
   );
