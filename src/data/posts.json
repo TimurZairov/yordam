@@ -27,6 +27,10 @@
       "id": "user1",
       "image": "https://i.pinimg.com/originals/87/f3/86/87f386f1ecba6fdc4b13884c6dd775a0.jpg",
       "fullName": "ШУхрат Аминов"
+    },
+    "jobLocation": {
+      "lat": 39.654754,
+      "loong": 66.965929
     }
   },
   {
@@ -54,6 +58,10 @@
       "id": "user1",
       "image": "https://miratext.ru/uploads/users/53685/avatar/26e63fd1aab69fb5d52212676e5ce457.jpg",
       "fullName": "Мфелюба Маматкулова"
+    },
+    "jobLocation": {
+      "lat": 39.656571,
+      "loong": 66.969384
     }
   },
   {
@@ -81,6 +89,10 @@
       "id": "user1",
       "image": "https://i.pinimg.com/originals/87/f3/86/87f386f1ecba6fdc4b13884c6dd775a0.jpg",
       "fullName": "Андрей Прокофьев"
+    },
+    "jobLocation": {
+      "lat": 39.649649,
+      "loong": 66.970607
     }
   }
 ]

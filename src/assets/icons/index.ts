@@ -9,10 +9,11 @@ import HomeIcon from './HomeIcon.svg';
 import LocationIcon from './LocationIcon.svg';
 import MapIcon from './MapIcon.svg';
 import MessageIcon from './MessageIcon.svg';
-import MuLocationIcon from './MuLocationIcon.svg';
+import MyLocationIcon from './MyLocationIcon.svg';
 import Notifications from './Notifications.svg';
 import ProfileIcon from './ProfileIcon.svg';
 import ArrowRightIcon from './ArrowRightIcon.svg';
+import MapMarker from './mapMarker.svg';
 
 export {
   Logo,
@@ -21,7 +22,7 @@ export {
   MapIcon,
   ArrowLeftIcon,
   LocationIcon,
-  MuLocationIcon,
+  MyLocationIcon,
   ProfileIcon,
   MessageIcon,
   DrawerIcon,
@@ -30,4 +31,5 @@ export {
   HomeIcon,
   Notifications,
   ArrowRightIcon,
+  MapMarker,
 };
