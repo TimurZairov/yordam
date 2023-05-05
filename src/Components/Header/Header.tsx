@@ -6,9 +6,10 @@ import {colors} from '../../theme/colors';
 
 interface IHeader {
   login?: boolean;
+  registry?: boolean;
 }
 
-const Header = ({login}: IHeader) => {
+const Header = ({login, registry}: IHeader) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerLeft}>
@@ -17,13 +18,15 @@ const Header = ({login}: IHeader) => {
           fill={colors.blackColor}
           style={styles.drawerIcon}
         />
-        {!login && (
-          <Text style={styles.greetingText}>
-            Привет, <Text style={styles.userName}>Тимур</Text>{' '}
-          </Text>
-        )}
+        {!login ||
+          (!registry && (
+            <Text style={styles.greetingText}>
+              Привет, <Text style={styles.userName}>Тимур</Text>{' '}
+            </Text>
+          ))}
       </View>
-      <Notifications height={19} fill={colors.blackColor} />
+      {!login ||
+        (!registry && <Notifications height={19} fill={colors.blackColor} />)}
     </View>
   );
 };
