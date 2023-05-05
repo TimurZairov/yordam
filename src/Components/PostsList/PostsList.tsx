@@ -11,6 +11,7 @@ const PostsList = () => {
         return <Card post={item} />;
       }}
       keyExtractor={item => item.id}
+      showsVerticalScrollIndicator={false}
     />
   );
 };

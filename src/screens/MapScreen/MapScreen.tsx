@@ -1,12 +1,37 @@
-import React from 'react';
-import {Image, View} from 'react-native';
+import React, {useState} from 'react';
+import {Image, PermissionsAndroid, View} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
 import {MapMarker, MyLocationIcon} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 import styles from './style';
 import posts from '../../data/posts.json';
+import Geolocation from 'react-native-geolocation-service';
 
 const MapScreen = () => {
+  const [myLocation, setMyLocation] = useState({});
+  const getPermissions = async () => {
+    try {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      );
+      if (!granted) {
+        return;
+      } else {
+        Geolocation.getCurrentPosition(
+          position => {
+            setMyLocation(position);
+          },
+          error => {
+            console.log(error.message);
+          },
+          {enableHighAccuracy: true, timeout: 15000, maximumAge: 10000},
+        );
+      }
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   return (
     <View style={styles.mapContainer}>
       <MapView
@@ -38,9 +63,10 @@ const MapScreen = () => {
             </Marker>
           );
         })}
+        {/*My location*/}
       </MapView>
       <View style={styles.myLocation}>
-        <MyLocationIcon width={45} />
+        <MyLocationIcon width={45} onPress={getPermissions} />
       </View>
     </View>
   );

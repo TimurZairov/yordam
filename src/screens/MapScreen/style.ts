@@ -29,4 +29,10 @@ export default StyleSheet.create({
     borderRadius: 25,
     marginBottom: 8,
   },
+  muLocationPoint: {
+    width: 15,
+    height: 15,
+    backgroundColor: colors.purpleColor,
+    borderRadius: 10,
+  },
 });

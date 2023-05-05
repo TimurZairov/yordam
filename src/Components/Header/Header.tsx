@@ -4,7 +4,11 @@ import styles from './style';
 import {DrawerIcon, Notifications} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 
-const Header = () => {
+interface IHeader {
+  login?: boolean;
+}
+
+const Header = ({login}: IHeader) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerLeft}>
@@ -13,9 +17,11 @@ const Header = () => {
           fill={colors.blackColor}
           style={styles.drawerIcon}
         />
-        <Text style={styles.greetingText}>
-          Привет, <Text style={styles.userName}>Тимур</Text>{' '}
-        </Text>
+        {!login && (
+          <Text style={styles.greetingText}>
+            Привет, <Text style={styles.userName}>Тимур</Text>{' '}
+          </Text>
+        )}
       </View>
       <Notifications height={19} fill={colors.blackColor} />
     </View>
