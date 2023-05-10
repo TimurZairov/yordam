@@ -5,9 +5,10 @@ import {colors} from '../../theme/colors';
 
 interface IInput {
   placeholder: string;
+  multiline?: boolean;
 }
 
-const Input = ({placeholder}: IInput) => {
+const Input = ({placeholder, multiline}: IInput) => {
   const [colorBg, setColorBg] = useState(colors.blackColor);
 
   const onFocus = () => {
@@ -25,6 +26,7 @@ const Input = ({placeholder}: IInput) => {
       placeholderTextColor={colors.lightGrayColor}
       onFocus={onFocus}
       onBlur={onBlur}
+      multiline={multiline}
     />
   );
 };
