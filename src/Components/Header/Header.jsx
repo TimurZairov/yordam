@@ -4,12 +4,7 @@ import styles from './style';
 import {DrawerIcon, Notifications} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 
-interface IHeader {
-  login?: boolean;
-  registry?: boolean;
-}
-
-const Header = ({login, registry}: IHeader) => {
+const Header = ({login, registry}) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerLeft}>

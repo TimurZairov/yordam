@@ -4,29 +4,7 @@ import styles from './style';
 import {ArrowRightIcon} from '../../assets/icons/index';
 import {colors} from '../../theme/colors';
 
-interface ICard {
-  post: IPost;
-}
-
-interface IPost {
-  applied: [];
-  date: string;
-  description: string;
-  id: string;
-  location: string;
-  title: string;
-  user: IUser;
-  image: string;
-  price: string;
-}
-
-interface IUser {
-  id: string;
-  fullName: string;
-  image: string;
-}
-
-const Card = ({post}: ICard) => {
+const Card = ({post}) => {
   return (
     <View style={styles.cardContainer}>
       <View style={styles.info}>

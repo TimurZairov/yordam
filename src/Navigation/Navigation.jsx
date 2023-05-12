@@ -36,6 +36,7 @@ const Navigation = () => {
           name={'Home'}
           component={HomeScreen}
           options={{
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({focused, color}) => {
               return (
                 <HomeIcon
@@ -51,6 +52,7 @@ const Navigation = () => {
           name={'Map'}
           component={MapScreen}
           options={{
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({color}) => {
               return <MapIcon height={30} fill={color} />;
             },
@@ -62,6 +64,7 @@ const Navigation = () => {
           name={'Create'}
           component={CreateScreen}
           options={{
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({color}) => {
               return <AddIcon height={47} fill={color} />;
             },
@@ -73,6 +76,7 @@ const Navigation = () => {
           name={'Message'}
           component={CreateScreen}
           options={{
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({color}) => {
               return <MessageIcon height={30} fill={color} />;
             },
@@ -83,6 +87,7 @@ const Navigation = () => {
           name={'Profile'}
           component={EmployerProfileScreen}
           options={{
+            // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({color}) => {
               return <ProfileIcon height={30} fill={color} />;
             },

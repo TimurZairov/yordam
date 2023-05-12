@@ -8,14 +8,7 @@ import posts from '../../data/posts.json';
 import Geolocation from 'react-native-geolocation-service';
 
 const MapScreen = () => {
-  const [myLocation, setMyLocation] = useState<{} | null>(null);
-
-  // data = {
-  //     latitude: '',
-  //     longitude: '',
-  //     userId: id,
-  //     postId: id
-  // }
+  const [myLocation, setMyLocation] = useState(null);
 
   const getPermissions = async () => {
     try {
@@ -56,8 +49,8 @@ const MapScreen = () => {
           return (
             <Marker
               coordinate={{
-                latitude: job.jobLocation.lat,
-                longitude: job.jobLocation.loong,
+                latitude: job?.jobLocation?.lat,
+                longitude: job?.jobLocation?.loong,
               }}
               anchor={{x: 0.5, y: 0.5}}
               key={index}>
@@ -80,7 +73,7 @@ const MapScreen = () => {
             longitude: 66.86036,
           }}
           anchor={{x: 0.5, y: 0.5}}>
-          <View style={[styles.markerContainer, {zIndex: 150}]}>
+          <View style={styles.markerContainer}>
             <MapMarker width={50} fill={colors.blackColor} />
           </View>
         </Marker>

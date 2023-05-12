@@ -9,4 +9,7 @@ export default StyleSheet.create({
     padding: 15,
     marginTop: 15,
   },
+  errorText: {
+    color: 'red',
+  },
 });
