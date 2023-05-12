@@ -19,8 +19,7 @@ const EmployerProfileScreen = () => {
   const navigation = useNavigation();
 
   const editProfileHandler = () => {
-    // navigation.navigate('EditProfile', {user: userData});
-    console.log('ok');
+    navigation.navigate('EditProfileScreen', {user: userData});
   };
 
   return (

@@ -4,16 +4,16 @@ import styles from './styles';
 import {colors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
 
-const Button = ({title, color, handleSubmit = () => {}}) => {
-  const onSubmit = data => {
-    console.log(data);
-  };
-
+const ButtonOnPress = ({title, color}) => {
   const navigation = useNavigation();
+
+  const onPress = () => {
+    navigation.goBack();
+  };
 
   return (
     <Pressable
-      onPress={handleSubmit(onSubmit)}
+      onPress={onPress}
       style={
         !color ? styles.button : {...styles.button, backgroundColor: color}
       }>
@@ -27,4 +27,4 @@ const Button = ({title, color, handleSubmit = () => {}}) => {
   );
 };
 
-export default Button;
+export default ButtonOnPress;
