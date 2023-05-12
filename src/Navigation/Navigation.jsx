@@ -12,7 +12,7 @@ import {
 } from '../assets/icons';
 import MapScreen from '../screens/MapScreen';
 import CreateScreen from '../screens/CreateScreen';
-import EmployerProfileScreen from '../screens/ProfileScreen/EmployerProfileScreen';
+import ProfileStack from './ProfileStack';
 
 const Tab = createBottomTabNavigator();
 const Navigation = () => {
@@ -85,7 +85,7 @@ const Navigation = () => {
         {/*Profile*/}
         <Tab.Screen
           name={'Profile'}
-          component={EmployerProfileScreen}
+          component={ProfileStack}
           options={{
             // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({color}) => {
