@@ -2,7 +2,7 @@ import React from 'react';
 import {SafeAreaView, ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import Header from '../../../Components/Header';
-import {Logo} from '../../../assets/icons/index';
+import {Logo} from '../../../assets/icons';
 import {colors} from '../../../theme/colors';
 import Input from '../../../Components/Input';
 import Button from '../../../Components/Button';

@@ -14,6 +14,7 @@ import Notifications from './Notifications.svg';
 import ProfileIcon from './ProfileIcon.svg';
 import ArrowRightIcon from './ArrowRightIcon.svg';
 import MapMarker from './mapMarker.svg';
+import EditIcon from './EditIcon.svg';
 
 export {
   Logo,
@@ -32,4 +33,5 @@ export {
   Notifications,
   ArrowRightIcon,
   MapMarker,
+  EditIcon,
 };

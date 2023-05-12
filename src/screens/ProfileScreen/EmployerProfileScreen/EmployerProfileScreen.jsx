@@ -4,14 +4,35 @@ import Header from '../../../Components/Header';
 import styles from './style';
 import UserInfo from '../../../Components/UserInfo';
 import UserData from '../../../Components/UserData';
+import {useNavigation} from '@react-navigation/native';
+
+const userData = {
+  name: 'Матлюба Маматкулова',
+  location: 'Ташкент, Ул. Комил-Яшин 2',
+  email: 'zairovne@gmail.com',
+  phoneNumber: '+998 99 591 48 83',
+  image:
+    'https://proprikol.ru/wp-content/uploads/2022/06/zhenskie-kartinki-na-avu-31.jpg',
+};
 
 const EmployerProfileScreen = () => {
+  const navigation = useNavigation();
+
+  const editProfileHandler = () => {
+    // navigation.navigate('EditProfile', {user: userData});
+    console.log('ok');
+  };
+
   return (
     <View style={styles.container}>
-      <Header />
-      <UserInfo />
-      <UserData name={'Почта'} userData={'zairovne@gmail.com'} />
-      <UserData name={'Телефон'} userData={'+998 99 591 48 83'} />
+      <Header profile onPress={editProfileHandler} />
+      <UserInfo
+        userName={userData.name}
+        userLocation={userData.location}
+        imageURL={userData.image}
+      />
+      <UserData name={'Почта'} userData={userData.email} />
+      <UserData name={'Телефон'} userData={userData.phoneNumber} />
       <UserData name={'Я работодатель'} />
       <Text style={styles.comments}>Отзывы как о работодателе (2)</Text>
 

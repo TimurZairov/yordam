@@ -1,10 +1,10 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import styles from './style';
-import {DrawerIcon, Notifications} from '../../assets/icons';
+import {DrawerIcon, EditIcon, Notifications} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 
-const Header = ({login, registry}) => {
+const Header = ({login, registry, profile, onPress}) => {
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerLeft}>
@@ -22,6 +22,9 @@ const Header = ({login, registry}) => {
       </View>
       {!login ||
         (!registry && <Notifications height={19} fill={colors.blackColor} />)}
+      {profile ? (
+        <EditIcon width={30} fill={colors.blackColor} onPress={onPress} />
+      ) : null}
     </View>
   );
 };

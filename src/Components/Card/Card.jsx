@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Text, View} from 'react-native';
 import styles from './style';
-import {ArrowRightIcon} from '../../assets/icons/index';
+import {ArrowRightIcon} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 
 const Card = ({post}) => {
