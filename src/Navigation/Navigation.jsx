@@ -1,7 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import HomeScreen from '../screens/HomeScreen';
 import {colors} from '../theme/colors';
 import {
   AddIcon,
@@ -13,6 +12,7 @@ import {
 import MapScreen from '../screens/MapScreen';
 import CreateScreen from '../screens/CreateScreen';
 import ProfileStack from './ProfileStack';
+import HomeStack from './HomeStack';
 
 const Tab = createBottomTabNavigator();
 const Navigation = () => {
@@ -34,7 +34,7 @@ const Navigation = () => {
         {/*  HOME*/}
         <Tab.Screen
           name={'Home'}
-          component={HomeScreen}
+          component={HomeStack}
           options={{
             // eslint-disable-next-line react/no-unstable-nested-components
             tabBarIcon: ({focused, color}) => {

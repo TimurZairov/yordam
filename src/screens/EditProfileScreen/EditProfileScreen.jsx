@@ -23,16 +23,20 @@ const EditProfileScreen = () => {
       phoneNumber: user.phoneNumber,
     },
   });
-
+  //ImagePicker
   const imageHandler = async () => {
-    const result = await launchImageLibrary(
-      {mediaType: 'photo'},
-      ({didCancel, errorCode, errorMessage, assets}) => {
-        if (!didCancel && !errorCode && assets && assets.length) {
-          setChangeAvatar(assets[0]);
-        }
-      },
-    );
+    try {
+      const result = await launchImageLibrary(
+        {mediaType: 'photo'},
+        ({didCancel, errorCode, errorMessage, assets}) => {
+          if (!didCancel && !errorCode && assets && assets.length) {
+            setChangeAvatar(assets[0]);
+          }
+        },
+      );
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
   return (

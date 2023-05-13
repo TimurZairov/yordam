@@ -15,4 +15,13 @@ export default StyleSheet.create({
     fontFamily: fonts.fontFamily.bold,
     fontSize: fonts.fontSize.lg,
   },
+  flatHeader: {
+    paddingVertical: 5,
+  },
+  titleHeader: {
+    fontSize: fonts.fontSize.md,
+    color: colors.blackColor,
+    fontFamily: fonts.fontFamily.light,
+    marginTop: 15,
+  },
 });

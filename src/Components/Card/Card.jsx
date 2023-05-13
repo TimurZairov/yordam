@@ -1,12 +1,21 @@
 import React from 'react';
-import {Image, Text, View} from 'react-native';
+import {Image, Pressable, Text, View} from 'react-native';
 import styles from './style';
 import {ArrowRightIcon} from '../../assets/icons';
 import {colors} from '../../theme/colors';
+import {useNavigation} from '@react-navigation/native';
 
 const Card = ({post}) => {
+  const navigation = useNavigation();
+  const getJobDetailsHandler = id => {
+    console.log(id);
+    navigation.navigate('Details');
+  };
+
   return (
-    <View style={styles.cardContainer}>
+    <Pressable
+      style={styles.cardContainer}
+      onPress={() => getJobDetailsHandler(post.id)}>
       <View style={styles.info}>
         <View style={styles.userInfoContainer}>
           <Image
@@ -40,7 +49,7 @@ const Card = ({post}) => {
         </Text>
         <ArrowRightIcon width={15} fill={colors.purpleColor} />
       </View>
-    </View>
+    </Pressable>
   );
 };
 
