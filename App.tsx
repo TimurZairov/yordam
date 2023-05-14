@@ -1,3 +1,4 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import {enableLatestRenderer} from 'react-native-maps';
 

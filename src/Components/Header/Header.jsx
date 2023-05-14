@@ -1,18 +1,27 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {Text, TouchableOpacity, View} from 'react-native';
 import styles from './style';
 import {DrawerIcon, EditIcon, Notifications} from '../../assets/icons';
 import {colors} from '../../theme/colors';
+import {useNavigation} from '@react-navigation/native';
 
 const Header = ({login, registry, profile, onPress}) => {
+  const navigation = useNavigation();
+  const drawerHandler = () => {
+    navigation.openDrawer();
+  };
+
   return (
     <View style={styles.headerContainer}>
       <View style={styles.headerLeft}>
-        <DrawerIcon
-          height={19}
-          fill={colors.blackColor}
-          style={styles.drawerIcon}
-        />
+        <TouchableOpacity onPress={drawerHandler}>
+          <DrawerIcon
+            height={19}
+            fill={colors.blackColor}
+            style={styles.drawerIcon}
+          />
+        </TouchableOpacity>
+
         {!login ||
           (!registry && (
             <Text style={styles.greetingText}>
