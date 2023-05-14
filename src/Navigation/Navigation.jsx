@@ -15,9 +15,20 @@ import ProfileStack from './ProfileStack';
 import HomeStack from './HomeStack';
 
 const Tab = createBottomTabNavigator();
+
+const linking = {
+  prefixes: ['yordam://'],
+  config: {
+    initialRouteName: 'HomeScreen',
+    screens: {
+      JobDetailsScreen: 'Details',
+    },
+  },
+};
+
 const Navigation = () => {
   return (
-    <NavigationContainer>
+    <NavigationContainer linking={linking}>
       <Tab.Navigator
         screenOptions={{
           headerShown: false,
