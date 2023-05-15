@@ -15,6 +15,7 @@ import ProfileIcon from './ProfileIcon.svg';
 import ArrowRightIcon from './ArrowRightIcon.svg';
 import MapMarker from './mapMarker.svg';
 import EditIcon from './EditIcon.svg';
+import DefaultAvatar from './DefaultAvatar.svg';
 
 export {
   Logo,
@@ -34,4 +35,5 @@ export {
   ArrowRightIcon,
   MapMarker,
   EditIcon,
+  DefaultAvatar,
 };

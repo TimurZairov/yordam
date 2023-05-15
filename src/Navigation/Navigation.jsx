@@ -4,6 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import AboutScreen from '../screens/AboutScreen';
 import TabNavigation from './TabNavigation';
+import CustomDrawerNavigation from '../Components/CustomDrawerNavigation';
 
 const Drawer = createDrawerNavigator();
 
@@ -23,7 +24,9 @@ const Navigation = () => {
       <Drawer.Navigator
         screenOptions={{
           headerShown: false,
-        }}>
+        }}
+        initialRouteName={'Tab'}
+        drawerContent={props => <CustomDrawerNavigation {...props} />}>
         <Drawer.Screen name="Tab" component={TabNavigation} />
         <Drawer.Screen name="About" component={AboutScreen} />
       </Drawer.Navigator>
