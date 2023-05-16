@@ -1,0 +1,15 @@
+{
+  "staging": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yordam-staging-123915-authRole",
+      "UnauthRoleArn": "arn:aws:iam::286416869436:role/amplify-yordam-staging-123915-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::286416869436:role/amplify-yordam-staging-123915-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-yordam-staging-123915-deployment",
+      "UnauthRoleName": "amplify-yordam-staging-123915-unauthRole",
+      "StackName": "amplify-yordam-staging-123915",
+      "StackId": "arn:aws:cloudformation:eu-central-1:286416869436:stack/amplify-yordam-staging-123915/5616e8b0-f254-11ed-a1ee-0a3075cabe28",
+      "AmplifyAppId": "dnn1e69k5z557"
+    }
+  }
+}
