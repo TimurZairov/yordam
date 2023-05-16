@@ -10,6 +10,11 @@
       "StackName": "amplify-yordam-staging-123915",
       "StackId": "arn:aws:cloudformation:eu-central-1:286416869436:stack/amplify-yordam-staging-123915/5616e8b0-f254-11ed-a1ee-0a3075cabe28",
       "AmplifyAppId": "dnn1e69k5z557"
+    },
+    "categories": {
+      "auth": {
+        "yordam": {}
+      }
     }
   }
 }

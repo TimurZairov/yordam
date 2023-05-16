@@ -1,1 +1,31 @@
-{}
+{
+  "auth": {
+    "yordam": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE"
+          ],
+          "passwordPolicyMinLength": 6
+        },
+        "signupAttributes": [
+          "EMAIL",
+          "NAME"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito"
+    }
+  }
+}
