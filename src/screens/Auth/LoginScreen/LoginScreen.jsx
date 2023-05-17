@@ -7,12 +7,21 @@ import {colors} from '../../../theme/colors';
 import Input from '../../../Components/Input';
 import Button from '../../../Components/Button';
 import SocialAuth from '../../../Components/SocialAuth';
+import {useNavigation} from '@react-navigation/native';
+import {useForm} from 'react-hook-form';
 
 const LoginScreen = () => {
+  const navigation = useNavigation();
+  const {handleSubmit, control} = useForm({defaultValues: {}});
+
+  const registryHandler = () => {
+    navigation.navigate('Registry');
+  };
+
   return (
     <SafeAreaView style={styles.saveContainer}>
       <View style={styles.headerContainer}>
-        <Header login />
+        <Header />
       </View>
 
       <ScrollView style={styles.container}>
@@ -21,15 +30,29 @@ const LoginScreen = () => {
           <Text style={styles.logoText}>Yordam</Text>
         </View>
         <Text style={styles.authText}>Авторизоваться</Text>
-        <Input placeholder={'Email*'} />
-        <Input placeholder={'Пароль*'} />
+        <Input
+          control={control}
+          placeholder={'Имя пользователя*'}
+          name={'userName'}
+          rules={{required: 'Введите пароль'}}
+        />
+        <Input
+          control={control}
+          placeholder={'Пароль*'}
+          name={'password'}
+          rules={{
+            required: 'Введите пароль',
+          }}
+        />
         <Text style={styles.forgotPassword}>Забыли пароль?</Text>
-        <Button title={'Войти'} />
+        <Button handleSubmit={handleSubmit} title={'Войти'} />
         <Text style={[styles.forgotPassword, {textAlign: 'center'}]}>Или</Text>
         <View style={styles.socialIcons}>
           <SocialAuth />
         </View>
-        <Text style={styles.registry}>Регистрация</Text>
+        <Text onPress={registryHandler} style={styles.registry}>
+          Регистрация
+        </Text>
       </ScrollView>
     </SafeAreaView>
   );
