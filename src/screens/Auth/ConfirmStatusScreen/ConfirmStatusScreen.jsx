@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Alert, Text, View} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import styles from './style';
 import {useForm} from 'react-hook-form';
 import Input from '../../../Components/Input';
@@ -9,7 +9,9 @@ import {colors} from '../../../theme/colors';
 import {Auth} from 'aws-amplify';
 
 const ConfirmStatusScreen = () => {
-  const [loading, setLoading] = useState(false);
+  const [loadingConfirm, setLoadingConfirm] = useState(false);
+  const [loadingCode, setLoadingCode] = useState(false);
+  const navigation = useNavigation();
   const router = useRoute();
   const {userName} = router.params;
   const {handleSubmit, control} = useForm({
@@ -19,19 +21,44 @@ const ConfirmStatusScreen = () => {
   });
 
   const confirmEmailHandler = async data => {
-    console.log(data);
-    if (loading) {
+    if (loadingConfirm) {
       return;
     }
-    setLoading(true);
+    setLoadingConfirm(true);
     try {
-      const response = await Auth.confirmSignUp(data.username, data.code);
-      console.log(response);
+      const res = await Auth.confirmSignUp(data.username, data.code);
+      if (res === 'SUCCESS') {
+        navigation.navigate('Login');
+      } else {
+        return Alert.alert('Ошибка', 'Попорбуйте позже');
+      }
     } catch (e) {
       return Alert.alert('Упс', 'Что то пошло не так...');
     } finally {
-      setLoading(false);
+      setLoadingConfirm(false);
     }
+  };
+
+  const resendConfirmPassHandler = async data => {
+    if (loadingCode) {
+      return;
+    }
+    setLoadingCode(true);
+    try {
+      await Auth.resendSignUp(data.username);
+      return Alert.alert(
+        'Код выслан',
+        'Код был выслан на указанную при регистрации почту',
+      );
+    } catch (e) {
+      return Alert.alert('Ошибка', 'Попорбуйте позже');
+    } finally {
+      setLoadingCode(false);
+    }
+  };
+
+  const loginScreenNavigationHandler = () => {
+    navigation.navigate('Login');
   };
 
   return (
@@ -45,10 +72,20 @@ const ConfirmStatusScreen = () => {
         rules={{required: 'Введите код высланный вам на почту'}}
       />
       <Button
-        title={loading ? 'Подождите...' : 'Подтвердить'}
+        title={loadingConfirm ? 'Подождите...' : 'Подтвердить'}
         onPress={handleSubmit(confirmEmailHandler)}
       />
-      <Button color={colors.blackColor} title={'Выслать код на почту'} />
+      <Button
+        color={colors.blackColor}
+        title={loadingCode ? 'Подождите...' : 'Выслать код на почту'}
+        onPress={handleSubmit(resendConfirmPassHandler)}
+      />
+      <Text
+        style={styles.auth}
+        onPress={loginScreenNavigationHandler}
+        hotSlop={5}>
+        Авторизация
+      </Text>
     </View>
   );
 };

@@ -14,4 +14,9 @@ export default StyleSheet.create({
     color: colors.blackColor,
     marginTop: 20,
   },
+  auth: {
+    color: colors.darkGrayColor,
+    textAlign: 'center',
+    marginTop: 15,
+  },
 });
