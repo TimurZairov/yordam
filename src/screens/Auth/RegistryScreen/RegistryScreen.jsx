@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Alert, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import {Auth} from 'aws-amplify';
@@ -12,6 +12,7 @@ import {useForm} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
 
 const RegistryScreen = () => {
+  const [loading, setLoading] = useState(false);
   const {handleSubmit, control} = useForm({defaultValues: {}});
   const navigation = useNavigation();
   const loginHandler = () => {
@@ -19,10 +20,13 @@ const RegistryScreen = () => {
   };
 
   const onRegisterHandler = async data => {
-    console.log(data);
+    if (loading) {
+      return;
+    }
+    setLoading(true);
     if (data.confirmPassword === data.password) {
       try {
-        const response = await Auth.signUp({
+        const res = await Auth.signUp({
           username: data.userName,
           password: data.password,
           attributes: {
@@ -31,9 +35,12 @@ const RegistryScreen = () => {
             // other custom attributes
           },
         });
-        console.log(response);
+        console.log(res);
+        navigation.navigate('Confirm', {userName: data.userName});
       } catch (e) {
         console.log(e);
+      } finally {
+        setLoading(false);
       }
     } else {
       return Alert.alert('Ошибка', 'Пароли не совпадают');
