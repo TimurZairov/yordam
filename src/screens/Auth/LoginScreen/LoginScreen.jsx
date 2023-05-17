@@ -1,5 +1,5 @@
-import React from 'react';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {Alert, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import Header from '../../../Components/Header';
 import {Logo} from '../../../assets/icons';
@@ -9,13 +9,29 @@ import Button from '../../../Components/Button';
 import SocialAuth from '../../../Components/SocialAuth';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
+import {Auth} from 'aws-amplify';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const {handleSubmit, control} = useForm({defaultValues: {}});
+  const [loading, setLoading] = useState(false);
 
   const registryHandler = () => {
     navigation.navigate('Registry');
+  };
+
+  const loginHandler = async data => {
+    setLoading(true);
+    if (loading) {
+      return;
+    }
+    try {
+      const response = await Auth.signIn(data.userName, data.password);
+    } catch (e) {
+      return Alert.alert('Ошибка', 'Не верный логин или пароль');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,7 +61,10 @@ const LoginScreen = () => {
           }}
         />
         <Text style={styles.forgotPassword}>Забыли пароль?</Text>
-        <Button handleSubmit={handleSubmit} title={'Войти'} />
+        <Button
+          onPress={handleSubmit(loginHandler)}
+          title={loading ? 'Загрузка...' : 'Войти'}
+        />
         <Text style={[styles.forgotPassword, {textAlign: 'center'}]}>Или</Text>
         <View style={styles.socialIcons}>
           <SocialAuth />

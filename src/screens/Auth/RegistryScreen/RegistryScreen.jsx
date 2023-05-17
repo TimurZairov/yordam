@@ -1,6 +1,7 @@
 import React from 'react';
-import {SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {Alert, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import styles from './style';
+import {Auth} from 'aws-amplify';
 import Header from '../../../Components/Header';
 import {Logo} from '../../../assets/icons';
 import {colors} from '../../../theme/colors';
@@ -17,6 +18,28 @@ const RegistryScreen = () => {
     navigation.navigate('Login');
   };
 
+  const onRegisterHandler = async data => {
+    console.log(data);
+    if (data.confirmPassword === data.password) {
+      try {
+        const response = await Auth.signUp({
+          username: data.userName,
+          password: data.password,
+          attributes: {
+            email: data.email,
+            name: data.name, // optional
+            // other custom attributes
+          },
+        });
+        console.log(response);
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      return Alert.alert('Ошибка', 'Пароли не совпадают');
+    }
+  };
+
   return (
     <SafeAreaView style={styles.saveContainer}>
       <View style={styles.headerContainer}>
@@ -30,10 +53,16 @@ const RegistryScreen = () => {
         </View>
         <Text style={styles.authText}>Регистрация</Text>
         <Input
-          placeholder={'Имя*'}
+          placeholder={'Имя пользователя*'}
           control={control}
           name={'userName'}
           rules={{required: 'Введите Имя'}}
+        />
+        <Input
+          placeholder={'Полное имя*'}
+          control={control}
+          name={'name'}
+          rules={{required: 'Введите Ваше полное имя'}}
         />
         <Input
           placeholder={'Email*'}
@@ -53,7 +82,10 @@ const RegistryScreen = () => {
           name={'confirmPassword'}
           rules={{required: 'Подтвердите Пароль'}}
         />
-        <Button title={'Войти'} handleSubmit={handleSubmit} />
+        <Button
+          title={'Регистрация'}
+          onPress={handleSubmit(onRegisterHandler)}
+        />
         <Text style={[styles.forgotPassword, {textAlign: 'center'}]}>Или</Text>
         <View style={styles.socialIcons}>
           <SocialAuth />

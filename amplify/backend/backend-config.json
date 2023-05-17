@@ -10,7 +10,7 @@
         ],
         "passwordProtectionSettings": {
           "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE"
+            "REQUIRES_NUMBERS"
           ],
           "passwordPolicyMinLength": 6
         },

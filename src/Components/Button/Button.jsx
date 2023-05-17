@@ -1,19 +1,16 @@
 import React from 'react';
-import {Pressable, Text} from 'react-native';
+import {Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {colors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
 
-const Button = ({title, color, handleSubmit = () => {}}) => {
-  const onSubmit = data => {
-    console.log(data);
-  };
-
+const Button = ({title, color, onPress = () => {}}) => {
   const navigation = useNavigation();
 
   return (
-    <Pressable
-      onPress={handleSubmit(onSubmit)}
+    <TouchableOpacity
+      onPress={onPress}
+      activeOpacity={0.6}
       style={
         !color ? styles.button : {...styles.button, backgroundColor: color}
       }>
@@ -23,7 +20,7 @@ const Button = ({title, color, handleSubmit = () => {}}) => {
         }>
         {title}
       </Text>
-    </Pressable>
+    </TouchableOpacity>
   );
 };
 
