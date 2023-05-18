@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react';
 
-const AppContext = createContext({user: undefined, setUser: Function});
+export const AppContext = createContext({user: undefined, setUser: Function});
 
 const AppProvider = ({children}) => {
   const [user, setUser] = useState(undefined);

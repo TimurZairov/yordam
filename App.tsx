@@ -1,9 +1,10 @@
+import {enableLatestRenderer} from 'react-native-maps';
 import 'react-native-gesture-handler';
 import React from 'react';
-import {enableLatestRenderer} from 'react-native-maps';
 import {Amplify} from 'aws-amplify';
 import awsConfig from './src/aws-exports';
 import Navigation from './src/Navigation';
+import AppProvider from './src/context/Context';
 // import {withAuthenticator} from 'aws-amplify-react-native';  Updated new imports
 
 Amplify.configure(awsConfig);
@@ -11,7 +12,11 @@ Amplify.configure(awsConfig);
 enableLatestRenderer();
 
 const App = () => {
-  return <Navigation />;
+  return (
+    <AppProvider>
+      <Navigation />
+    </AppProvider>
+  );
 };
 
 export default App;

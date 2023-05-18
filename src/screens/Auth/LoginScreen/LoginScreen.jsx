@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {Alert, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import styles from './style';
 import Header from '../../../Components/Header';
@@ -10,11 +10,13 @@ import SocialAuth from '../../../Components/SocialAuth';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {Auth} from 'aws-amplify';
+import {AppContext} from '../../../context/Context';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const {handleSubmit, control, reset} = useForm();
   const [loading, setLoading] = useState(false);
+  const {setUser} = useContext(AppContext);
 
   const registryHandler = () => {
     navigation.navigate('Registry');
@@ -26,8 +28,9 @@ const LoginScreen = () => {
       return;
     }
     try {
-      const response = await Auth.signIn(data.email, data.password);
-      console.log(response);
+      const user = await Auth.signIn(data.email, data.password);
+      setUser(user);
+      navigation.navigate('Profile');
     } catch (e) {
       console.log(e);
       return Alert.alert('Ошибка', 'Не верный логин или пароль');
