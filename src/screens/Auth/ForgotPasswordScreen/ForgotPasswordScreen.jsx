@@ -18,7 +18,7 @@ const ForgotPasswordScreen = () => {
     }
     setLoading(true);
     try {
-      await Auth.forgotPasswordSubmit(data.username, data.code, data.password);
+      await Auth.forgotPasswordSubmit(data.email, data.code, data.password);
     } catch (e) {
       console.log(e);
     } finally {
@@ -35,9 +35,9 @@ const ForgotPasswordScreen = () => {
       <Text style={styles.text}>Восстановление пароля</Text>
       <Input
         control={control}
-        name={'username'}
+        name={'email'}
         rules={{}}
-        placeholder={'Имя пользователя*'}
+        placeholder={'Веедите почту*'}
       />
       <Input
         control={control}
@@ -50,6 +50,7 @@ const ForgotPasswordScreen = () => {
         name={'password'}
         rules={{}}
         placeholder={'Новый пароль*'}
+        secureTextEntry
       />
       <Button
         title={loading ? 'Загрузка...' : 'Сохранить'}

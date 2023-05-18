@@ -4,7 +4,14 @@ import {Text, TextInput} from 'react-native';
 import {colors} from '../../theme/colors';
 import {Controller} from 'react-hook-form';
 
-const Input = ({placeholder, multiline, name, control, rules}) => {
+const Input = ({
+  placeholder,
+  multiline,
+  name,
+  control,
+  rules,
+  secureTextEntry,
+}) => {
   const [colorBg, setColorBg] = useState(colors.blackColor);
 
   const onFocus = () => {
@@ -28,6 +35,7 @@ const Input = ({placeholder, multiline, name, control, rules}) => {
               multiline={multiline}
               onChangeText={onChange}
               value={value}
+              secureTextEntry={secureTextEntry}
             />
             {error && <Text style={styles.errorText}>{error.message}</Text>}
           </>

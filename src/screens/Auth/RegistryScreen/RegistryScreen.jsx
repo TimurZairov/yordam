@@ -27,16 +27,14 @@ const RegistryScreen = () => {
     if (data.confirmPassword === data.password) {
       try {
         const res = await Auth.signUp({
-          username: data.userName,
+          username: data.email,
           password: data.password,
           attributes: {
-            email: data.email,
             name: data.name, // optional
             // other custom attributes
           },
         });
-        console.log(res);
-        navigation.navigate('Confirm', {userName: data.userName});
+        navigation.navigate('Confirm', {username: data.email});
       } catch (e) {
         console.log(e);
       } finally {
@@ -60,10 +58,10 @@ const RegistryScreen = () => {
         </View>
         <Text style={styles.authText}>Регистрация</Text>
         <Input
-          placeholder={'Имя пользователя*'}
+          placeholder={'Email*'}
           control={control}
-          name={'userName'}
-          rules={{required: 'Введите Имя'}}
+          name={'email'}
+          rules={{required: 'Введите Email'}}
         />
         <Input
           placeholder={'Полное имя*'}
@@ -72,22 +70,18 @@ const RegistryScreen = () => {
           rules={{required: 'Введите Ваше полное имя'}}
         />
         <Input
-          placeholder={'Email*'}
-          control={control}
-          name={'email'}
-          rules={{required: 'Введите Email'}}
-        />
-        <Input
           placeholder={'Пароль*'}
           control={control}
           name={'password'}
           rules={{required: 'Введите Пароль'}}
+          secureTextEntry
         />
         <Input
           placeholder={'Подтвердить пароль*'}
           control={control}
           name={'confirmPassword'}
           rules={{required: 'Подтвердите Пароль'}}
+          secureTextEntry
         />
         <Button
           title={loading ? 'Подождите...' : 'Регистрация'}

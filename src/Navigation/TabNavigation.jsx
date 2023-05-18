@@ -12,6 +12,7 @@ import MapScreen from '../screens/MapScreen';
 import CreateScreen from '../screens/CreateScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AuthStack from './AuthStack';
+import MessageScreen from '../screens/MessageScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -73,7 +74,7 @@ const TabNavigation = () => {
       {/*Message*/}
       <Tab.Screen
         name={'Message'}
-        component={CreateScreen}
+        component={MessageScreen}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color}) => {

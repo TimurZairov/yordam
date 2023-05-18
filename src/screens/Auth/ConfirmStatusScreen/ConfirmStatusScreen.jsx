@@ -13,10 +13,11 @@ const ConfirmStatusScreen = () => {
   const [loadingCode, setLoadingCode] = useState(false);
   const navigation = useNavigation();
   const router = useRoute();
-  const {userName} = router.params;
+  const {username} = router.params;
+  console.log(username);
   const {handleSubmit, control} = useForm({
     defaultValues: {
-      username: userName,
+      username: username,
     },
   });
 
@@ -64,7 +65,12 @@ const ConfirmStatusScreen = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.confirm}>Подтвердить почту</Text>
-      <Input control={control} rules={{}} name={'username'} />
+      <Input
+        control={control}
+        rules={{}}
+        name={'username'}
+        placeholder={'Введите почту'}
+      />
       <Input
         control={control}
         name={'code'}

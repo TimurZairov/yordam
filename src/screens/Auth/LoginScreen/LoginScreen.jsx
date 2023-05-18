@@ -13,7 +13,7 @@ import {Auth} from 'aws-amplify';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  const {handleSubmit, control} = useForm({defaultValues: {}});
+  const {handleSubmit, control, reset} = useForm();
   const [loading, setLoading] = useState(false);
 
   const registryHandler = () => {
@@ -26,11 +26,14 @@ const LoginScreen = () => {
       return;
     }
     try {
-      const response = await Auth.signIn(data.userName, data.password);
+      const response = await Auth.signIn(data.email, data.password);
+      console.log(response);
     } catch (e) {
+      console.log(e);
       return Alert.alert('Ошибка', 'Не верный логин или пароль');
     } finally {
       setLoading(false);
+      reset();
     }
   };
 
@@ -52,9 +55,9 @@ const LoginScreen = () => {
         <Text style={styles.authText}>Авторизоваться</Text>
         <Input
           control={control}
-          placeholder={'Имя пользователя*'}
-          name={'userName'}
-          rules={{required: 'Введите пароль'}}
+          placeholder={'Email*'}
+          name={'email'}
+          rules={{required: 'Введите Email'}}
         />
         <Input
           control={control}
@@ -63,6 +66,7 @@ const LoginScreen = () => {
           rules={{
             required: 'Введите пароль',
           }}
+          secureTextEntry
         />
         <Text onPress={forgotPassScreenHandler} style={styles.forgotPassword}>
           Забыли пароль?
