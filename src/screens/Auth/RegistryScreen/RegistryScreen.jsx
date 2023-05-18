@@ -90,7 +90,7 @@ const RegistryScreen = () => {
           rules={{required: 'Подтвердите Пароль'}}
         />
         <Button
-          title={'Регистрация'}
+          title={loading ? 'Подождите...' : 'Регистрация'}
           onPress={handleSubmit(onRegisterHandler)}
         />
         <Text style={[styles.forgotPassword, {textAlign: 'center'}]}>Или</Text>

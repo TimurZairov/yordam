@@ -2,11 +2,8 @@ import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import styles from './styles';
 import {colors} from '../../theme/colors';
-import {useNavigation} from '@react-navigation/native';
 
 const Button = ({title, color, onPress = () => {}}) => {
-  const navigation = useNavigation();
-
   return (
     <TouchableOpacity
       onPress={onPress}

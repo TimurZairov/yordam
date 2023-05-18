@@ -34,6 +34,10 @@ const LoginScreen = () => {
     }
   };
 
+  const forgotPassScreenHandler = () => {
+    navigation.navigate('Reset');
+  };
+
   return (
     <SafeAreaView style={styles.saveContainer}>
       <View style={styles.headerContainer}>
@@ -60,10 +64,12 @@ const LoginScreen = () => {
             required: 'Введите пароль',
           }}
         />
-        <Text style={styles.forgotPassword}>Забыли пароль?</Text>
+        <Text onPress={forgotPassScreenHandler} style={styles.forgotPassword}>
+          Забыли пароль?
+        </Text>
         <Button
           onPress={handleSubmit(loginHandler)}
-          title={loading ? 'Загрузка...' : 'Войти'}
+          title={loading ? 'Подождите...' : 'Войти'}
         />
         <Text style={[styles.forgotPassword, {textAlign: 'center'}]}>Или</Text>
         <View style={styles.socialIcons}>

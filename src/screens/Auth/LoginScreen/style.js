@@ -44,5 +44,6 @@ export default StyleSheet.create({
     fontFamily: fonts.fontFamily.bold,
     marginTop: 15,
     textAlign: 'center',
+    marginBottom: 20,
   },
 });
