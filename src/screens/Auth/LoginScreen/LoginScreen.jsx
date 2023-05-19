@@ -1,5 +1,12 @@
 import React, {useContext, useState} from 'react';
-import {Alert, SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from 'react-native';
 import styles from './style';
 import Header from '../../../Components/Header';
 import {Logo} from '../../../assets/icons';
@@ -43,6 +50,14 @@ const LoginScreen = () => {
       reset();
     }
   };
+
+  if (loading) {
+    return (
+      <View style={styles.activityContainer}>
+        <ActivityIndicator size={20} color={colors.purpleColor} />
+      </View>
+    );
+  }
 
   const forgotPassScreenHandler = () => {
     navigation.navigate('Reset');

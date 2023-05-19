@@ -2,7 +2,13 @@ import React, {useContext} from 'react';
 import {Pressable, Text, View} from 'react-native';
 import {colors} from '../../theme/colors';
 import styles from './style';
-import {ArrowLeftIcon, DefaultAvatar} from '../../assets/icons';
+import {
+  AboutIcon,
+  ArrowLeftIcon,
+  DefaultAvatar,
+  SignInIcon,
+  SignOutIcon,
+} from '../../assets/icons';
 import {Auth} from 'aws-amplify';
 import {AppContext} from '../../context/Context';
 
@@ -23,6 +29,10 @@ const CustomDrawerNavigation = ({navigation}) => {
     } catch (e) {
       setUser(null);
     }
+  };
+
+  const loginHandler = () => {
+    navigation.navigate('Login');
   };
 
   return (
@@ -47,15 +57,31 @@ const CustomDrawerNavigation = ({navigation}) => {
         </Text>
         <Text style={styles.phone}>+998 99 591 48 83</Text>
       </View>
-      <Text
-        style={styles.about}
-        onPress={navigateAboutScreenHandler}
-        hotSlop={5}>
-        О приложении
-      </Text>
-      <Text style={styles.about} hotSlop={5} onPress={signOutHandler}>
-        Выйти
-      </Text>
+      <View style={styles.listContainer}>
+        <AboutIcon width={15} height={15} fill={colors.blackColor} />
+        <Text
+          style={styles.about}
+          onPress={navigateAboutScreenHandler}
+          hotSlop={5}>
+          О приложении
+        </Text>
+      </View>
+
+      {user ? (
+        <View style={styles.listContainer}>
+          <SignOutIcon width={15} height={15} fill={colors.blackColor} />
+          <Text style={styles.about} hotSlop={5} onPress={signOutHandler}>
+            Выйти
+          </Text>
+        </View>
+      ) : (
+        <View style={styles.listContainer}>
+          <SignInIcon width={15} height={15} fill={colors.blackColor} />
+          <Text style={styles.about} hotSlop={5} onPress={loginHandler}>
+            Войти
+          </Text>
+        </View>
+      )}
     </View>
   );
 };

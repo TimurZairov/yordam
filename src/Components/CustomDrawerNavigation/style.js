@@ -77,6 +77,11 @@ export default StyleSheet.create({
     fontFamily: fonts.fontFamily.bold,
     color: colors.blackColor,
     paddingVertical: 11,
-    paddingHorizontal: 20,
+    marginLeft: 10,
+  },
+  listContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 15,
   },
 });

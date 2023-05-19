@@ -16,6 +16,9 @@ import ArrowRightIcon from './ArrowRightIcon.svg';
 import MapMarker from './mapMarker.svg';
 import EditIcon from './EditIcon.svg';
 import DefaultAvatar from './DefaultAvatar.svg';
+import AboutIcon from './AboutIcon.svg';
+import SignInIcon from './SignInIcon.svg';
+import SignOutIcon from './SignOutIcon.svg';
 
 export {
   Logo,
@@ -36,4 +39,7 @@ export {
   MapMarker,
   EditIcon,
   DefaultAvatar,
+  AboutIcon,
+  SignInIcon,
+  SignOutIcon,
 };

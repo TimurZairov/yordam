@@ -46,4 +46,10 @@ export default StyleSheet.create({
     textAlign: 'center',
     marginBottom: 20,
   },
+  activityContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.backgroundColor,
+  },
 });
