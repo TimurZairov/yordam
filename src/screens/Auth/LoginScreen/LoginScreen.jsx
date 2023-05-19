@@ -31,7 +31,7 @@ const LoginScreen = () => {
       const user = await Auth.signIn(data.email, data.password);
       if (user) {
         setUser(user);
-        navigation.replace('ProfileScreen');
+        navigation.replace('Authenticated', {screen: 'ProfileScreen'});
       } else {
         navigation.navigate('Login');
       }
