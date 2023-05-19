@@ -29,8 +29,12 @@ const LoginScreen = () => {
     }
     try {
       const user = await Auth.signIn(data.email, data.password);
-      setUser(user);
-      navigation.navigate('Profile');
+      if (user) {
+        setUser(user);
+        navigation.replace('ProfileScreen');
+      } else {
+        navigation.navigate('Login');
+      }
     } catch (e) {
       console.log(e);
       return Alert.alert('Ошибка', 'Не верный логин или пароль');

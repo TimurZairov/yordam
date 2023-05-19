@@ -1,16 +1,28 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {Pressable, Text, View} from 'react-native';
 import {colors} from '../../theme/colors';
 import styles from './style';
 import {ArrowLeftIcon, DefaultAvatar} from '../../assets/icons';
+import {Auth} from 'aws-amplify';
+import {AppContext} from '../../context/Context';
 
 const CustomDrawerNavigation = ({navigation}) => {
+  const {user, setUser} = useContext(AppContext);
   const closeDrawer = () => {
     navigation.closeDrawer();
   };
 
   const navigateAboutScreenHandler = () => {
     navigation.navigate('About');
+  };
+
+  const signOutHandler = async () => {
+    try {
+      await Auth.signOut();
+      navigation.closeDrawer();
+    } catch (e) {
+      setUser(null);
+    }
   };
 
   return (
@@ -40,6 +52,9 @@ const CustomDrawerNavigation = ({navigation}) => {
         onPress={navigateAboutScreenHandler}
         hotSlop={5}>
         О приложении
+      </Text>
+      <Text style={styles.about} hotSlop={5} onPress={signOutHandler}>
+        Выйти
       </Text>
     </View>
   );

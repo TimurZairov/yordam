@@ -11,8 +11,8 @@ import {
 import MapScreen from '../screens/MapScreen';
 import CreateScreen from '../screens/CreateScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import AuthStack from './AuthStack';
 import MessageScreen from '../screens/MessageScreen';
+import SignedStack from './SignedStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -85,7 +85,7 @@ const TabNavigation = () => {
       {/*Profile*/}
       <Tab.Screen
         name={'Auth'}
-        component={AuthStack}
+        component={SignedStack}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color}) => {
