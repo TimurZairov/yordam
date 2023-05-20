@@ -1,7 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {
   ActivityIndicator,
-  Alert,
   SafeAreaView,
   ScrollView,
   Text,
@@ -43,8 +42,9 @@ const LoginScreen = () => {
         navigation.navigate('Login');
       }
     } catch (e) {
-      console.log(e);
-      return Alert.alert('Ошибка', 'Не верный логин или пароль');
+      if (e.message === ' User is not confirmed.') {
+        navigation.navigate('Confirm');
+      }
     } finally {
       setLoading(false);
       reset();

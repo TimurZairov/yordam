@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@aws-amplify/auth": "^5.3.6",
     "@react-native-async-storage/async-storage": "^1.18.1",
     "@react-native-community/netinfo": "^9.3.10",
     "@react-native-picker/picker": "^2.4.10",

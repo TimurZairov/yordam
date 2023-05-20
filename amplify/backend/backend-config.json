@@ -2,7 +2,17 @@
   "auth": {
     "yordam": {
       "customAuth": false,
-      "dependsOn": [],
+      "dependsOn": [
+        {
+          "attributes": [
+            "Arn",
+            "Name"
+          ],
+          "category": "function",
+          "resourceName": "yordamPostConfirmation",
+          "triggerProvider": "Cognito"
+        }
+      ],
       "frontendAuthConfig": {
         "mfaConfiguration": "OFF",
         "mfaTypes": [
@@ -18,8 +28,7 @@
           "NAME"
         ],
         "socialProviders": [
-          "FACEBOOK",
-          "GOOGLE"
+          "FACEBOOK"
         ],
         "usernameAttributes": [
           "EMAIL"
@@ -30,6 +39,31 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "yordamPostConfirmation": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_yordamPostConfirmation_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "yordamPostConfirmation"
+        }
+      ]
+    },
+    "AMPLIFY_function_yordamPostConfirmation_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "yordamPostConfirmation"
+        }
+      ]
     }
   }
 }

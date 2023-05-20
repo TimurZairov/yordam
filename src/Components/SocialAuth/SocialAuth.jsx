@@ -10,21 +10,30 @@ const SocialAuth = () => {
   const goggleSingUpHandler = async () => {
     try {
       await Auth.federatedSignIn({
-        provider: CognitoHostedUIIdentityProvider.Facebook,
+        provider: CognitoHostedUIIdentityProvider.Google,
+      });
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const facebookSingUpHandler = async () => {
+    try {
+      await Auth.federatedSignIn({
+        provider: CognitoHostedUIIdentityProvider.Google,
       });
     } catch (e) {
       console.log(e);
     }
   };
 
-  const facebookSingUpHandler = () => {};
-
   return (
     <View style={styles.socialContainer}>
-      <Pressable style={styles.google} onPress={goggleSingUpHandler}>
+      <Pressable style={styles.google} onPress={facebookSingUpHandler}>
         <GoogleIcon width={22} fill={colors.purpleColor} />
       </Pressable>
-      <Pressable style={styles.google} onPress={facebookSingUpHandler}>
+      <Pressable style={styles.google} onPress={goggleSingUpHandler}>
         <FacebookIcon width={22} fill={colors.purpleColor} />
       </Pressable>
     </View>

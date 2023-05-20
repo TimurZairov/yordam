@@ -33,6 +33,9 @@ const AppProvider = ({children}) => {
         if (event === 'signOut') {
           setUser(null);
         }
+        if (event === 'signIn') {
+          console.log('ok');
+        }
       } catch (e) {
         console.log(e);
       }

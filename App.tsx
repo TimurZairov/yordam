@@ -4,6 +4,7 @@ import React from 'react';
 import {Amplify} from 'aws-amplify';
 import awsConfig from './src/aws-exports';
 import Navigation from './src/Navigation';
+import AppProvider from './src/context/Context';
 
 Amplify.configure(awsConfig);
 
@@ -11,7 +12,9 @@ enableLatestRenderer();
 
 const App = () => {
   return (
-        <Navigation />
+    <AppProvider>
+      <Navigation />
+    </AppProvider>
   );
 };
 
