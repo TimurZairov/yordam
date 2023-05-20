@@ -4,7 +4,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import AboutScreen from '../screens/AboutScreen';
 import TabNavigation from './TabNavigation';
-import CustomDrawerNavigation from '../Components/CustomDrawerNavigation';
+import CustomDrawerNavigation from '../Components/CustomDrawerNavigation/CustomDrawerNavigation';
 
 const Drawer = createDrawerNavigator();
 

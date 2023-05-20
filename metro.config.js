@@ -1,10 +1,12 @@
+/* eslint-disable prettier/prettier */
 /**
  * Metro configuration for React Native
  * https://github.com/facebook/react-native
  *
  * @format
  */
-const {getDefaultConfig} = require('metro-config');
+const {getDefaultConfig, mergeConfig } = require('metro-config');
+const blacklist  = require('metro-config/src/defaults/exclusionList');
 
 // module.exports = {
 //   transformer: {
@@ -18,10 +20,15 @@ const {getDefaultConfig} = require('metro-config');
 // };
 
 module.exports = (async () => {
+  const awsPackageIgnore = {
+    resolver: {
+      blacklistRE: blacklist([/amplify\/#current-cloud-backend\/.*/])},
+  };
+
   const {
     resolver: {sourceExts, assetExts},
   } = await getDefaultConfig();
-  return {
+  const svgTransformer = {
     transformer: {
       transform: {
         experimentalImportSupport: false,
@@ -34,4 +41,11 @@ module.exports = (async () => {
       sourceExts: [...sourceExts, 'svg'],
     },
   };
+
+  return mergeConfig(awsPackageIgnore,svgTransformer );
 })();
+
+// module.exports = {
+//   resolver: {
+//     blacklistRE: blacklist([/amplify\/#current-cloud-backend\/.*/])},
+// };

@@ -1,7 +1,7 @@
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, Text, View} from 'react-native';
 import styles from './style';
-import Header from '../../Components/Header';
+import Header from '../../Components/Header/';
 import TabButton from '../../Components/TabButton';
 
 import PostsList from '../../Components/PostsList';
@@ -20,6 +20,7 @@ const HomeScreen = () => {
         {/*Posts*/}
         <PostsList />
       </View>
+      <Text>FDFFD</Text>
     </SafeAreaView>
   );
 };

@@ -4,8 +4,6 @@ import React from 'react';
 import {Amplify} from 'aws-amplify';
 import awsConfig from './src/aws-exports';
 import Navigation from './src/Navigation';
-import AppProvider from './src/context/Context';
-// import {withAuthenticator} from 'aws-amplify-react-native';  Updated new imports
 
 Amplify.configure(awsConfig);
 
@@ -13,9 +11,7 @@ enableLatestRenderer();
 
 const App = () => {
   return (
-    <AppProvider>
-      <Navigation />
-    </AppProvider>
+        <Navigation />
   );
 };
 
