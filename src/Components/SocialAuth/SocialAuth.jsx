@@ -1,18 +1,32 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Pressable, View} from 'react-native';
 import {FacebookIcon, GoogleIcon} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 import styles from './style';
+import {Auth} from 'aws-amplify';
+import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth/src/types/Auth';
 
 const SocialAuth = () => {
+  const goggleSingUpHandler = async () => {
+    try {
+      await Auth.federatedSignIn({
+        provider: CognitoHostedUIIdentityProvider.Facebook,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const facebookSingUpHandler = () => {};
+
   return (
     <View style={styles.socialContainer}>
-      <View style={styles.google}>
+      <Pressable style={styles.google} onPress={goggleSingUpHandler}>
         <GoogleIcon width={22} fill={colors.purpleColor} />
-      </View>
-      <View style={styles.google}>
+      </Pressable>
+      <Pressable style={styles.google} onPress={facebookSingUpHandler}>
         <FacebookIcon width={22} fill={colors.purpleColor} />
-      </View>
+      </Pressable>
     </View>
   );
 };
