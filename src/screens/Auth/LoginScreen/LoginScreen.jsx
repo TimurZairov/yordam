@@ -33,10 +33,9 @@ const LoginScreen = () => {
       return;
     }
     try {
-      const user = await Auth.signIn(data.email, data.password);
-      if (user) {
-        navigation.navigate('Authenticated', {screen: 'ProfileScreen'});
-      }
+      await Auth.signIn(data.email, data.password);
+
+      navigation.navigate('Tab', {screen: 'ProfileScreen'});
     } catch (e) {
       return Alert.alert('Ошибка', 'Не верный логин ии пароль');
     } finally {
