@@ -1,6 +1,7 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import {
   ActivityIndicator,
+  Alert,
   SafeAreaView,
   ScrollView,
   Text,
@@ -16,13 +17,11 @@ import SocialAuth from '../../../Components/SocialAuth';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {Auth} from 'aws-amplify';
-import {AppContext} from '../../../context/Context';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const {handleSubmit, control, reset} = useForm();
   const [loading, setLoading] = useState(false);
-  const {setUser} = useContext(AppContext);
 
   const registryHandler = () => {
     navigation.navigate('Registry');
@@ -36,15 +35,10 @@ const LoginScreen = () => {
     try {
       const user = await Auth.signIn(data.email, data.password);
       if (user) {
-        setUser(user);
-        navigation.replace('Authenticated', {screen: 'ProfileScreen'});
-      } else {
-        navigation.navigate('Login');
+        navigation.navigate('Authenticated', {screen: 'ProfileScreen'});
       }
     } catch (e) {
-      if (e.message === ' User is not confirmed.') {
-        navigation.navigate('Confirm');
-      }
+      return Alert.alert('Ошибка', 'Не верный логин ии пароль');
     } finally {
       setLoading(false);
       reset();

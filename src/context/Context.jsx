@@ -1,29 +1,23 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {Auth, Hub} from 'aws-amplify';
 
-export const AppContext = createContext({user: undefined, setUser: Function});
+export const AppContext = createContext({user: undefined});
 
 const AppProvider = ({children}) => {
   const [user, setUser] = useState(undefined);
-
-  useEffect(() => {
+  const isSigned = async () => {
     try {
-      const isSigned = async () => {
-        if (user !== undefined) {
-          const signedUser = await Auth.currentAuthenticatedUser({
-            bypassCache: true,
-          });
-          if (signedUser) {
-            setUser(signedUser);
-          } else {
-            return;
-          }
-        }
-      };
-      isSigned();
+      const signedUser = await Auth.currentAuthenticatedUser({
+        bypassCache: true,
+      });
+      setUser(signedUser);
     } catch (e) {
       console.log(e);
     }
+  };
+
+  useEffect(() => {
+    isSigned();
   }, []);
 
   useEffect(() => {
@@ -34,7 +28,7 @@ const AppProvider = ({children}) => {
           setUser(null);
         }
         if (event === 'signIn') {
-          console.log('ok');
+          isSigned();
         }
       } catch (e) {
         console.log(e);
@@ -47,11 +41,7 @@ const AppProvider = ({children}) => {
     };
   }, []);
 
-  return (
-    <AppContext.Provider value={{user, setUser}}>
-      {children}
-    </AppContext.Provider>
-  );
+  return <AppContext.Provider value={{user}}>{children}</AppContext.Provider>;
 };
 
 export default AppProvider;

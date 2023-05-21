@@ -13,7 +13,7 @@ import {Auth} from 'aws-amplify';
 import {AppContext} from '../../context/Context';
 
 const CustomDrawerNavigation = ({navigation}) => {
-  const {user, setUser} = useContext(AppContext);
+  const {user} = useContext(AppContext);
   const closeDrawer = () => {
     navigation.closeDrawer();
   };
@@ -27,7 +27,7 @@ const CustomDrawerNavigation = ({navigation}) => {
       await Auth.signOut();
       navigation.closeDrawer();
     } catch (e) {
-      setUser(null);
+      console.log(e.message);
     }
   };
 

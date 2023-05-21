@@ -20,6 +20,7 @@ const MapScreen = () => {
       } else {
         await Geolocation.getCurrentPosition(
           position => {
+            console.log(position);
             setMyLocation(position.coords);
           },
           error => {
@@ -67,16 +68,16 @@ const MapScreen = () => {
           );
         })}
         {/*My location*/}
-        <Marker
-          coordinate={{
-            latitude: 39.668715,
-            longitude: 66.86036,
-          }}
-          anchor={{x: 0.5, y: 0.5}}>
-          <View style={styles.markerContainer}>
-            <MapMarker width={50} fill={colors.blackColor} />
-          </View>
-        </Marker>
+        {/*<Marker*/}
+        {/*  coordinate={{*/}
+        {/*    latitude: 39.668715,*/}
+        {/*    longitude: 66.86036,*/}
+        {/*  }}*/}
+        {/*  anchor={{x: 0.5, y: 0.5}}>*/}
+        {/*  <View style={styles.markerContainer}>*/}
+        {/*    <MapMarker width={50} fill={colors.blackColor} />*/}
+        {/*  </View>*/}
+        {/*</Marker>*/}
       </MapView>
 
       <View style={styles.myLocation}>
