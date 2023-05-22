@@ -19,12 +19,14 @@ const Card = ({post}) => {
         <View style={styles.userInfoContainer}>
           <Image
             source={{
-              uri: post?.user.image,
+              uri:
+                post?.image ||
+                'https://abrakadabra.fun/uploads/posts/2021-12/1639614002_3-abrakadabra-fun-p-avatarki-na-vatsap-iz-pinterest-3.jpg',
             }}
             style={styles.userInfoImage}
           />
           <View style={styles.userInfo}>
-            <Text style={styles.userInfoText}>{post?.user.fullName}</Text>
+            <Text style={styles.userInfoText}>{post?.name}</Text>
             <Text style={styles.userInfoText}>
               Дата: <Text style={styles.userText}>{post?.date}</Text>
             </Text>
@@ -35,7 +37,7 @@ const Card = ({post}) => {
         </View>
         <View style={styles.priceContainer}>
           <View style={styles.price}>
-            <Text style={styles.priceTExt}>{post?.price}</Text>
+            <Text style={styles.priceTExt}>{post.price}</Text>
           </View>
           <Text style={styles.time}>19:47</Text>
         </View>

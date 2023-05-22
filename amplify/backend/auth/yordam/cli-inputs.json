@@ -73,9 +73,10 @@
     "hostedUI": true,
     "hostedUIDomainName": "teu83aosjg6j",
     "authProvidersUserPool": [
-      "Facebook"
+      "Facebook",
+      "Google"
     ],
-    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"public_profile\",\"AttributeMapping\":{\"name\":\"name\",\"username\":\"id\"}}]",
+    "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"public_profile\",\"AttributeMapping\":{\"name\":\"name\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid profile\",\"AttributeMapping\":{\"name\":\"name\",\"username\":\"sub\"}}]",
     "triggers": {
       "PostConfirmation": [
         "custom"

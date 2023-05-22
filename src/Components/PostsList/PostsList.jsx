@@ -1,11 +1,26 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {FlatList, Text, View} from 'react-native';
-import posts from '../../data/posts.json';
+import {API} from 'aws-amplify';
+import {listPosts} from '../../graphql/queries';
 import Card from '../Card';
 import TabFilter from '../TabFilter';
 import styles from '../Button/styles';
 
 const PostsList = () => {
+  const [posts, setPosts] = useState([]);
+  console.log(posts[0]);
+  const fetchPost = async () => {
+    try {
+      const response = await API.graphql({query: listPosts});
+      setPosts(response.data?.listPosts.items);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  useEffect(() => {
+    fetchPost();
+  }, []);
   return (
     <FlatList
       ListHeaderComponent={
