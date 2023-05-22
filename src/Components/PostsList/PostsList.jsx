@@ -8,7 +8,6 @@ import styles from '../Button/styles';
 
 const PostsList = () => {
   const [posts, setPosts] = useState([]);
-  console.log(posts[0]);
   const fetchPost = async () => {
     try {
       const response = await API.graphql({query: listPosts});
