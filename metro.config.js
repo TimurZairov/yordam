@@ -5,8 +5,8 @@
  *
  * @format
  */
-const {getDefaultConfig, mergeConfig } = require('metro-config');
-const blacklist  = require('metro-config/src/defaults/exclusionList');
+const {getDefaultConfig, mergeConfig} = require('metro-config');
+const blacklist = require('metro-config/src/defaults/exclusionList');
 
 // module.exports = {
 //   transformer: {
@@ -22,7 +22,8 @@ const blacklist  = require('metro-config/src/defaults/exclusionList');
 module.exports = (async () => {
   const awsPackageIgnore = {
     resolver: {
-      blacklistRE: blacklist([/amplify\/#current-cloud-backend\/.*/])},
+      blacklistRE: blacklist([/amplify\/#current-cloud-backend\/.*/]),
+    },
   };
 
   const {
@@ -42,7 +43,7 @@ module.exports = (async () => {
     },
   };
 
-  return mergeConfig(awsPackageIgnore,svgTransformer );
+  return mergeConfig(awsPackageIgnore, svgTransformer);
 })();
 
 // module.exports = {

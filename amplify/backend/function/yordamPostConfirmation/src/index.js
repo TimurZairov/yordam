@@ -1,4 +1,10 @@
-/**
+/* Amplify Params - DO NOT EDIT
+	API_YORDAM_GRAPHQLAPIENDPOINTOUTPUT
+	API_YORDAM_GRAPHQLAPIIDOUTPUT
+	API_YORDAM_GRAPHQLAPIKEYOUTPUT
+	ENV
+	REGION
+Amplify Params - DO NOT EDIT *//**
  * @fileoverview
  *
  * This CloudFormation Trigger creates a handler which awaits the other handlers

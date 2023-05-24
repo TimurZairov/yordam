@@ -12,5 +12,13 @@
   "triggerTemplate": "PostConfirmation.json.ejs",
   "triggerEventPath": "PostConfirmation.event.json",
   "roleName": "yordamPostConfirmation",
-  "skipEdit": true
+  "skipEdit": true,
+  "permissions": {
+    "api": {
+      "yordam": [
+        "Query",
+        "Mutation"
+      ]
+    }
+  }
 }
