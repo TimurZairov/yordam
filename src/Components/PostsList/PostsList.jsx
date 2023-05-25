@@ -1,43 +1,15 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 import Card from '../Card';
 import TabFilter from '../TabFilter';
 import styles from '../Button/styles';
-import {gql, useQuery} from '@apollo/client';
+import {useQuery} from '@apollo/client';
+import {listPosts} from './queries';
 
 //from '../../graphql/queries';
-export const listPosts = gql/* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        title
-        price
-        adress
-        lat
-        long
-        description
-        userID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 
 const PostsList = () => {
-  // const [posts, setPosts] = useState([]);
-  const {data, loading, error} = useQuery(listPosts);
-  //FETCH POST
+  //FETCH POST WAS
   // const fetchPost = async () => {
   //   try {
   //     const response = await API.graphql({query: listPosts});
@@ -46,17 +18,22 @@ const PostsList = () => {
   //     console.log(e);
   //   }
   // };
+  const {data, loading, error} = useQuery(listPosts, {variables: {limit: 1}}); // second parameter of options = {limits of query}
 
   if (loading) {
     return <ActivityIndicator />;
   }
+  //add component for Error message
   if (error) {
     return <Text>{e.message}</Text>;
   }
   //POSTS from hook useQuery
-  const posts = data.listPosts?.items;
+  const posts = data?.listPosts?.items || [];
 
-  useEffect(() => {}, []);
+  // useEffect(() => {
+  //   setPosts(data.listPosts.items);
+  // }, [data]);
+
   return (
     <FlatList
       ListHeaderComponent={
