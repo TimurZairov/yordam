@@ -5,6 +5,7 @@ import {Amplify} from 'aws-amplify';
 import awsConfig from './src/aws-exports';
 import Navigation from './src/Navigation';
 import AppProvider from './src/context/Context';
+import Client from './src/apollo/client';
 
 Amplify.configure(awsConfig);
 
@@ -13,7 +14,9 @@ enableLatestRenderer();
 const App = () => {
   return (
     <AppProvider>
-      <Navigation />
+      <Client>
+        <Navigation />
+      </Client>
     </AppProvider>
   );
 };
