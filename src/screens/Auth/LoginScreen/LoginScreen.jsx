@@ -34,10 +34,11 @@ const LoginScreen = () => {
     }
     try {
       await Auth.signIn(data.email, data.password);
-
-      navigation.navigate('Tab', {screen: 'ProfileScreen'});
+      navigation.navigate('Tab', {
+        screen: 'ProfileScreen',
+      });
     } catch (e) {
-      return Alert.alert('Ошибка', 'Не верный логин ии пароль');
+      Alert.alert('Ошибка', 'Не верный логин ии пароль');
     } finally {
       setLoading(false);
       reset();

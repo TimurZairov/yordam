@@ -3,7 +3,6 @@ import {SafeAreaView, View} from 'react-native';
 import styles from './style';
 import Header from '../../Components/Header/';
 import TabButton from '../../Components/TabButton';
-
 import PostsList from '../../Components/PostsList';
 
 const HomeScreen = () => {

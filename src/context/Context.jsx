@@ -1,10 +1,14 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {Auth, Hub} from 'aws-amplify';
 
-export const AppContext = createContext({user: undefined});
+export const AppContext = createContext({
+  user: undefined,
+  userId: undefined,
+});
 
 const AppProvider = ({children}) => {
   const [user, setUser] = useState(undefined);
+
   const isSigned = async () => {
     try {
       const signedUser = await Auth.currentAuthenticatedUser({
@@ -41,7 +45,11 @@ const AppProvider = ({children}) => {
     };
   }, []);
 
-  return <AppContext.Provider value={{user}}>{children}</AppContext.Provider>;
+  return (
+    <AppContext.Provider value={{user, userId: user?.attributes.sub}}>
+      {children}
+    </AppContext.Provider>
+  );
 };
 
 export default AppProvider;

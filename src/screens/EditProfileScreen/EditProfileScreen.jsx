@@ -9,6 +9,7 @@ import Button from '../../Components/Button';
 import {colors} from '../../theme/colors';
 import ButtonOnPress from '../../Components/Button/ButtonOnPress';
 import {launchImageLibrary} from 'react-native-image-picker';
+import {DefaultAvatar} from '../../assets/icons';
 
 const EditProfileScreen = () => {
   const [changeAvatar, setChangeAvatar] = useState(null);
@@ -43,10 +44,14 @@ const EditProfileScreen = () => {
     <ScrollView style={styles.container}>
       <Header />
       <View style={styles.imageContainer}>
-        <Image
-          source={{uri: changeAvatar?.uri || user.image}}
-          style={styles.image}
-        />
+        {user.image.length !== 0 ? (
+          <Image
+            source={{uri: changeAvatar?.uri || user.image}}
+            style={styles.image}
+          />
+        ) : (
+          <DefaultAvatar width={85} fill={colors.grayColor} />
+        )}
         <Text style={styles.imageText} onPress={imageHandler}>
           Сменить Фото
         </Text>

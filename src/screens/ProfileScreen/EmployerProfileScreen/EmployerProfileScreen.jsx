@@ -1,23 +1,35 @@
-import React from 'react';
-import {Image, Text, View} from 'react-native';
-import Header from '../../../Components/Header';
-import styles from './style';
-import UserInfo from '../../../Components/UserInfo';
+import React, {useContext} from 'react';
+import {ActivityIndicator, Text, View} from 'react-native';
+
+import {AppContext} from '../../../context/Context';
+import {getUser} from './queries';
+import {useQuery} from '@apollo/client';
 import UserData from '../../../Components/UserData';
 import {useNavigation} from '@react-navigation/native';
 
-const userData = {
-  name: 'Матлюба Маматкулова',
-  location: 'Ташкент, Ул. Комил-Яшин 2',
-  email: 'zairovne@gmail.com',
-  phoneNumber: '+998 99 591 48 83',
-  image:
-    'https://proprikol.ru/wp-content/uploads/2022/06/zhenskie-kartinki-na-avu-31.jpg',
-};
+import Header from '../../../Components/Header';
+import styles from './style';
+import UserInfo from '../../../Components/UserInfo';
 
 const EmployerProfileScreen = () => {
   const navigation = useNavigation();
+  const {userId} = useContext(AppContext);
+  const {data, loading, error} = useQuery(getUser, {
+    variables: {
+      id: userId,
+    },
+    pollInterval: 500,
+  });
+  if (error) {
+    return <Text>{error.message}</Text>;
+  }
 
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+
+  const userData = data.getUser;
+  console.log(userData);
   const editProfileHandler = () => {
     navigation.navigate('EditProfileScreen', {user: userData});
   };
@@ -32,14 +44,10 @@ const EmployerProfileScreen = () => {
       />
       <UserData name={'Почта'} userData={userData.email} />
       <UserData name={'Телефон'} userData={userData.phoneNumber} />
-      <UserData name={'Я работодатель'} />
-      <Text style={styles.comments}>Отзывы как о работодателе (2)</Text>
+      <UserData name={'Я работодатель'} userData={userData.employer} />
+      <Text style={styles.comments}>Ваши посты</Text>
 
       <View style={styles.commentContainer}>
-        <Image
-          source={require('../../../assets/images/avatar.png')}
-          style={styles.commentImage}
-        />
         <View style={styles.textContainer}>
           <Text style={styles.commentName}>Мадина</Text>
           <Text style={styles.commentText}>

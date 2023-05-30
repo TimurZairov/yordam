@@ -10,7 +10,7 @@ export default StyleSheet.create({
   imageContainer: {
     width: 100,
     height: 100,
-    backgroundColor: colors.whiteColor,
+    backgroundColor: colors.lightGrayColor,
     elevation: 4,
     borderRadius: 50,
     alignItems: 'center',

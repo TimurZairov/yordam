@@ -8,14 +8,12 @@
  */
 
 const AWS = require('aws-sdk');
-// const docClient = new AWS.DynamoDB.DocumentClient();
+
 let ddb = new AWS.DynamoDB();
 
 const AppSyncId = process.env.API_YORDAM_GRAPHQLAPIIDOUTPUT;
 const env = process.env.ENV;
 const TableName = `User-${AppSyncId}-${env}`;
-
-console.log(ddb);
 
 console.log('Hello lamda');
 let date = new Date();
@@ -27,7 +25,6 @@ const isExist = async id => {
   };
   try {
     const response = await ddb.getItem(params).promise();
-    console.log(response);
     return !!response?.Item;
   } catch (e) {
     return false;
@@ -68,7 +65,6 @@ exports.handler = async (event, context) => {
   }
   //if exists
   const userAtt = event.request.userAttributes; // {sub : id user, email, name}
-  console.log(userAtt);
   //if not save to database
   const newUser = {
     id: userAtt.sub,
@@ -83,8 +79,14 @@ exports.handler = async (event, context) => {
         __typename: {S: 'User'},
         name: {S: event.request.userAttributes.name},
         email: {S: event.request.userAttributes.email},
+        employer: {BOOL: false},
+        location: {S: ''},
+        about: {S: ''},
+        image: {S: ''},
+        phoneNumber: {S: ''},
         createdAt: {S: date.toISOString()},
         updatedAt: {S: date.toISOString()},
+        _lastChangedAt: {S: date.toISOString()},
       },
       TableName,
     };
