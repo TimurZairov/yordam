@@ -42,4 +42,7 @@ export default StyleSheet.create({
     fontSize: fonts.fontSize.s,
     fontFamily: fonts.fontFamily.semiBold,
   },
+  activity: {
+    flex: 1,
+  },
 });

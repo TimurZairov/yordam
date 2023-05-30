@@ -10,6 +10,7 @@ import {useNavigation} from '@react-navigation/native';
 import Header from '../../../Components/Header';
 import styles from './style';
 import UserInfo from '../../../Components/UserInfo';
+import {colors} from '../../../theme/colors';
 
 const EmployerProfileScreen = () => {
   const navigation = useNavigation();
@@ -20,16 +21,18 @@ const EmployerProfileScreen = () => {
     },
     pollInterval: 500,
   });
+
   if (error) {
     return <Text>{error.message}</Text>;
   }
 
   if (loading) {
-    return <ActivityIndicator />;
+    return (
+      <ActivityIndicator style={styles.activity} color={colors.purpleColor} />
+    );
   }
 
   const userData = data.getUser;
-  console.log(userData);
   const editProfileHandler = () => {
     navigation.navigate('EditProfileScreen', {user: userData});
   };
@@ -42,9 +45,9 @@ const EmployerProfileScreen = () => {
         userLocation={userData.location}
         imageURL={userData.image}
       />
-      <UserData name={'Почта'} userData={userData.email} />
-      <UserData name={'Телефон'} userData={userData.phoneNumber} />
-      <UserData name={'Я работодатель'} userData={userData.employer} />
+      <UserData name={'Почта'} info={userData.email} />
+      <UserData name={'Телефон'} info={userData.phoneNumber} />
+      <UserData name={'Я работодатель'} info={userData.employer} />
       <Text style={styles.comments}>Ваши посты</Text>
 
       <View style={styles.commentContainer}>

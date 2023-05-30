@@ -6,7 +6,6 @@ import {DefaultAvatar} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 
 const UserInfo = ({userLocation, userName, imageURL}) => {
-  console.log(imageURL);
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
