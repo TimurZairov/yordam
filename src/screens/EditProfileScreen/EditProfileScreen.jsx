@@ -14,8 +14,10 @@ import ButtonOnPress from '../../Components/Button/ButtonOnPress';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {DefaultAvatar} from '../../assets/icons';
 import ErrorScreen from '../ErrorScreen';
+import {useNavigation} from '@react-navigation/native';
 
 const EditProfileScreen = () => {
+  const navigation = useNavigation();
   const {userId} = useContext(AppContext);
   const {data, loading, error} = useQuery(getUser, {
     variables: {
@@ -23,11 +25,11 @@ const EditProfileScreen = () => {
     },
   });
 
-  const user = data.getUser;
+  const user = data?.getUser;
 
   const [
     doUpdateUser,
-    {data: updateData, loading: updateLoading, error: updateError},
+    {data: updateData, loading: updateLoading, error: updateError}, // change name if exist
   ] = useMutation(updateUser);
 
   const [changeAvatar, setChangeAvatar] = useState(null);
@@ -51,13 +53,13 @@ const EditProfileScreen = () => {
   };
 
   const submitUpdateUserHandler = async formUpdate => {
-    console.log(formUpdate);
     try {
       await doUpdateUser({
         variables: {
-          input: {id: userId, ...formUpdate, _version: user._version},
+          input: {id: userId, ...formUpdate, _version: user?._version},
         },
       });
+      navigation.goBack();
     } catch (e) {
       console.log(e);
     }
