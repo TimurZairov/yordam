@@ -17,6 +17,7 @@ const TableName = `User-${AppSyncId}-${env}`;
 
 console.log('Hello lamda');
 let date = new Date();
+const versionNumber = '1';
 
 const isExist = async id => {
   const params = {
@@ -87,6 +88,7 @@ exports.handler = async (event, context) => {
         createdAt: {S: date.toISOString()},
         updatedAt: {S: date.toISOString()},
         _lastChangedAt: {S: date.toISOString()},
+        _version: {N: versionNumber},
       },
       TableName,
     };

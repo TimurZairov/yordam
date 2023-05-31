@@ -1,6 +1,9 @@
-import React, {useState} from 'react';
-import {Image, ScrollView, Text, View} from 'react-native';
-import {useRoute} from '@react-navigation/native';
+import React, {useContext, useEffect, useState} from 'react';
+import {ActivityIndicator, Image, ScrollView, Text, View} from 'react-native';
+import {getUser, updateUser} from './queries';
+import {AppContext} from '../../context/Context';
+import {useMutation, useQuery} from '@apollo/client';
+
 import styles from './style';
 import Header from '../../Components/Header';
 import Input from '../../Components/Input';
@@ -10,20 +13,27 @@ import {colors} from '../../theme/colors';
 import ButtonOnPress from '../../Components/Button/ButtonOnPress';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {DefaultAvatar} from '../../assets/icons';
+import ErrorScreen from '../ErrorScreen';
 
 const EditProfileScreen = () => {
-  const [changeAvatar, setChangeAvatar] = useState(null);
-  const router = useRoute();
-  const {user} = router.params;
-  //Hook form
-  const {control, handleSubmit} = useForm({
-    defaultValues: {
-      name: user.name,
-      location: user.location,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
+  const {userId} = useContext(AppContext);
+  const {data, loading, error} = useQuery(getUser, {
+    variables: {
+      id: userId,
     },
   });
+
+  const user = data.getUser;
+
+  const [
+    doUpdateUser,
+    {data: updateData, loading: updateLoading, error: updateError},
+  ] = useMutation(updateUser);
+
+  const [changeAvatar, setChangeAvatar] = useState(null);
+  // //Hook form
+  const {control, handleSubmit, setValue} = useForm();
+
   //ImagePicker
   const imageHandler = async () => {
     try {
@@ -39,6 +49,34 @@ const EditProfileScreen = () => {
       console.warn(e);
     }
   };
+
+  const submitUpdateUserHandler = async formUpdate => {
+    console.log(formUpdate);
+    try {
+      await doUpdateUser({
+        variables: {
+          input: {id: userId, ...formUpdate, _version: user._version},
+        },
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  if (loading) {
+    return <ActivityIndicator color={colors.purpleColor} />;
+  }
+
+  if (error || updateError) {
+    return <ErrorScreen error={updateError.message} />;
+  }
+
+  useEffect(() => {
+    setValue('name', user.name);
+    setValue('email', user.email);
+    setValue('location', user.location);
+    setValue('phoneNumber', user.phoneNumber);
+  }, [user, setValue]);
 
   return (
     <ScrollView style={styles.container}>
@@ -72,7 +110,10 @@ const EditProfileScreen = () => {
       />
       <Text style={styles.label}>Номер телефона</Text>
       <Input control={control} name={'phoneNumber'} />
-      <Button handleSubmit={handleSubmit} title={'Сохранить'} />
+      <Button
+        onPress={handleSubmit(submitUpdateUserHandler)}
+        title={updateLoading ? 'Сохряняем...' : 'Сохранить'}
+      />
       <ButtonOnPress title={'Отмена'} color={colors.blackColor} />
     </ScrollView>
   );

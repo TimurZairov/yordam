@@ -19,7 +19,7 @@
       "function": {
         "yordamPostConfirmation": {
           "deploymentBucketName": "amplify-yordam-staging-123915-deployment",
-          "s3Key": "amplify-builds/yordamPostConfirmation-67655934335434555153-build.zip"
+          "s3Key": "amplify-builds/yordamPostConfirmation-33787542622b5a4b436f-build.zip"
         }
       },
       "api": {

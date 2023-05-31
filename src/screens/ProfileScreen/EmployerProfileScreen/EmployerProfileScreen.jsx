@@ -11,6 +11,7 @@ import Header from '../../../Components/Header';
 import styles from './style';
 import UserInfo from '../../../Components/UserInfo';
 import {colors} from '../../../theme/colors';
+import ErrorScreen from '../../ErrorScreen';
 
 const EmployerProfileScreen = () => {
   const navigation = useNavigation();
@@ -23,7 +24,7 @@ const EmployerProfileScreen = () => {
   });
 
   if (error) {
-    return <Text>{error.message}</Text>;
+    return <ErrorScreen error={error.message} />;
   }
 
   if (loading) {

@@ -4,6 +4,7 @@ import Header from '../../Components/Header';
 import styles from './style';
 
 const ErrorScreen = ({error}) => {
+  console.log(error);
   return (
     <View style={styles.container}>
       <Header />

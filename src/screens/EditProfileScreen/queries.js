@@ -22,3 +22,24 @@ export const getUser = gql`
     }
   }
 `;
+
+export const updateUser = gql`
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      email
+      name
+      location
+      image
+      phoneNumber
+      employer
+      about
+      createdAt
+      updatedAt
+      _deleted
+    }
+  }
+`;
