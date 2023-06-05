@@ -31,10 +31,10 @@ export const createComment = /* GraphQL */ `
         title
         price
         adress
-        lat
-        long
         description
         userID
+        lat
+        long
         createdAt
         updatedAt
         _version
@@ -79,10 +79,10 @@ export const updateComment = /* GraphQL */ `
         title
         price
         adress
-        lat
-        long
         description
         userID
+        lat
+        long
         createdAt
         updatedAt
         _version
@@ -127,10 +127,10 @@ export const deleteComment = /* GraphQL */ `
         title
         price
         adress
-        lat
-        long
         description
         userID
+        lat
+        long
         createdAt
         updatedAt
         _version
@@ -155,8 +155,6 @@ export const createPost = /* GraphQL */ `
       title
       price
       adress
-      lat
-      long
       User {
         id
         email
@@ -178,6 +176,8 @@ export const createPost = /* GraphQL */ `
       }
       description
       userID
+      lat
+      long
       createdAt
       updatedAt
       _version
@@ -196,8 +196,6 @@ export const updatePost = /* GraphQL */ `
       title
       price
       adress
-      lat
-      long
       User {
         id
         email
@@ -219,6 +217,8 @@ export const updatePost = /* GraphQL */ `
       }
       description
       userID
+      lat
+      long
       createdAt
       updatedAt
       _version
@@ -237,8 +237,6 @@ export const deletePost = /* GraphQL */ `
       title
       price
       adress
-      lat
-      long
       User {
         id
         email
@@ -260,6 +258,8 @@ export const deletePost = /* GraphQL */ `
       }
       description
       userID
+      lat
+      long
       createdAt
       updatedAt
       _version

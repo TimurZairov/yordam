@@ -7,7 +7,7 @@ import {useQuery} from '@apollo/client';
 import {listPosts} from './queries';
 
 const PostsList = () => {
-  const {data, loading, error} = useQuery(listPosts); // second parameter of options = {limits of query}
+  const {data, loading, error, refetch} = useQuery(listPosts); // second parameter of options = {limits of query}
   if (loading) {
     return <ActivityIndicator />;
   }
@@ -34,6 +34,8 @@ const PostsList = () => {
       }}
       keyExtractor={item => item.id}
       showsVerticalScrollIndicator={false}
+      onRefresh={() => refetch()}
+      refreshing={loading}
     />
   );
 };

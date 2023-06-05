@@ -72,7 +72,7 @@ const EditProfileScreen = () => {
   if (error || updateError) {
     return <ErrorScreen error={updateError.message} />;
   }
-
+  //react hook form setValue
   useEffect(() => {
     setValue('name', user.name);
     setValue('email', user.email);

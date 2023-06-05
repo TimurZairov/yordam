@@ -28,10 +28,10 @@ export const getComment = /* GraphQL */ `
         title
         price
         adress
-        lat
-        long
         description
         userID
+        lat
+        long
         createdAt
         updatedAt
         _version
@@ -167,8 +167,6 @@ export const getPost = /* GraphQL */ `
       title
       price
       adress
-      lat
-      long
       User {
         id
         email
@@ -190,6 +188,8 @@ export const getPost = /* GraphQL */ `
       }
       description
       userID
+      lat
+      long
       createdAt
       updatedAt
       _version
@@ -210,10 +210,10 @@ export const listPosts = /* GraphQL */ `
         title
         price
         adress
-        lat
-        long
         description
         userID
+        lat
+        long
         createdAt
         updatedAt
         _version
@@ -243,10 +243,10 @@ export const syncPosts = /* GraphQL */ `
         title
         price
         adress
-        lat
-        long
         description
         userID
+        lat
+        long
         createdAt
         updatedAt
         _version
@@ -278,10 +278,10 @@ export const postsByUserID = /* GraphQL */ `
         title
         price
         adress
-        lat
-        long
         description
         userID
+        lat
+        long
         createdAt
         updatedAt
         _version
