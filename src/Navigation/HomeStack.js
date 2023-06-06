@@ -12,7 +12,7 @@ const HomeStack = () => {
         headerShown: false,
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
-      <Stack.Screen name="Details" component={JobDetailsScreen} options={{}} />
+      <Stack.Screen name="Details" component={JobDetailsScreen} />
     </Stack.Navigator>
   );
 };

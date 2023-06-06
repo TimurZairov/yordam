@@ -46,27 +46,28 @@ const MapScreen = () => {
         }}
         style={styles.map}>
         {/*MARKER*/}
-        {posts.map((job, index) => {
-          return (
-            <Marker
-              coordinate={{
-                latitude: job?.jobLocation?.lat,
-                longitude: job?.jobLocation?.loong,
-              }}
-              anchor={{x: 0.5, y: 0.5}}
-              key={index}>
-              <View style={styles.markerContainer}>
-                <Image
-                  source={{
-                    uri: job.user.image,
-                  }}
-                  style={styles.userImage}
-                />
-                <MapMarker width={50} fill={colors.purpleColor} />
-              </View>
-            </Marker>
-          );
-        })}
+        {posts.length &&
+          posts.map((job, index) => {
+            return (
+              <Marker
+                coordinate={{
+                  latitude: job?.jobLocation?.lat,
+                  longitude: job?.jobLocation?.loong,
+                }}
+                anchor={{x: 0.5, y: 0.5}}
+                key={index}>
+                <View style={styles.markerContainer}>
+                  <Image
+                    source={{
+                      uri: job.user.image,
+                    }}
+                    style={styles.userImage}
+                  />
+                  <MapMarker width={50} fill={colors.purpleColor} />
+                </View>
+              </Marker>
+            );
+          })}
         {/*My location*/}
         {/*<Marker*/}
         {/*  coordinate={{*/}

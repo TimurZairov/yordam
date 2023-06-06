@@ -4,10 +4,13 @@ import {Auth, Hub} from 'aws-amplify';
 export const AppContext = createContext({
   user: undefined,
   userId: undefined,
+  coordinates: null,
+  setCoordinates: Function,
 });
 
 const AppProvider = ({children}) => {
   const [user, setUser] = useState(undefined);
+  const [coordinates, setCoordinates] = useState(undefined);
 
   const isSigned = async () => {
     try {
@@ -46,7 +49,8 @@ const AppProvider = ({children}) => {
   }, []);
 
   return (
-    <AppContext.Provider value={{user, userId: user?.attributes.sub}}>
+    <AppContext.Provider
+      value={{user, userId: user?.attributes.sub, coordinates, setCoordinates}}>
       {children}
     </AppContext.Provider>
   );

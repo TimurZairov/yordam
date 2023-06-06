@@ -9,10 +9,10 @@ import {
   ProfileIcon,
 } from '../assets/icons';
 import MapScreen from '../screens/MapScreen';
-import CreateScreen from '../screens/CreateScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MessageScreen from '../screens/MessageScreen';
 import SignedStack from './SignedStack';
+import CreateStack from './CreateStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -62,7 +62,7 @@ const TabNavigation = () => {
 
       <Tab.Screen
         name={'Create'}
-        component={CreateScreen}
+        component={CreateStack}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color}) => {

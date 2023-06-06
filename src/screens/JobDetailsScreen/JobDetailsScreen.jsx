@@ -3,8 +3,12 @@ import styles from './style';
 import {Text, View} from 'react-native';
 import Header from '../../Components/Header';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import {useRoute} from '@react-navigation/native';
 
 const JobDetailsScreen = () => {
+  const route = useRoute();
+  const id = route.params;
+
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
@@ -21,11 +25,13 @@ const JobDetailsScreen = () => {
           longitudeDelta: 0.0421,
         }}
       />
-      <View style={styles.jobInfoContainer}>
-        <View style={styles.jobInfo}>
-          <Text style={styles.jobUserName}>Матлюба Маматкулова</Text>
+      {id ? (
+        <View style={styles.jobInfoContainer}>
+          <View style={styles.jobInfo}>
+            <Text style={styles.jobUserName}>Матлюба Маматкулова</Text>
+          </View>
         </View>
-      </View>
+      ) : null}
     </View>
   );
 };

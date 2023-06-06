@@ -8,7 +8,7 @@ import {useNavigation} from '@react-navigation/native';
 const Card = ({post}) => {
   const navigation = useNavigation();
   const getJobDetailsHandler = id => {
-    navigation.navigate('Details');
+    navigation.navigate('Details', {id});
   };
 
   return (

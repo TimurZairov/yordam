@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import Header from '../../Components/Header';
 import styles from './style';
@@ -10,43 +10,42 @@ import {useForm} from 'react-hook-form';
 import {AppContext} from '../../context/Context';
 import {useMutation} from '@apollo/client';
 import {createPost} from './queries';
+import {useNavigation} from '@react-navigation/native';
 
 const CreateScreen = () => {
-  const {userId, user} = useContext(AppContext);
+  const [jobCoordinates, setJobCoordinates] = useState(null);
+  const {userId} = useContext(AppContext);
   const [doCreatePost] = useMutation(createPost);
+  const {coordinates, setCoordinates} = useContext(AppContext);
+  const navigation = useNavigation();
 
-  const {control, handleSubmit} = useForm();
+  const {control, handleSubmit, reset} = useForm();
 
   const createPostSubmit = async data => {
-    console.log(data);
     try {
-      const response = await doCreatePost({
+      await doCreatePost({
         variables: {
           input: {
             title: data.title,
             price: data.price,
-            adress: data.adress,
+            adress: data.address,
             description: data.description,
             userID: userId,
-            lat: '39.672616',
-            long: '66.853766',
-            User: {
-              id: userId,
-              email: user.email,
-              location: '',
-              image: '',
-              phoneNumber: '',
-              employer: false,
-              about: '',
-            },
-            Comment: [],
+            lat: coordinates?.latitude,
+            long: coordinates?.longitude,
           },
         },
       });
-      console.log(response);
+      navigation.navigate('Home');
+      setCoordinates(null);
+      reset();
     } catch (e) {
       console.log(e);
     }
+  };
+
+  const getLocationScreenHandler = () => {
+    navigation.navigate('Location');
   };
 
   return (
@@ -83,6 +82,11 @@ const CreateScreen = () => {
         control={control}
         name={'description'}
         rules={{required: 'Подробнее опишите что нужно сделать*'}}
+      />
+      <Button
+        title={'Место на карте'}
+        color={colors.blackColor}
+        onPress={getLocationScreenHandler}
       />
       <Button title={'Создать'} onPress={handleSubmit(createPostSubmit)} />
     </ScrollView>
