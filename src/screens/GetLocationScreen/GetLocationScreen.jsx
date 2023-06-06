@@ -5,6 +5,7 @@ import Header from '../../Components/Header';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {AppContext} from '../../context/Context';
 import {useNavigation} from '@react-navigation/native';
+import Button from '../../Components/Button';
 
 const GetLocationScreen = () => {
   const {setCoordinates, coordinates} = useContext(AppContext);
@@ -13,6 +14,10 @@ const GetLocationScreen = () => {
 
   const getJobLocation = event => {
     setCoordinates(event.nativeEvent.coordinate);
+  };
+
+  const backHandler = () => {
+    navigation.navigate('CreateScreen');
   };
 
   useEffect(() => {
@@ -47,6 +52,9 @@ const GetLocationScreen = () => {
             anchor={{x: 0.5, y: 0.5}}></Marker>
         ) : null}
       </MapView>
+      <View style={styles.btn}>
+        <Button title={'Вернуться'} onPress={backHandler} />
+      </View>
     </View>
   );
 };

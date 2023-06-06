@@ -30,4 +30,8 @@ export default StyleSheet.create({
     width: 150,
     height: 150,
   },
+  btn: {
+    paddingHorizontal: 15,
+    paddingBottom: 15,
+  },
 });
