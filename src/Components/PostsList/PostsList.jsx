@@ -16,7 +16,7 @@ const PostsList = () => {
     return <Text>{error.message}</Text>;
   }
   //POSTS from hook useQuery
-  const posts = data?.listPosts?.items || [];
+  const posts = (data?.listPosts?.items || []).filter(posts => !posts._deleted);
 
   return (
     <FlatList

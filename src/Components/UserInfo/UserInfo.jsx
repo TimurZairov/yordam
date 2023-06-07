@@ -5,7 +5,7 @@ import UserNum from '../UserNum';
 import {DefaultAvatar} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 
-const UserInfo = ({userLocation, userName, imageURL}) => {
+const UserInfo = ({userLocation, userName, imageURL, postNum}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -27,7 +27,7 @@ const UserInfo = ({userLocation, userName, imageURL}) => {
         </Text>
         <View>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-            <UserNum num={20} subTitle="Постов" />
+            <UserNum num={postNum} subTitle="Постов" />
             {/*<UserNum num={5} subTitle="Завершеных" />*/}
             {/*<UserNum num={20} subTitle="Активных" />*/}
           </View>

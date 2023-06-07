@@ -34,6 +34,9 @@ const EmployerProfileScreen = () => {
       console.log(e);
     }
   };
+
+  //EDit Post
+
   //  USER QUERY
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
@@ -73,6 +76,8 @@ const EmployerProfileScreen = () => {
     ]);
   };
 
+  const postedPost = userData?.Posts.items.filter(post => !post._deleted);
+
   return (
     <View style={styles.container}>
       <Header profile onPress={editProfileHandler} />
@@ -85,11 +90,16 @@ const EmployerProfileScreen = () => {
                 userName={userData.name}
                 userLocation={userData.location}
                 imageURL={userData.image}
+                postNum={postedPost.length || 0}
               />
               <UserData name={'Почта'} info={userData.email} />
               <UserData name={'Телефон'} info={userData.phoneNumber} />
               <UserData name={'Я работодатель'} info={userData.employer} />
-              <Text style={styles.comments}>Ваши посты</Text>
+              <Text style={styles.comments}>
+                {userData?.Posts.items.length
+                  ? 'Ваши посты'
+                  : 'У Вас нет постов'}
+              </Text>
             </>
           );
         }}
