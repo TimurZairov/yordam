@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import Header from '../../Components/Header';
 import styles from './style';
@@ -13,7 +13,6 @@ import {createPost} from './queries';
 import {useNavigation} from '@react-navigation/native';
 
 const CreateScreen = () => {
-  const [jobCoordinates, setJobCoordinates] = useState(null);
   const {userId} = useContext(AppContext);
   const [doCreatePost] = useMutation(createPost);
   const {coordinates, setCoordinates} = useContext(AppContext);

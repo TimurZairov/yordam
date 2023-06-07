@@ -17,6 +17,14 @@ export const getComment = /* GraphQL */ `
         phoneNumber
         employer
         about
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -28,6 +36,25 @@ export const getComment = /* GraphQL */ `
         title
         price
         adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         description
         userID
         lat
@@ -58,6 +85,36 @@ export const listComments = /* GraphQL */ `
         comment
         userID
         postID
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         createdAt
         updatedAt
         _version
@@ -87,6 +144,36 @@ export const syncComments = /* GraphQL */ `
         comment
         userID
         postID
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         createdAt
         updatedAt
         _version
@@ -118,6 +205,36 @@ export const commentsByUserID = /* GraphQL */ `
         comment
         userID
         postID
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         createdAt
         updatedAt
         _version
@@ -149,6 +266,36 @@ export const commentsByPostID = /* GraphQL */ `
         comment
         userID
         postID
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         createdAt
         updatedAt
         _version
@@ -176,6 +323,14 @@ export const getPost = /* GraphQL */ `
         phoneNumber
         employer
         about
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -183,6 +338,17 @@ export const getPost = /* GraphQL */ `
         _lastChangedAt
       }
       Comments {
+        items {
+          id
+          comment
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
@@ -210,6 +376,25 @@ export const listPosts = /* GraphQL */ `
         title
         price
         adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         description
         userID
         lat
@@ -243,6 +428,25 @@ export const syncPosts = /* GraphQL */ `
         title
         price
         adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         description
         userID
         lat
@@ -278,6 +482,25 @@ export const postsByUserID = /* GraphQL */ `
         title
         price
         adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         description
         userID
         lat
@@ -305,10 +528,36 @@ export const getUser = /* GraphQL */ `
       employer
       about
       Posts {
+        items {
+          id
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Comments {
+        items {
+          id
+          comment
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
@@ -336,6 +585,14 @@ export const listUsers = /* GraphQL */ `
         phoneNumber
         employer
         about
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -369,6 +626,14 @@ export const syncUsers = /* GraphQL */ `
         phoneNumber
         employer
         about
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version

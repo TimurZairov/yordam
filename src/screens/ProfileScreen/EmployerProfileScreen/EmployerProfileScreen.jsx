@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {ActivityIndicator, Text, View} from 'react-native';
+import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 
 import {AppContext} from '../../../context/Context';
 import {getUser} from './queries';
@@ -22,7 +22,6 @@ const EmployerProfileScreen = () => {
     },
     pollInterval: 500,
   });
-
   if (error) {
     return <ErrorScreen error={error.message} />;
   }
@@ -34,6 +33,7 @@ const EmployerProfileScreen = () => {
   }
 
   const userData = data.getUser;
+  console.log(userData.Posts.items);
   const editProfileHandler = () => {
     navigation.navigate('EditProfileScreen', {user: userData});
   };
@@ -41,25 +41,37 @@ const EmployerProfileScreen = () => {
   return (
     <View style={styles.container}>
       <Header profile onPress={editProfileHandler} />
-      <UserInfo
-        userName={userData.name}
-        userLocation={userData.location}
-        imageURL={userData.image}
+      <FlatList
+        data={userData?.Posts.items}
+        ListHeaderComponent={() => {
+          return (
+            <>
+              <UserInfo
+                userName={userData.name}
+                userLocation={userData.location}
+                imageURL={userData.image}
+              />
+              <UserData name={'Почта'} info={userData.email} />
+              <UserData name={'Телефон'} info={userData.phoneNumber} />
+              <UserData name={'Я работодатель'} info={userData.employer} />
+              <Text style={styles.comments}>Ваши посты</Text>
+            </>
+          );
+        }}
+        renderItem={({item}) => {
+          return (
+            <View style={styles.commentContainer}>
+              <View style={styles.textContainer}>
+                <Text style={styles.commentName}>{item.title}</Text>
+                <Text style={styles.commentName}>{item.price}</Text>
+                <Text style={styles.commentText}>{item.description}</Text>
+              </View>
+            </View>
+          );
+        }}
+        keyExtractor={item => item.id}
+        showsVerticalScrollIndicator={false}
       />
-      <UserData name={'Почта'} info={userData.email} />
-      <UserData name={'Телефон'} info={userData.phoneNumber} />
-      <UserData name={'Я работодатель'} info={userData.employer} />
-      <Text style={styles.comments}>Ваши посты</Text>
-
-      <View style={styles.commentContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.commentName}>Мадина</Text>
-          <Text style={styles.commentText}>
-            Отличный человек, поработал классно, все сразу оплатили, если дает
-            работу не сомневайтесь все будет оплачено!
-          </Text>
-        </View>
-      </View>
     </View>
   );
 };
