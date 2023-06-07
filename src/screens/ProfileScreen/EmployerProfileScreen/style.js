@@ -45,4 +45,13 @@ export default StyleSheet.create({
   activity: {
     flex: 1,
   },
+  postBtn: {
+    padding: 6,
+    backgroundColor: colors.purpleColor,
+    marginLeft: 5,
+    borderRadius: 5,
+  },
+  btnText: {
+    color: 'red',
+  },
 });

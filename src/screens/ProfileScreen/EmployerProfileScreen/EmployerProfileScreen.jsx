@@ -1,9 +1,16 @@
 import React, {useContext} from 'react';
-import {ActivityIndicator, FlatList, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  FlatList,
+  Pressable,
+  Text,
+  View,
+} from 'react-native';
 
 import {AppContext} from '../../../context/Context';
-import {getUser} from './queries';
-import {useQuery} from '@apollo/client';
+import {deletePost, getUser} from './queries';
+import {useMutation, useQuery} from '@apollo/client';
 import UserData from '../../../Components/UserData';
 import {useNavigation} from '@react-navigation/native';
 
@@ -14,6 +21,20 @@ import {colors} from '../../../theme/colors';
 import ErrorScreen from '../../ErrorScreen';
 
 const EmployerProfileScreen = () => {
+  //Delete POST
+  const [onDeletePost] = useMutation(deletePost);
+
+  const postDelete = async (id, version) => {
+    try {
+      const response = await onDeletePost({
+        variables: {input: {id, _version: version}},
+      });
+      console.log(response);
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  //  USER QUERY
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
   const {data, loading, error} = useQuery(getUser, {
@@ -33,16 +54,30 @@ const EmployerProfileScreen = () => {
   }
 
   const userData = data.getUser;
-  console.log(userData.Posts.items);
   const editProfileHandler = () => {
     navigation.navigate('EditProfileScreen', {user: userData});
+  };
+
+  const deletePostHandler = (id, version) => {
+    Alert.alert('Удалить?', '', [
+      {
+        text: 'Отмена',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Удалить',
+        onPress: () => postDelete(id, version),
+        style: 'destructive',
+      },
+    ]);
   };
 
   return (
     <View style={styles.container}>
       <Header profile onPress={editProfileHandler} />
       <FlatList
-        data={userData?.Posts.items}
+        data={(userData?.Posts.items || []).filter(post => !post._deleted)}
         ListHeaderComponent={() => {
           return (
             <>
@@ -66,6 +101,14 @@ const EmployerProfileScreen = () => {
                 <Text style={styles.commentName}>{item.price}</Text>
                 <Text style={styles.commentText}>{item.description}</Text>
               </View>
+              <Pressable
+                style={styles.postBtn}
+                onPress={() => deletePostHandler(item.id, item._version)}>
+                <Text style={styles.btnText}>Удалить</Text>
+              </Pressable>
+              <Pressable style={styles.postBtn}>
+                <Text>Реадактировать</Text>
+              </Pressable>
             </View>
           );
         }}
