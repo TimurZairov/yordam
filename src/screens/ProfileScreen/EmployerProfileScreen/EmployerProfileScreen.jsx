@@ -21,6 +21,8 @@ import {colors} from '../../../theme/colors';
 import ErrorScreen from '../../ErrorScreen';
 
 const EmployerProfileScreen = () => {
+  const navigation = useNavigation();
+  const {userId} = useContext(AppContext);
   //Delete POST
   const [onDeletePost] = useMutation(deletePost);
 
@@ -36,10 +38,11 @@ const EmployerProfileScreen = () => {
   };
 
   //EDit Post
+  const editPostHandler = id => {
+    navigation.navigate('UpdatePost', {id: id});
+  };
 
-  //  USER QUERY
-  const navigation = useNavigation();
-  const {userId} = useContext(AppContext);
+  // USER QUERY
   const {data, loading, error} = useQuery(getUser, {
     variables: {
       id: userId,
@@ -116,7 +119,9 @@ const EmployerProfileScreen = () => {
                 onPress={() => deletePostHandler(item.id, item._version)}>
                 <Text style={styles.btnText}>Удалить</Text>
               </Pressable>
-              <Pressable style={styles.postBtn}>
+              <Pressable
+                style={styles.postBtn}
+                onPress={() => editPostHandler(item.id)}>
                 <Text>Реадактировать</Text>
               </Pressable>
             </View>
