@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './style';
 import {ActivityIndicator, Text, View} from 'react-native';
 import Header from '../../Components/Header';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {useRoute} from '@react-navigation/native';
 import {useQuery} from '@apollo/client';
 import {getPost} from './queries';
@@ -34,13 +34,20 @@ const JobDetailsScreen = () => {
         style={styles.map}
         showsMyLocationButton={true}
         initialRegion={{
-          latitude: 39.652451,
-          longitude: 66.970139,
+          latitude: +jobDetails?.lat,
+          longitude: +jobDetails?.long,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
-        customMapStyle={mapStyle}
-      />
+        customMapStyle={mapStyle}>
+        <Marker
+          coordinate={{
+            latitude: jobDetails?.lat ? +jobDetails?.lat : 0,
+            longitude: jobDetails?.long ? +jobDetails?.long : 0,
+          }}
+          anchor={{x: 0.5, y: 0.5}}
+        />
+      </MapView>
       {id ? (
         <View style={styles.jobInfoContainer}>
           <View style={styles.jobInfo}>
