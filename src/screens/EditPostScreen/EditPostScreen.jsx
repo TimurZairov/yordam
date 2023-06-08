@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ActivityIndicator, ScrollView, Text, View} from 'react-native';
 import Header from '../../Components/Header';
 import styles from './style';
 import {Logo} from '../../assets/icons';
@@ -8,33 +8,62 @@ import Input from '../../Components/Input';
 import Button from '../../Components/Button';
 import {useForm} from 'react-hook-form';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {useQuery} from '@apollo/client';
-import {getPost} from './queries';
+import {useMutation, useQuery} from '@apollo/client';
+import {getPost, updatePost} from './queries';
+import ErrorScreen from '../ErrorScreen';
 
 const EditPostScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {id} = route.params;
 
-  const {control, handleSubmit, reset, setValue} = useForm();
-
   //GetPost
   const {data, loading, error} = useQuery(getPost, {variables: {id}});
   const post = data?.getPost;
 
-  const createPostSubmit = async data => {};
-
-  const getLocationScreenHandler = () => {
-    navigation.navigate('Location');
-  };
-
-  //Edit Post
+  //react-hook-form
+  const {control, handleSubmit, setValue} = useForm();
 
   useEffect(() => {
-    setValue('title', post.title);
-    setValue('price', post.price);
-    setValue('description', post.description);
-  }, []);
+    setValue('title', post?.title);
+    setValue('price', post?.price);
+    setValue('description', post?.description);
+  }, [post, setValue]);
+
+  //Edit Post
+  const [
+    doUpdatePost,
+    {data: dataPost, loading: loadingPost, error: errorPost},
+  ] = useMutation(updatePost);
+
+  //function updatePost
+
+  const updatePostSubmit = async updatedPost => {
+    console.log(updatedPost);
+    try {
+      await doUpdatePost({
+        variables: {
+          input: {
+            id: post.id,
+            ...updatedPost,
+            _version: post?._version,
+          },
+        },
+      });
+      navigation.popToTop();
+      navigation.navigate('HomeScreen');
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  ////
+
+  if (loading || loadingPost) {
+    return <ActivityIndicator color={colors.purpleColor} />;
+  }
+  if (error || errorPost) {
+    return <ErrorScreen error={error.message} />;
+  }
 
   return (
     <ScrollView style={styles.container}>
@@ -65,7 +94,7 @@ const EditPostScreen = () => {
         name={'description'}
         rules={{required: 'Подробнее опишите что нужно сделать*'}}
       />
-      <Button title={'Сохранить'} onPress={handleSubmit(createPostSubmit)} />
+      <Button title={'Сохранить'} onPress={handleSubmit(updatePostSubmit)} />
     </ScrollView>
   );
 };

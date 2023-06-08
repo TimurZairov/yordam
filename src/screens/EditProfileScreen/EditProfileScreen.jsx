@@ -17,6 +17,7 @@ import ErrorScreen from '../ErrorScreen';
 import {useNavigation} from '@react-navigation/native';
 
 const EditProfileScreen = () => {
+  //GetUser
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
   const {data, loading, error} = useQuery(getUser, {
@@ -26,7 +27,7 @@ const EditProfileScreen = () => {
   });
 
   const user = data?.getUser;
-
+  //UpdateUser
   const [
     doUpdateUser,
     {data: updateData, loading: updateLoading, error: updateError}, // change name if exist
