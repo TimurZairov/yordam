@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './style';
-import {ActivityIndicator, Text, View} from 'react-native';
+import {ActivityIndicator, Text, TextInput, View} from 'react-native';
 import Header from '../../Components/Header';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {useRoute} from '@react-navigation/native';
@@ -8,6 +8,7 @@ import {useQuery} from '@apollo/client';
 import {getPost} from './queries';
 import {colors, mapStyle} from '../../theme/colors';
 import ErrorScreen from '../ErrorScreen';
+import Button from '../../Components/Button';
 
 const JobDetailsScreen = () => {
   const route = useRoute();
@@ -54,6 +55,8 @@ const JobDetailsScreen = () => {
             <Text style={styles.jobUserName}>{jobDetails.User.name}</Text>
             <Text style={styles.title}>{jobDetails.title}</Text>
             <Text style={styles.title}>{jobDetails.description}</Text>
+            <TextInput style={styles.input} multiline={true} />
+            <Button title={'Откликнуться'} />
           </View>
         </View>
       ) : null}

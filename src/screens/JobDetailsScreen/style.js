@@ -31,4 +31,11 @@ export default StyleSheet.create({
   title: {
     marginTop: 5,
   },
+  input: {
+    padding: 6,
+    borderWidth: 1,
+    marginVertical: 5,
+    borderRadius: 10,
+    borderColor: colors.lightGrayColor,
+  },
 });
