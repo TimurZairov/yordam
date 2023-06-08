@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Image, PermissionsAndroid, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {MapMarker, MyLocationIcon} from '../../assets/icons';
-import {colors} from '../../theme/colors';
+import {colors, mapStyle} from '../../theme/colors';
 import styles from './style';
 import posts from '../../data/posts.json';
 import Geolocation from 'react-native-geolocation-service';
@@ -44,6 +44,7 @@ const MapScreen = () => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+        customMapStyle={mapStyle}
         style={styles.map}>
         {/*MARKER*/}
         {posts.length &&

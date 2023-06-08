@@ -25,5 +25,10 @@ export default StyleSheet.create({
   },
   jobUserName: {
     fontSize: fonts.fontSize.default,
+    fontFamily: fonts.fontFamily.bold,
+    color: colors.blackColor,
+  },
+  title: {
+    marginTop: 5,
   },
 });
