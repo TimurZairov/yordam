@@ -27,7 +27,7 @@ const JobDetailsScreen = () => {
   }
 
   const applyJobHandler = () => {
-    navigation.navigate('Applied');
+    navigation.navigate('Applied', {id});
   };
 
   return (

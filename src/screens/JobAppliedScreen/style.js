@@ -5,7 +5,7 @@ import fonts from '../../theme/fonts';
 export default StyleSheet.create({
   container: {
     flex: 1,
-
+    paddingHorizontal: 15,
     backgroundColor: colors.backgroundColor,
   },
   inputContainer: {
@@ -28,5 +28,23 @@ export default StyleSheet.create({
     position: 'absolute',
     bottom: 15,
     right: 15,
+  },
+  commentContainer: {
+    padding: 10,
+    backgroundColor: colors.whiteColor,
+    marginVertical: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderRadius: 10,
+  },
+  avatar: {
+    width: 40,
+    aspectRatio: 1,
+    backgroundColor: colors.lightGrayColor,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+  emptyList: {
+    textAlign: 'center',
   },
 });
