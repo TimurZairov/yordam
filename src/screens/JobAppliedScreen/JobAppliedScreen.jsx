@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   FlatList,
@@ -10,20 +10,34 @@ import {
 } from 'react-native';
 import styles from './style';
 import Header from '../../Components/Header';
-import {useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppContext} from '../../context/Context';
 import {useMutation, useQuery} from '@apollo/client';
 import {commentsByPost, createComment} from './queries';
 import {colors} from '../../theme/colors';
 import ErrorScreen from '../ErrorScreen';
+import Button from '../../Components/Button';
 
 const JobAppliedScreen = () => {
+  const [isApplied, setIsApplied] = useState(false);
   const [comment, setComment] = useState('');
   const {userId} = useContext(AppContext);
   const route = useRoute();
+  const navigation = useNavigation();
   const {id} = route.params;
+  //Render Item component
+  const renderItem = ({item}) => {
+    return (
+      <View style={styles.commentContainer}>
+        <View>
+          <View style={styles.avatar}></View>
+        </View>
+        <Text>{item.comment}</Text>
+      </View>
+    );
+  };
 
-  //create Comment
+  //create Comment & refetch
   const [doCreateComment] = useMutation(createComment, {
     refetchQueries: ['CommentsByPost'],
   });
@@ -41,21 +55,39 @@ const JobAppliedScreen = () => {
       });
       setComment('');
       Keyboard.dismiss;
+      setIsApplied(true);
     } catch (e) {
       console.log(e);
     }
   };
-
   //query Comments
-
   const {data, loading, error} = useQuery(commentsByPost, {
     variables: {
       postID: id,
     },
   });
 
-  const comments = data?.commentsByPost?.items || [];
+  useEffect(() => {
+    //check ID User
+    if (comments.length) {
+      comments.map(item => {
+        if (userId !== item.User.id) {
+          setIsApplied(false);
+        } else {
+          setIsApplied(true);
+        }
+      });
+    }
+    return () => {
+      setIsApplied(false);
+    };
+  }, [loading, createCommentHandler]);
 
+  const goToMainHandler = () => {
+    navigation.navigate('HomeScreen');
+  };
+
+  const comments = data?.commentsByPost?.items || [];
   if (loading) {
     return <ActivityIndicator color={colors.purpleColor} />;
   }
@@ -70,16 +102,7 @@ const JobAppliedScreen = () => {
         <Header />
         <FlatList
           data={comments}
-          renderItem={({item}) => {
-            return (
-              <View style={styles.commentContainer}>
-                <View>
-                  <View style={styles.avatar}></View>
-                </View>
-                <Text>{item.comment}</Text>
-              </View>
-            );
-          }}
+          renderItem={renderItem}
           ListEmptyComponent={() => {
             return (
               <Text style={styles.emptyList}>
@@ -89,17 +112,21 @@ const JobAppliedScreen = () => {
           }}
         />
       </Pressable>
-      <View style={styles.inputContainer}>
-        <TextInput
-          multiline={true}
-          style={styles.input}
-          value={comment}
-          onChangeText={setComment}
-        />
-        <Text style={styles.submit} onPress={createCommentHandler}>
-          Оправить
-        </Text>
-      </View>
+      {isApplied ? (
+        <Button title={'На главную'} onPress={goToMainHandler} />
+      ) : (
+        <View style={styles.inputContainer}>
+          <TextInput
+            multiline={true}
+            style={styles.input}
+            value={comment}
+            onChangeText={setComment}
+          />
+          <Text style={styles.submit} onPress={createCommentHandler}>
+            Оправить
+          </Text>
+        </View>
+      )}
     </>
   );
 };
