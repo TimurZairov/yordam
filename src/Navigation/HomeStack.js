@@ -13,6 +13,7 @@ const HomeStack = () => {
       }}>
       <Stack.Screen name="HomeScreen" component={HomeScreen} />
       <Stack.Screen name="Details" component={JobDetailsScreen} />
+      {/*<Stack.Screen name="Applied" component={JobAppliedScreen} />*/}
     </Stack.Navigator>
   );
 };

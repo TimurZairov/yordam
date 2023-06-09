@@ -57,7 +57,7 @@ export const schema = {
                     "association": {
                         "connectionType": "BELONGS_TO",
                         "targetNames": [
-                            "userID"
+                            "postID"
                         ]
                     }
                 },
@@ -98,6 +98,7 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "name": "byPost",
+                        "queryField": "commentsByPost",
                         "fields": [
                             "postID"
                         ]
@@ -179,7 +180,7 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
-                            "postID"
+                            "Post"
                         ]
                     }
                 },
@@ -399,5 +400,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.3",
-    "version": "a8a7e84aafe4b81bf03c613cafb7811d"
+    "version": "a9c3fb0f426bd14f99bbe157e66d691e"
 };

@@ -5,6 +5,7 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import AboutScreen from '../screens/AboutScreen';
 import TabNavigation from './TabNavigation';
 import CustomDrawerNavigation from '../Components/CustomDrawerNavigation/CustomDrawerNavigation';
+import JobAppliedScreen from '../screens/JobAppliedScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -29,6 +30,7 @@ const Navigation = () => {
         drawerContent={props => <CustomDrawerNavigation {...props} />}>
         <Drawer.Screen name="Tab" component={TabNavigation} />
         <Drawer.Screen name="About" component={AboutScreen} />
+        <Drawer.Screen name="Applied" component={JobAppliedScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
