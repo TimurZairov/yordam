@@ -7,6 +7,7 @@ export default StyleSheet.create({
     flex: 1,
     paddingHorizontal: 15,
     backgroundColor: colors.backgroundColor,
+    paddingBottom: 15,
   },
   inputContainer: {
     width: '100%',
@@ -46,5 +47,11 @@ export default StyleSheet.create({
   },
   emptyList: {
     textAlign: 'center',
+  },
+  name: {
+    fontFamily: fonts.fontFamily.bold,
+    color: colors.blackColor,
+    marginRight: 10,
+    fontSize: fonts.fontSize.s,
   },
 });

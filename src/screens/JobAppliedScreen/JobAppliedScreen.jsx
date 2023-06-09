@@ -32,7 +32,10 @@ const JobAppliedScreen = () => {
         <View>
           <View style={styles.avatar}></View>
         </View>
-        <Text>{item.comment}</Text>
+        <View>
+          <Text style={styles.name}>{item.User.name}</Text>
+          <Text>{item.comment}</Text>
+        </View>
       </View>
     );
   };
@@ -111,10 +114,9 @@ const JobAppliedScreen = () => {
             );
           }}
         />
+        {isApplied && <Button title={'На главную'} onPress={goToMainHandler} />}
       </Pressable>
-      {isApplied ? (
-        <Button title={'На главную'} onPress={goToMainHandler} />
-      ) : (
+      {!isApplied && (
         <View style={styles.inputContainer}>
           <TextInput
             multiline={true}
