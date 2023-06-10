@@ -17,7 +17,7 @@ const PostsList = () => {
   }
   //POSTS from hook useQuery
   const posts = (data?.listPosts?.items || []).filter(posts => !posts._deleted);
-
+  console.log(posts);
   return (
     <FlatList
       ListHeaderComponent={

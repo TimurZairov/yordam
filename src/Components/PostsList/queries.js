@@ -21,7 +21,12 @@ export const listPosts = gql/* GraphQL */ `
         _version
         _deleted
         _lastChangedAt
+        Comments {
+          nextToken
+          startedAt
+        }
       }
+
       nextToken
       startedAt
     }

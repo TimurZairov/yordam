@@ -1,15 +1,34 @@
 import React from 'react';
-import {Image, Pressable, Text, View} from 'react-native';
+import {ActivityIndicator, Image, Pressable, Text, View} from 'react-native';
 import styles from './style';
 import {ArrowRightIcon} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
+import {useQuery} from '@apollo/client';
+import {commentsByPost} from './queries';
+import ErrorScreen from '../../screens/ErrorScreen';
 
 const Card = ({post}) => {
   const navigation = useNavigation();
   const getJobDetailsHandler = id => {
     navigation.navigate('Details', {id});
   };
+  //getComments
+  const {data, loading, error} = useQuery(commentsByPost, {
+    variables: {
+      postID: post.id,
+    },
+  });
+
+  const numberOfComments = data?.commentsByPost?.items.length || 0;
+  console.log(numberOfComments);
+  if (loading) {
+    return <ActivityIndicator color={colors.purpleColor} />;
+  }
+
+  if (error) {
+    return <ErrorScreen error={error.message} />;
+  }
 
   return (
     <Pressable
@@ -45,9 +64,16 @@ const Card = ({post}) => {
       <Text style={styles.userJobTitle}>{post?.title}</Text>
       <Text numberOfLines={4}>{post?.description}</Text>
       <View style={styles.userInfoFooter}>
-        <Text style={styles.usersAgreed}>
-          Откликнулись: <Text>{post?.applied?.length + 1} человек</Text>
-        </Text>
+        {numberOfComments === 0 ? (
+          <Text style={styles.usersAgreed}>
+            Откликнулись: <Text>Будьте первым</Text>
+          </Text>
+        ) : (
+          <Text style={styles.usersAgreed}>
+            Откликнулись: <Text>{numberOfComments} человек</Text>
+          </Text>
+        )}
+
         <ArrowRightIcon width={15} fill={colors.purpleColor} />
       </View>
     </Pressable>

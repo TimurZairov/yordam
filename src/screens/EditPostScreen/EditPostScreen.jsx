@@ -95,6 +95,7 @@ const EditPostScreen = () => {
         rules={{required: 'Подробнее опишите что нужно сделать*'}}
       />
       <Button title={'Сохранить'} onPress={handleSubmit(updatePostSubmit)} />
+      <Button title={'Отмена'} onPress={() => navigation.goBack()} />
     </ScrollView>
   );
 };
