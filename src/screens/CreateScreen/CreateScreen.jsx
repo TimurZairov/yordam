@@ -25,6 +25,7 @@ const CreateScreen = () => {
       await doCreatePost({
         variables: {
           input: {
+            type: 'POST',
             title: data.title,
             price: data.price,
             adress: data.address,

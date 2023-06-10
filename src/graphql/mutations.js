@@ -8,6 +8,7 @@ export const createComment = /* GraphQL */ `
   ) {
     createComment(input: $input, condition: $condition) {
       id
+      createdAt
       comment
       userID
       postID
@@ -36,6 +37,8 @@ export const createComment = /* GraphQL */ `
       }
       Post {
         id
+        createdAt
+        type
         title
         price
         adress
@@ -62,13 +65,11 @@ export const createComment = /* GraphQL */ `
         userID
         lat
         long
-        createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      createdAt
       updatedAt
       _version
       _deleted
@@ -83,6 +84,7 @@ export const updateComment = /* GraphQL */ `
   ) {
     updateComment(input: $input, condition: $condition) {
       id
+      createdAt
       comment
       userID
       postID
@@ -111,6 +113,8 @@ export const updateComment = /* GraphQL */ `
       }
       Post {
         id
+        createdAt
+        type
         title
         price
         adress
@@ -137,13 +141,11 @@ export const updateComment = /* GraphQL */ `
         userID
         lat
         long
-        createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      createdAt
       updatedAt
       _version
       _deleted
@@ -158,6 +160,7 @@ export const deleteComment = /* GraphQL */ `
   ) {
     deleteComment(input: $input, condition: $condition) {
       id
+      createdAt
       comment
       userID
       postID
@@ -186,6 +189,8 @@ export const deleteComment = /* GraphQL */ `
       }
       Post {
         id
+        createdAt
+        type
         title
         price
         adress
@@ -212,13 +217,11 @@ export const deleteComment = /* GraphQL */ `
         userID
         lat
         long
-        createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      createdAt
       updatedAt
       _version
       _deleted
@@ -233,6 +236,8 @@ export const createPost = /* GraphQL */ `
   ) {
     createPost(input: $input, condition: $condition) {
       id
+      createdAt
+      type
       title
       price
       adress
@@ -262,10 +267,10 @@ export const createPost = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -278,7 +283,6 @@ export const createPost = /* GraphQL */ `
       userID
       lat
       long
-      createdAt
       updatedAt
       _version
       _deleted
@@ -293,6 +297,8 @@ export const updatePost = /* GraphQL */ `
   ) {
     updatePost(input: $input, condition: $condition) {
       id
+      createdAt
+      type
       title
       price
       adress
@@ -322,10 +328,10 @@ export const updatePost = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -338,7 +344,6 @@ export const updatePost = /* GraphQL */ `
       userID
       lat
       long
-      createdAt
       updatedAt
       _version
       _deleted
@@ -353,6 +358,8 @@ export const deletePost = /* GraphQL */ `
   ) {
     deletePost(input: $input, condition: $condition) {
       id
+      createdAt
+      type
       title
       price
       adress
@@ -382,10 +389,10 @@ export const deletePost = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -398,7 +405,6 @@ export const deletePost = /* GraphQL */ `
       userID
       lat
       long
-      createdAt
       updatedAt
       _version
       _deleted
@@ -423,6 +429,8 @@ export const createUser = /* GraphQL */ `
       Posts {
         items {
           id
+          createdAt
+          type
           title
           price
           adress
@@ -430,7 +438,6 @@ export const createUser = /* GraphQL */ `
           userID
           lat
           long
-          createdAt
           updatedAt
           _version
           _deleted
@@ -442,10 +449,10 @@ export const createUser = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -479,6 +486,8 @@ export const updateUser = /* GraphQL */ `
       Posts {
         items {
           id
+          createdAt
+          type
           title
           price
           adress
@@ -486,7 +495,6 @@ export const updateUser = /* GraphQL */ `
           userID
           lat
           long
-          createdAt
           updatedAt
           _version
           _deleted
@@ -498,10 +506,10 @@ export const updateUser = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -535,6 +543,8 @@ export const deleteUser = /* GraphQL */ `
       Posts {
         items {
           id
+          createdAt
+          type
           title
           price
           adress
@@ -542,7 +552,6 @@ export const deleteUser = /* GraphQL */ `
           userID
           lat
           long
-          createdAt
           updatedAt
           _version
           _deleted
@@ -554,10 +563,10 @@ export const deleteUser = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted

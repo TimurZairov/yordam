@@ -5,6 +5,7 @@ export const onCreateComment = /* GraphQL */ `
   subscription OnCreateComment($filter: ModelSubscriptionCommentFilterInput) {
     onCreateComment(filter: $filter) {
       id
+      createdAt
       comment
       userID
       postID
@@ -33,6 +34,8 @@ export const onCreateComment = /* GraphQL */ `
       }
       Post {
         id
+        createdAt
+        type
         title
         price
         adress
@@ -59,13 +62,11 @@ export const onCreateComment = /* GraphQL */ `
         userID
         lat
         long
-        createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      createdAt
       updatedAt
       _version
       _deleted
@@ -77,6 +78,7 @@ export const onUpdateComment = /* GraphQL */ `
   subscription OnUpdateComment($filter: ModelSubscriptionCommentFilterInput) {
     onUpdateComment(filter: $filter) {
       id
+      createdAt
       comment
       userID
       postID
@@ -105,6 +107,8 @@ export const onUpdateComment = /* GraphQL */ `
       }
       Post {
         id
+        createdAt
+        type
         title
         price
         adress
@@ -131,13 +135,11 @@ export const onUpdateComment = /* GraphQL */ `
         userID
         lat
         long
-        createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      createdAt
       updatedAt
       _version
       _deleted
@@ -149,6 +151,7 @@ export const onDeleteComment = /* GraphQL */ `
   subscription OnDeleteComment($filter: ModelSubscriptionCommentFilterInput) {
     onDeleteComment(filter: $filter) {
       id
+      createdAt
       comment
       userID
       postID
@@ -177,6 +180,8 @@ export const onDeleteComment = /* GraphQL */ `
       }
       Post {
         id
+        createdAt
+        type
         title
         price
         adress
@@ -203,13 +208,11 @@ export const onDeleteComment = /* GraphQL */ `
         userID
         lat
         long
-        createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      createdAt
       updatedAt
       _version
       _deleted
@@ -221,6 +224,8 @@ export const onCreatePost = /* GraphQL */ `
   subscription OnCreatePost($filter: ModelSubscriptionPostFilterInput) {
     onCreatePost(filter: $filter) {
       id
+      createdAt
+      type
       title
       price
       adress
@@ -250,10 +255,10 @@ export const onCreatePost = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -266,7 +271,6 @@ export const onCreatePost = /* GraphQL */ `
       userID
       lat
       long
-      createdAt
       updatedAt
       _version
       _deleted
@@ -278,6 +282,8 @@ export const onUpdatePost = /* GraphQL */ `
   subscription OnUpdatePost($filter: ModelSubscriptionPostFilterInput) {
     onUpdatePost(filter: $filter) {
       id
+      createdAt
+      type
       title
       price
       adress
@@ -307,10 +313,10 @@ export const onUpdatePost = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -323,7 +329,6 @@ export const onUpdatePost = /* GraphQL */ `
       userID
       lat
       long
-      createdAt
       updatedAt
       _version
       _deleted
@@ -335,6 +340,8 @@ export const onDeletePost = /* GraphQL */ `
   subscription OnDeletePost($filter: ModelSubscriptionPostFilterInput) {
     onDeletePost(filter: $filter) {
       id
+      createdAt
+      type
       title
       price
       adress
@@ -364,10 +371,10 @@ export const onDeletePost = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -380,7 +387,6 @@ export const onDeletePost = /* GraphQL */ `
       userID
       lat
       long
-      createdAt
       updatedAt
       _version
       _deleted
@@ -402,6 +408,8 @@ export const onCreateUser = /* GraphQL */ `
       Posts {
         items {
           id
+          createdAt
+          type
           title
           price
           adress
@@ -409,7 +417,6 @@ export const onCreateUser = /* GraphQL */ `
           userID
           lat
           long
-          createdAt
           updatedAt
           _version
           _deleted
@@ -421,10 +428,10 @@ export const onCreateUser = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -455,6 +462,8 @@ export const onUpdateUser = /* GraphQL */ `
       Posts {
         items {
           id
+          createdAt
+          type
           title
           price
           adress
@@ -462,7 +471,6 @@ export const onUpdateUser = /* GraphQL */ `
           userID
           lat
           long
-          createdAt
           updatedAt
           _version
           _deleted
@@ -474,10 +482,10 @@ export const onUpdateUser = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted
@@ -508,6 +516,8 @@ export const onDeleteUser = /* GraphQL */ `
       Posts {
         items {
           id
+          createdAt
+          type
           title
           price
           adress
@@ -515,7 +525,6 @@ export const onDeleteUser = /* GraphQL */ `
           userID
           lat
           long
-          createdAt
           updatedAt
           _version
           _deleted
@@ -527,10 +536,10 @@ export const onDeleteUser = /* GraphQL */ `
       Comments {
         items {
           id
+          createdAt
           comment
           userID
           postID
-          createdAt
           updatedAt
           _version
           _deleted

@@ -53,7 +53,7 @@ const Card = ({post}) => {
               Дата: <Text style={styles.userText}>{post?.date}</Text>
             </Text>
             <Text style={styles.userInfoText}>
-              Локация: <Text style={styles.userText}>{post?.location}</Text>
+              Город: <Text style={styles.userText}>{post?.adress}</Text>
             </Text>
           </View>
         </View>

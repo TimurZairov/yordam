@@ -4,10 +4,12 @@ import Card from '../Card';
 import TabFilter from '../TabFilter';
 import styles from '../Button/styles';
 import {useQuery} from '@apollo/client';
-import {listPosts} from './queries';
+import {postsByDate} from './queries';
 
 const PostsList = () => {
-  const {data, loading, error, refetch} = useQuery(listPosts); // second parameter of options = {limits of query}
+  const {data, loading, error, refetch} = useQuery(postsByDate, {
+    variables: {type: 'POST', sortDirection: 'DESC'},
+  }); // second parameter of options = {limits of query}
   if (loading) {
     return <ActivityIndicator />;
   }
@@ -16,7 +18,9 @@ const PostsList = () => {
     return <Text>{error.message}</Text>;
   }
   //POSTS from hook useQuery
-  const posts = (data?.listPosts?.items || []).filter(posts => !posts._deleted);
+  const posts = (data?.postsByDate?.items || []).filter(
+    posts => !posts._deleted,
+  );
   return (
     <FlatList
       ListHeaderComponent={
