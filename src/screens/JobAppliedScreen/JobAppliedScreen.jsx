@@ -8,6 +8,7 @@ import {
   TextInput,
   View,
 } from 'react-native';
+import relativeTime from 'dayjs/plugin/relativeTime';
 import styles from './style';
 import Header from '../../Components/Header';
 import {useNavigation, useRoute} from '@react-navigation/native';
@@ -17,6 +18,7 @@ import {commentsByPost, createComment} from './queries';
 import {colors} from '../../theme/colors';
 import ErrorScreen from '../ErrorScreen';
 import Button from '../../Components/Button';
+import dayjs from 'dayjs';
 
 const JobAppliedScreen = () => {
   const [isApplied, setIsApplied] = useState(false);
@@ -25,6 +27,8 @@ const JobAppliedScreen = () => {
   const route = useRoute();
   const navigation = useNavigation();
   const {id} = route.params;
+  //dayjs for time
+  dayjs.extend(relativeTime);
   //Render Item component
   const renderItem = ({item}) => {
     return (
@@ -35,6 +39,7 @@ const JobAppliedScreen = () => {
         <View>
           <Text style={styles.name}>{item.User.name}</Text>
           <Text>{item.comment}</Text>
+          <Text>{dayjs(item.createdAt).fromNow()}</Text>
         </View>
       </View>
     );

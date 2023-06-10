@@ -1,5 +1,8 @@
 import React from 'react';
 import {ActivityIndicator, Image, Pressable, Text, View} from 'react-native';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+
 import styles from './style';
 import {ArrowRightIcon} from '../../assets/icons';
 import {colors} from '../../theme/colors';
@@ -10,10 +13,11 @@ import ErrorScreen from '../../screens/ErrorScreen';
 
 const Card = ({post}) => {
   const navigation = useNavigation();
+  dayjs.extend(relativeTime);
   const getJobDetailsHandler = id => {
     navigation.navigate('Details', {id});
   };
-  //getComments
+  //getComments || number of Comments
   const {data, loading, error} = useQuery(commentsByPost, {
     variables: {
       postID: post.id,
@@ -21,7 +25,6 @@ const Card = ({post}) => {
   });
 
   const numberOfComments = data?.commentsByPost?.items.length || 0;
-  console.log(numberOfComments);
   if (loading) {
     return <ActivityIndicator color={colors.purpleColor} />;
   }
@@ -58,7 +61,7 @@ const Card = ({post}) => {
           <View style={styles.price}>
             <Text style={styles.priceTExt}>{post.price}</Text>
           </View>
-          <Text style={styles.time}>19:47</Text>
+          <Text style={styles.time}>{dayjs(post?.createdAt).fromNow()}</Text>
         </View>
       </View>
       <Text style={styles.userJobTitle}>{post?.title}</Text>
