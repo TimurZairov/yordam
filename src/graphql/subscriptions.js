@@ -1,6 +1,79 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCommentByPostId = /* GraphQL */ `
+  subscription OnCommentByPostId($postID: ID!) {
+    onCommentByPostId(postID: $postID) {
+      id
+      createdAt
+      comment
+      userID
+      postID
+      User {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        createdAt
+        type
+        title
+        price
+        adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        description
+        userID
+        lat
+        long
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
 export const onCreateComment = /* GraphQL */ `
   subscription OnCreateComment($filter: ModelSubscriptionCommentFilterInput) {
     onCreateComment(filter: $filter) {

@@ -13,8 +13,8 @@ import styles from './style';
 import Header from '../../Components/Header';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppContext} from '../../context/Context';
-import {useMutation, useQuery} from '@apollo/client';
-import {commentsByPost, createComment} from './queries';
+import {useMutation, useQuery, useSubscription} from '@apollo/client';
+import {commentsByPost, createComment, onCommentByPostId} from './queries';
 import {colors} from '../../theme/colors';
 import ErrorScreen from '../ErrorScreen';
 import Button from '../../Components/Button';
@@ -22,6 +22,7 @@ import dayjs from 'dayjs';
 
 const JobAppliedScreen = () => {
   const [isApplied, setIsApplied] = useState(false);
+  const [newComments, setNewComments] = useState([]);
   const [comment, setComment] = useState('');
   const {userId} = useContext(AppContext);
   const route = useRoute();
@@ -29,6 +30,7 @@ const JobAppliedScreen = () => {
   const {id} = route.params;
   //dayjs for time
   dayjs.extend(relativeTime);
+
   //Render Item component
   const renderItem = ({item}) => {
     return (
@@ -37,13 +39,28 @@ const JobAppliedScreen = () => {
           <View style={styles.avatar}></View>
         </View>
         <View>
-          <Text style={styles.name}>{item.User.name}</Text>
+          <Text style={styles.name}>{item?.User.name}</Text>
           <Text>{item.comment}</Text>
           <Text>{dayjs(item.createdAt).fromNow()}</Text>
         </View>
       </View>
     );
   };
+
+  //subscription
+
+  const {data: newCommentsData} = useSubscription(onCommentByPostId, {
+    variables: {postID: id},
+  });
+
+  useEffect(() => {
+    if (newCommentsData?.onCommentByPostId) {
+      setNewComments(existingComments => [
+        newCommentsData?.onCommentByPostId,
+        ...existingComments,
+      ]);
+    }
+  }, [newCommentsData]);
 
   //create Comment & refetch
   const [doCreateComment] = useMutation(createComment, {
@@ -109,7 +126,7 @@ const JobAppliedScreen = () => {
       <Pressable style={styles.container} onPress={Keyboard.dismiss}>
         <Header />
         <FlatList
-          data={comments}
+          data={[...newComments, ...comments]}
           renderItem={renderItem}
           ListEmptyComponent={() => {
             return (
