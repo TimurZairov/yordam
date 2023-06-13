@@ -19,9 +19,26 @@ const link = ApolloLink.from([
   createSubscriptionHandshakeLink({url, region, auth}, httpLink),
 ]);
 
+let typePolicies = {
+  Query: {
+    fields: {
+      postsByDate: {
+        keyArgs: ['type', 'createdAt', 'sortDirection', 'filter'],
+        merge: (existing = [], incoming) => {
+          return {
+            ...existing,
+            ...incoming,
+            items: [...(existing.items || []), ...incoming.items],
+          };
+        },
+      },
+    },
+  },
+};
+
 const client = new ApolloClient({
   link,
-  cache: new InMemoryCache(),
+  cache: new InMemoryCache({typePolicies}),
 });
 
 const Client = ({children}) => {

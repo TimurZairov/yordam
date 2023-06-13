@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ActivityIndicator, FlatList, Text, View} from 'react-native';
 import Card from '../Card';
 import TabFilter from '../TabFilter';
@@ -7,8 +7,9 @@ import {useQuery} from '@apollo/client';
 import {postsByDate} from './queries';
 
 const PostsList = () => {
-  const {data, loading, error, refetch} = useQuery(postsByDate, {
-    variables: {type: 'POST', sortDirection: 'DESC'},
+  const [isLoadMore, setIsLoadMore] = useState(false);
+  const {data, loading, error, refetch, fetchMore} = useQuery(postsByDate, {
+    variables: {type: 'POST', sortDirection: 'DESC', limit: 1},
   }); // second parameter of options = {limits of query}
   if (loading) {
     return <ActivityIndicator />;
@@ -21,6 +22,18 @@ const PostsList = () => {
   const posts = (data?.postsByDate?.items || []).filter(
     posts => !posts._deleted,
   );
+
+  const nextToken = data?.postsByDate?.nextToken;
+
+  const loadMore = async () => {
+    if (!nextToken || isLoadMore) {
+      return;
+    }
+    setIsLoadMore(true);
+    await fetchMore({variables: {nextToken}});
+    setIsLoadMore(false);
+  };
+
   return (
     <FlatList
       ListHeaderComponent={
@@ -39,6 +52,7 @@ const PostsList = () => {
       showsVerticalScrollIndicator={false}
       onRefresh={() => refetch()}
       refreshing={loading}
+      onEndReached={loadMore}
     />
   );
 };
