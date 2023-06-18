@@ -60,6 +60,7 @@ const EmployerProfileScreen = () => {
   }
 
   const userData = data.getUser;
+
   const editProfileHandler = () => {
     navigation.navigate('EditProfileScreen', {user: userData});
   };

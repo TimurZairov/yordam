@@ -3,6 +3,7 @@ import {ActivityIndicator, Image, ScrollView, Text, View} from 'react-native';
 import {getUser, updateUser} from './queries';
 import {AppContext} from '../../context/Context';
 import {useMutation, useQuery} from '@apollo/client';
+import {Storage} from 'aws-amplify';
 
 import styles from './style';
 import Header from '../../Components/Header';
@@ -54,13 +55,32 @@ const EditProfileScreen = () => {
   };
 
   const submitUpdateUserHandler = async formUpdate => {
+    //upload image profile and get the key
+    let image = null;
+    if (changeAvatar) {
+      image = await uploadImageHandler(changeAvatar.uri);
+    }
+
     try {
       await doUpdateUser({
         variables: {
-          input: {id: userId, ...formUpdate, _version: user?._version},
+          input: {id: userId, ...formUpdate, _version: user?._version, image},
         },
       });
       navigation.goBack();
+    } catch (e) {
+      console.log(e);
+    }
+  };
+  //Upload Image Profile
+  const uploadImageHandler = async uri => {
+    try {
+      //blob
+      const res = await fetch(uri);
+      const blob = await res.blob();
+      const splitBlob = blob._data?.type.split('/');
+      const extension = splitBlob[splitBlob.length - 1];
+      await Storage.put(`${userId}-image.${extension}`, blob);
     } catch (e) {
       console.log(e);
     }
@@ -81,11 +101,13 @@ const EditProfileScreen = () => {
     setValue('phoneNumber', user.phoneNumber);
   }, [user, setValue]);
 
+  console.log(user.image);
+
   return (
     <ScrollView style={styles.container}>
       <Header />
       <View style={styles.imageContainer}>
-        {user.image.length !== 0 ? (
+        {changeAvatar ? (
           <Image
             source={{uri: changeAvatar?.uri || user.image}}
             style={styles.image}
