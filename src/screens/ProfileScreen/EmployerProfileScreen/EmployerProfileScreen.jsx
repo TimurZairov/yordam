@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -7,6 +7,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import {Storage} from 'aws-amplify';
 
 import {AppContext} from '../../../context/Context';
 import {deletePost, getUser} from './queries';
@@ -23,6 +24,7 @@ import ErrorScreen from '../../ErrorScreen';
 const EmployerProfileScreen = () => {
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
+  const [userImage, setUserImage] = useState(null);
   //Delete POST
   const [onDeletePost] = useMutation(deletePost);
 
@@ -41,6 +43,20 @@ const EmployerProfileScreen = () => {
   const editPostHandler = id => {
     navigation.navigate('UpdatePost', {id: id});
   };
+
+  useEffect(() => {
+    if (userData) {
+      const getImageHandler = async () => {
+        try {
+          const res = await Storage.get(userData.image);
+          setUserImage(res);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      getImageHandler();
+    }
+  }, []);
 
   // USER QUERY
   const {data, loading, error} = useQuery(getUser, {
@@ -93,7 +109,7 @@ const EmployerProfileScreen = () => {
               <UserInfo
                 userName={userData.name}
                 userLocation={userData.location}
-                imageURL={userData.image}
+                imageURL={userImage}
                 postNum={postedPost.length || 0}
               />
               <UserData name={'Почта'} info={userData.email} />

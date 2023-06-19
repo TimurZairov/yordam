@@ -9,7 +9,7 @@ const UserInfo = ({userLocation, userName, imageURL, postNum}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        {imageURL.length !== 0 ? (
+        {imageURL?.length !== 0 ? (
           <Image
             source={{uri: imageURL}}
             style={styles.userImage}

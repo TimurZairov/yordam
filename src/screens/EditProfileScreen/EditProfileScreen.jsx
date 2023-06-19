@@ -56,11 +56,10 @@ const EditProfileScreen = () => {
 
   const submitUpdateUserHandler = async formUpdate => {
     //upload image profile and get the key
-    let image = null;
+    let image;
     if (changeAvatar) {
       image = await uploadImageHandler(changeAvatar.uri);
     }
-
     try {
       await doUpdateUser({
         variables: {
@@ -80,7 +79,8 @@ const EditProfileScreen = () => {
       const blob = await res.blob();
       const splitBlob = blob._data?.type.split('/');
       const extension = splitBlob[splitBlob.length - 1];
-      await Storage.put(`${userId}-image.${extension}`, blob);
+      const imageKey = await Storage.put(`${userId}-image.${extension}`, blob);
+      return imageKey.key;
     } catch (e) {
       console.log(e);
     }
