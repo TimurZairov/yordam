@@ -31,7 +31,7 @@ const EditProfileScreen = () => {
   //UpdateUser
   const [
     doUpdateUser,
-    {data: updateData, loading: updateLoading, error: updateError}, // change name if exist
+    {loading: updateLoading, error: updateError}, // change name if exist
   ] = useMutation(updateUser);
 
   const [changeAvatar, setChangeAvatar] = useState(null);
@@ -100,8 +100,6 @@ const EditProfileScreen = () => {
     setValue('location', user.location);
     setValue('phoneNumber', user.phoneNumber);
   }, [user, setValue]);
-
-  console.log(user.image);
 
   return (
     <ScrollView style={styles.container}>

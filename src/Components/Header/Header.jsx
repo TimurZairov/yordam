@@ -1,12 +1,16 @@
-import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
+import React, {useContext} from 'react';
+import {TouchableOpacity, View} from 'react-native';
 import styles from './style';
 import {DrawerIcon, EditIcon, Notifications} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
+import {AppContext} from '../../context/Context';
 
-const Header = ({login, registry, profile, onPress}) => {
+const Header = ({registry, profile, onPress}) => {
   const navigation = useNavigation();
+
+  const {user} = useContext(AppContext);
+
   const drawerHandler = () => {
     navigation.openDrawer();
   };
@@ -21,16 +25,11 @@ const Header = ({login, registry, profile, onPress}) => {
             style={styles.drawerIcon}
           />
         </TouchableOpacity>
-
-        {!login ||
-          (!registry && (
-            <Text style={styles.greetingText}>
-              Привет, <Text style={styles.userName}>Тимур</Text>{' '}
-            </Text>
-          ))}
       </View>
-      {!login ||
-        (!registry && <Notifications height={19} fill={colors.blackColor} />)}
+      {user && !profile && (
+        <Notifications height={19} fill={colors.blackColor} />
+      )}
+
       {profile ? (
         <EditIcon width={30} fill={colors.blackColor} onPress={onPress} />
       ) : null}

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {Image, Pressable, Text, View} from 'react-native';
 import {colors} from '../../theme/colors';
 import styles from './style';
@@ -14,9 +14,8 @@ import {AppContext} from '../../context/Context';
 import useUserImage from '../../utils/custom/useUserImage';
 import useGetUser from '../../utils/custom/useGetUser/useGetUser';
 
-const CustomDrawerNavigation = ({navigation}) => {
-  const [imageUrl, setImageUrl] = useState(null);
-
+const CustomDrawerNavigation = props => {
+  const {navigation} = props;
   const {userId} = useContext(AppContext);
   //custom hook
   const [imageKey, getImageHandler] = useUserImage();
@@ -52,7 +51,7 @@ const CustomDrawerNavigation = ({navigation}) => {
       };
       getImage();
     }
-  }, []);
+  }, [user]);
 
   return (
     <View style={styles.drawerContainer}>
@@ -62,26 +61,30 @@ const CustomDrawerNavigation = ({navigation}) => {
             <ArrowLeftIcon width={25} fill={colors.whiteColor} />
           </Pressable>
         </View>
-        <View style={styles.image}>
-          <View style={styles.imageContainer}>
-            <View style={styles.background}>
-              {imageUrl?.length !== 0 ? (
-                <Image
-                  source={{uri: imageKey}}
-                  resizeMode={'contain'}
-                  style={{width: 85, height: 85, borderRadius: 45}}
-                />
-              ) : (
-                <DefaultAvatar width={85} />
-              )}
+        {user ? (
+          <>
+            <View style={styles.image}>
+              <View style={styles.imageContainer}>
+                <View style={styles.background}>
+                  {imageKey?.length !== 0 ? (
+                    <Image
+                      source={{uri: imageKey}}
+                      resizeMode={'contain'}
+                      style={{width: 85, height: 85, borderRadius: 45}}
+                    />
+                  ) : (
+                    <DefaultAvatar width={85} />
+                  )}
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
-        <Text style={styles.name}>{user?.name}</Text>
-        <Text style={styles.location}>
-          Email: <Text style={styles.address}>{user?.email}</Text>
-        </Text>
-        <Text style={styles.phone}>{user?.phoneNumber}</Text>
+            <Text style={styles.name}>{user?.name}</Text>
+            <Text style={styles.location}>
+              Email: <Text style={styles.address}>{user?.email}</Text>
+            </Text>
+            <Text style={styles.phone}>{user?.phoneNumber}</Text>
+          </>
+        ) : null}
       </View>
       <View style={styles.listContainer}>
         <AboutIcon width={15} height={15} fill={colors.blackColor} />

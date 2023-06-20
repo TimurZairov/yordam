@@ -5,7 +5,6 @@ const useUserImage = () => {
   const [imageKey, setImageKey] = useState(null);
 
   const getImageHandler = async key => {
-    console.log(key);
     try {
       const responseKey = await Storage.get(key);
       if (responseKey) {

@@ -48,7 +48,7 @@ const RegistryScreen = () => {
   return (
     <SafeAreaView style={styles.saveContainer}>
       <View style={styles.headerContainer}>
-        <Header registry />
+        <Header />
       </View>
 
       <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
