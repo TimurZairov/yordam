@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {Pressable, Text, View} from 'react-native';
+import React, {useContext, useEffect, useState} from 'react';
+import {Image, Pressable, Text, View} from 'react-native';
 import {colors} from '../../theme/colors';
 import styles from './style';
 import {
@@ -11,9 +11,19 @@ import {
 } from '../../assets/icons';
 import {Auth} from 'aws-amplify';
 import {AppContext} from '../../context/Context';
+import useUserImage from '../../utils/custom/useUserImage';
+import useGetUser from '../../utils/custom/useGetUser/useGetUser';
 
 const CustomDrawerNavigation = ({navigation}) => {
-  const {user} = useContext(AppContext);
+  const [imageUrl, setImageUrl] = useState(null);
+
+  const {userId} = useContext(AppContext);
+  //custom hook
+  const [imageKey] = useUserImage(user?.image);
+  const [data, loading, error] = useGetUser(userId);
+
+  const user = data?.getUser;
+
   const closeDrawer = () => {
     navigation.closeDrawer();
   };
@@ -35,6 +45,13 @@ const CustomDrawerNavigation = ({navigation}) => {
     navigation.navigate('Login');
   };
 
+  useEffect(() => {
+    if (imageKey) {
+      console.log(imageKey);
+      setImageUrl(imageKey);
+    }
+  }, [imageKey]);
+
   return (
     <View style={styles.drawerContainer}>
       <View style={styles.header}>
@@ -46,16 +63,23 @@ const CustomDrawerNavigation = ({navigation}) => {
         <View style={styles.image}>
           <View style={styles.imageContainer}>
             <View style={styles.background}>
-              <DefaultAvatar width={85} />
+              {imageUrl ? (
+                <Image
+                  source={{uri: imageUrl}}
+                  style={styles.userImage}
+                  resizeMode="cover"
+                />
+              ) : (
+                <DefaultAvatar width={85} />
+              )}
             </View>
           </View>
         </View>
-        <Text style={styles.name}>Матлюба Маматкулова</Text>
+        <Text style={styles.name}>{user?.name}</Text>
         <Text style={styles.location}>
-          Локация:{' '}
-          <Text style={styles.address}> Ташкент, Ул. Комил-Яшин 2</Text>
+          Email: <Text style={styles.address}>{user?.email}</Text>
         </Text>
-        <Text style={styles.phone}>+998 99 591 48 83</Text>
+        <Text style={styles.phone}>{user?.phoneNumber}</Text>
       </View>
       <View style={styles.listContainer}>
         <AboutIcon width={15} height={15} fill={colors.blackColor} />

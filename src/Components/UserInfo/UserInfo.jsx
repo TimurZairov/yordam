@@ -1,17 +1,34 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {Image, Text, View} from 'react-native';
 import styles from './style';
 import UserNum from '../UserNum';
 import {DefaultAvatar} from '../../assets/icons';
 import {colors} from '../../theme/colors';
+import {Storage} from 'aws-amplify';
 
-const UserInfo = ({userLocation, userName, imageURL, postNum}) => {
+const UserInfo = ({userLocation, userName, postNum, userData}) => {
+  const [url, setUrl] = useState('');
+
+  useEffect(() => {
+    if (userData) {
+      const getImageHandler = async () => {
+        try {
+          const res = await Storage.get(userData.image);
+          setUrl(res);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      getImageHandler();
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        {imageURL?.length !== 0 ? (
+        {url?.length !== 0 ? (
           <Image
-            source={{uri: imageURL}}
+            source={{uri: url}}
             style={styles.userImage}
             resizeMode="cover"
           />

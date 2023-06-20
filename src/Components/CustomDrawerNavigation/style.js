@@ -84,4 +84,9 @@ export default StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 15,
   },
+  userImage: {
+    width: 85,
+    height: 85,
+    borderRadius: 100,
+  },
 });
