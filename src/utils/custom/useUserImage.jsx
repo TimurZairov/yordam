@@ -1,10 +1,11 @@
 import React, {useState} from 'react';
 import {Storage} from 'aws-amplify';
 
-const useUserImage = key => {
+const useUserImage = () => {
   const [imageKey, setImageKey] = useState(null);
 
-  const getImageHandler = async () => {
+  const getImageHandler = async key => {
+    console.log(key);
     try {
       const responseKey = await Storage.get(key);
       if (responseKey) {
@@ -14,7 +15,7 @@ const useUserImage = key => {
       console.log(e);
     }
   };
-  return [imageKey, getImageHandler(key)];
+  return [imageKey, getImageHandler];
 };
 
 export default useUserImage;

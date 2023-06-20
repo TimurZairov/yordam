@@ -19,7 +19,7 @@ const CustomDrawerNavigation = ({navigation}) => {
 
   const {userId} = useContext(AppContext);
   //custom hook
-  const [imageKey] = useUserImage(user?.image);
+  const [imageKey, getImageHandler] = useUserImage();
   const [data, loading, error] = useGetUser(userId);
 
   const user = data?.getUser;
@@ -46,11 +46,13 @@ const CustomDrawerNavigation = ({navigation}) => {
   };
 
   useEffect(() => {
-    if (imageKey) {
-      console.log(imageKey);
-      setImageUrl(imageKey);
+    if (user) {
+      const getImage = async () => {
+        await getImageHandler(user?.image);
+      };
+      getImage();
     }
-  }, [imageKey]);
+  }, []);
 
   return (
     <View style={styles.drawerContainer}>
@@ -63,11 +65,11 @@ const CustomDrawerNavigation = ({navigation}) => {
         <View style={styles.image}>
           <View style={styles.imageContainer}>
             <View style={styles.background}>
-              {imageUrl ? (
+              {imageUrl?.length !== 0 ? (
                 <Image
-                  source={{uri: imageUrl}}
-                  style={styles.userImage}
-                  resizeMode="cover"
+                  source={{uri: imageKey}}
+                  resizeMode={'contain'}
+                  style={{width: 85, height: 85, borderRadius: 45}}
                 />
               ) : (
                 <DefaultAvatar width={85} />
