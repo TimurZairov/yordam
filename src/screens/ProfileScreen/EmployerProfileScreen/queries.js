@@ -1,6 +1,6 @@
 import {gql} from '@apollo/client';
 
-export const getUser = gql/* GraphQL */ `
+export const getUser = gql`
   query GetUser($id: ID!) {
     getUser(id: $id) {
       id
@@ -34,7 +34,7 @@ export const getUser = gql/* GraphQL */ `
   }
 `;
 
-export const deletePost = gql/* GraphQL */ `
+export const deletePost = gql`
   mutation DeletePost(
     $input: DeletePostInput!
     $condition: ModelPostConditionInput

@@ -20,8 +20,8 @@ const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   const [isChecked] = useGetRole();
   const [userRole, setUserRole] = useState(null);
-  console.log(userRole);
 
+  // Custom hook
   useEffect(() => {
     setUserRole(isChecked);
   }, [isChecked]);

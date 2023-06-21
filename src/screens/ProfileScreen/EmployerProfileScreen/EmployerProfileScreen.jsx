@@ -94,7 +94,7 @@ const EmployerProfileScreen = () => {
     ]);
   };
 
-  const toggleSwitch = async e => {
+  const toggleSwitch = async () => {
     setIsEnabled(!isEnabled);
   };
 

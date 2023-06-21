@@ -22,21 +22,3 @@ const App = () => {
 };
 
 export default App;
-
-//DEFAULT CONFIG aws
-
-// const signUpConfig = {
-//   hideAllDefaultFields: true,
-//   signUpFields: [
-//     {
-//       label: 'Name',
-//       key: 'name',
-//       required: true,
-//       displayOrder: 1,
-//       type: 'string',
-//       placeholder: 'Name',
-//     },
-//   ],
-// };
-
-// export default withAuthenticator(App, {signUpConfig});
