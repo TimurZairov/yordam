@@ -19,7 +19,7 @@ const CustomDrawerNavigation = props => {
   const {userId} = useContext(AppContext);
   //custom hook
   const [imageKey, getImageHandler] = useUserImage();
-  const [data, loading, error] = useGetUser(userId);
+  const [data] = useGetUser(userId);
 
   const user = data?.getUser;
 
@@ -68,7 +68,7 @@ const CustomDrawerNavigation = props => {
                 <View style={styles.background}>
                   {imageKey?.length !== 0 ? (
                     <Image
-                      source={{uri: imageKey}}
+                      source={{uri: imageKey || ''}}
                       resizeMode={'contain'}
                       style={{width: 85, height: 85, borderRadius: 45}}
                     />
