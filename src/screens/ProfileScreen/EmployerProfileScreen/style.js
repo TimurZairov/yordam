@@ -54,4 +54,17 @@ export default StyleSheet.create({
   btnText: {
     color: 'red',
   },
+  userData: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.darkGrayColor,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginTop: 27,
+    paddingBottom: 12,
+  },
+  userText: {
+    fontSize: fonts.fontSize.md,
+    fontFamily: fonts.fontFamily.bold,
+    color: colors.blackColor,
+  },
 });

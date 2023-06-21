@@ -22,7 +22,7 @@ const linking = {
 
 const Navigation = () => {
   const [check, setCheck] = useState(null);
-
+  //Check AsyncStorage
   useEffect(() => {
     const checkedHandler = async () => {
       try {

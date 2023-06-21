@@ -11,6 +11,7 @@ const WelcomeScreen = () => {
   const navigation = useNavigation();
   const [profile, setProfile] = useState(false);
 
+  //put to Storage
   const putToStorage = async () => {
     const res = JSON.stringify(profile);
     navigation.navigate('Tab');
@@ -20,11 +21,11 @@ const WelcomeScreen = () => {
       console.log(e);
     }
   };
-
+  //worker
   const workerProfileHandler = async () => {
     await putToStorage();
   };
-
+  //employer
   const employerProfileHandler = async () => {
     setProfile(true);
     await putToStorage();

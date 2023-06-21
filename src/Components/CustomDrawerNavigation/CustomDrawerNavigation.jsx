@@ -41,7 +41,7 @@ const CustomDrawerNavigation = props => {
   };
 
   const loginHandler = () => {
-    navigation.navigate('Login');
+    navigation.navigate('Auth', {screen: 'Login'});
   };
 
   useEffect(() => {

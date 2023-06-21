@@ -1,9 +1,10 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
   FlatList,
   Pressable,
+  Switch,
   Text,
   View,
 } from 'react-native';
@@ -19,8 +20,10 @@ import styles from './style';
 import UserInfo from '../../../Components/UserInfo';
 import {colors} from '../../../theme/colors';
 import ErrorScreen from '../../ErrorScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EmployerProfileScreen = () => {
+  const [isEnabled, setIsEnabled] = useState(false);
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
   //Delete POST
@@ -79,6 +82,22 @@ const EmployerProfileScreen = () => {
     ]);
   };
 
+  const toggleSwitch = async e => {
+    console.log(e);
+
+    setIsEnabled(!isEnabled);
+  };
+
+  useEffect(() => {
+    const checkRoleHandler = async () => {
+      const res = await AsyncStorage.getItem('profile');
+      if (res) {
+        setIsEnabled(JSON.parse(res));
+      }
+    };
+    checkRoleHandler();
+  }, []);
+
   const postedPost = userData?.Posts.items.filter(post => !post._deleted);
 
   return (
@@ -97,7 +116,16 @@ const EmployerProfileScreen = () => {
               />
               <UserData name={'Почта'} info={userData.email} />
               <UserData name={'Телефон'} info={userData.phoneNumber} />
-              <UserData name={'Я работодатель'} info={userData.employer} />
+              <View style={styles.userData}>
+                <Text style={styles.userText}>Я работодатель</Text>
+                <Switch
+                  trackColor={{false: '#767577', true: '#81b0ff'}}
+                  thumbColor={colors.purpleColor}
+                  value={isEnabled}
+                  onChange={toggleSwitch}
+                />
+              </View>
+
               <Text style={styles.comments}>
                 {userData?.Posts.items.length
                   ? 'Ваши посты'
