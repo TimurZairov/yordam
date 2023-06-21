@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {colors} from '../theme/colors';
 import HomeStack from './HomeStack';
 import {
@@ -13,10 +13,19 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MessageScreen from '../screens/MessageScreen';
 import SignedStack from './SignedStack';
 import CreateStack from './CreateStack';
+import useGetRole from '../utils/custom/useGetRole';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
+  const [isChecked] = useGetRole();
+  const [userRole, setUserRole] = useState(null);
+  console.log(userRole);
+
+  useEffect(() => {
+    setUserRole(isChecked);
+  }, [isChecked]);
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -60,16 +69,18 @@ const TabNavigation = () => {
       />
       {/*CREATE*/}
 
-      <Tab.Screen
-        name={'Create'}
-        component={CreateStack}
-        options={{
-          // eslint-disable-next-line react/no-unstable-nested-components
-          tabBarIcon: ({color}) => {
-            return <AddIcon height={47} fill={color} />;
-          },
-        }}
-      />
+      {userRole ? (
+        <Tab.Screen
+          name={'Create'}
+          component={CreateStack}
+          options={{
+            // eslint-disable-next-line react/no-unstable-nested-components
+            tabBarIcon: ({color}) => {
+              return <AddIcon height={47} fill={color} />;
+            },
+          }}
+        />
+      ) : null}
 
       {/*Message*/}
       <Tab.Screen

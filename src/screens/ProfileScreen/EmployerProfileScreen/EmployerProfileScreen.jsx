@@ -43,6 +43,16 @@ const EmployerProfileScreen = () => {
   const editPostHandler = id => {
     navigation.navigate('UpdatePost', {id: id});
   };
+  // get Role
+  useEffect(() => {
+    const checkRoleHandler = async () => {
+      const res = await AsyncStorage.getItem('profile');
+      if (res) {
+        setIsEnabled(JSON.parse(res));
+      }
+    };
+    checkRoleHandler();
+  }, []);
 
   // USER QUERY
   const {data, loading, error} = useQuery(getUser, {
@@ -62,10 +72,12 @@ const EmployerProfileScreen = () => {
   }
 
   const userData = data.getUser;
-
+  //Edit Profile Screen
   const editProfileHandler = () => {
     navigation.navigate('EditProfileScreen', {user: userData});
   };
+
+  //Alert deleting
 
   const deletePostHandler = (id, version) => {
     Alert.alert('Удалить?', '', [
@@ -83,20 +95,8 @@ const EmployerProfileScreen = () => {
   };
 
   const toggleSwitch = async e => {
-    console.log(e);
-
     setIsEnabled(!isEnabled);
   };
-
-  useEffect(() => {
-    const checkRoleHandler = async () => {
-      const res = await AsyncStorage.getItem('profile');
-      if (res) {
-        setIsEnabled(JSON.parse(res));
-      }
-    };
-    checkRoleHandler();
-  }, []);
 
   const postedPost = userData?.Posts.items.filter(post => !post._deleted);
 

@@ -20,3 +20,21 @@ export const getUser = gql/* GraphQL */ `
     }
   }
 `;
+
+export const updateUser = gql/* GraphQL */ `
+  mutation UpdateUser(
+    $input: UpdateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    updateUser(input: $input, condition: $condition) {
+      id
+      employer
+
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
