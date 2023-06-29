@@ -94,8 +94,12 @@ const EmployerProfileScreen = () => {
     ]);
   };
 
-  const toggleSwitch = async () => {
+  const toggleSwitch = () => {
     setIsEnabled(!isEnabled);
+  };
+
+  const changeProfileHandler = async e => {
+    console.log('ok');
   };
 
   const postedPost = userData?.Posts.items.filter(post => !post._deleted);
@@ -123,6 +127,7 @@ const EmployerProfileScreen = () => {
                   thumbColor={colors.purpleColor}
                   value={isEnabled}
                   onChange={toggleSwitch}
+                  onValueChange={e => changeProfileHandler(e)}
                 />
               </View>
 
