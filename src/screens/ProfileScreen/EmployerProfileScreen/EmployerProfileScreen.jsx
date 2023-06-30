@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 
 import {AppContext} from '../../../context/Context';
-import {deletePost, getUser} from './queries';
+import {deletePost, getUser, updateUser} from './queries';
 import {useMutation, useQuery} from '@apollo/client';
 import UserData from '../../../Components/UserData';
 import {useNavigation} from '@react-navigation/native';
@@ -24,10 +24,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EmployerProfileScreen = () => {
   const [isEnabled, setIsEnabled] = useState(false);
+  const [isEmployer, setIsEmployer] = useState(null);
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
   //Delete POST
   const [onDeletePost] = useMutation(deletePost);
+
+  const [onUpdateUserProfile] = useMutation(updateUser);
 
   const postDelete = async (id, version) => {
     try {
@@ -44,15 +47,42 @@ const EmployerProfileScreen = () => {
     navigation.navigate('UpdatePost', {id: id});
   };
   // get Role
-  useEffect(() => {
-    const checkRoleHandler = async () => {
-      const res = await AsyncStorage.getItem('profile');
-      if (res) {
-        setIsEnabled(JSON.parse(res));
+  const toggleSwitch = async (id, version) => {
+    if (isEmployer !== null) {
+      try {
+        const res = await onUpdateUserProfile({
+          variables: {input: {id, employer: !isEmployer, _version: version}},
+        });
+        if (res) {
+          const user = res.data.updateUser;
+          const userRole = JSON.stringify(user.employer);
+          await AsyncStorage.setItem('profile', userRole);
+          Alert.alert(
+            'Внимание',
+            'Перезапустите приложение для включения новых функций!',
+          );
+        }
+      } catch (e) {
+        console.log(e);
       }
-    };
-    checkRoleHandler();
-  }, []);
+    }
+  };
+
+  // useEffect(() => {
+  //   const checkRoleHandler = async () => {
+  //     const res = await AsyncStorage.getItem('profile');
+  //     if (res) {
+  //       setIsEnabled(JSON.parse(res));
+  //     }
+  //   };
+  //   checkRoleHandler();
+  // }, []);
+
+  useEffect(() => {
+    if (userData) {
+      setIsEmployer(userData.employer);
+    }
+  }, [toggleSwitch, userData]);
 
   // USER QUERY
   const {data, loading, error} = useQuery(getUser, {
@@ -94,14 +124,6 @@ const EmployerProfileScreen = () => {
     ]);
   };
 
-  const toggleSwitch = () => {
-    setIsEnabled(!isEnabled);
-  };
-
-  const changeProfileHandler = async e => {
-    console.log('ok');
-  };
-
   const postedPost = userData?.Posts.items.filter(post => !post._deleted);
 
   return (
@@ -125,9 +147,8 @@ const EmployerProfileScreen = () => {
                 <Switch
                   trackColor={{false: '#767577', true: '#81b0ff'}}
                   thumbColor={colors.purpleColor}
-                  value={isEnabled}
-                  onChange={toggleSwitch}
-                  onValueChange={e => changeProfileHandler(e)}
+                  value={isEmployer}
+                  onChange={() => toggleSwitch(userData.id, userData._version)}
                 />
               </View>
 

@@ -14,7 +14,7 @@ const useGetRole = () => {
       }
     };
     checkRoleHandler();
-  }, []);
+  }, [AsyncStorage]);
 
   return [isChecked];
 };
