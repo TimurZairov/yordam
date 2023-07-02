@@ -17,11 +17,13 @@ import SocialAuth from '../../../Components/SocialAuth';
 import {useNavigation} from '@react-navigation/native';
 import {useForm} from 'react-hook-form';
 import {Auth} from 'aws-amplify';
+import useGetRole from '../../../utils/custom/useGetRole';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
   const {handleSubmit, control, reset} = useForm();
   const [loading, setLoading] = useState(false);
+  const [isChecked] = useGetRole();
 
   const registryHandler = () => {
     navigation.navigate('Registry');
@@ -34,6 +36,9 @@ const LoginScreen = () => {
     }
     try {
       await Auth.signIn(data.email, data.password);
+      if (isChecked === null) {
+        navigation.navigate('Welcome');
+      }
       navigation.navigate('Tab', {
         screen: 'ProfileScreen',
       });

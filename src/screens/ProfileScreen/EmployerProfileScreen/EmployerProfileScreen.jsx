@@ -30,8 +30,6 @@ const EmployerProfileScreen = () => {
   //Delete POST
   const [onDeletePost] = useMutation(deletePost);
 
-  const [onUpdateUserProfile] = useMutation(updateUser);
-
   const postDelete = async (id, version) => {
     try {
       const response = await onDeletePost({
@@ -47,6 +45,7 @@ const EmployerProfileScreen = () => {
     navigation.navigate('UpdatePost', {id: id});
   };
   // get Role
+  const [onUpdateUserProfile] = useMutation(updateUser);
   const toggleSwitch = async (id, version) => {
     if (isEmployer !== null) {
       try {
@@ -57,10 +56,7 @@ const EmployerProfileScreen = () => {
           const user = res.data.updateUser;
           const userRole = JSON.stringify(user.employer);
           await AsyncStorage.setItem('profile', userRole);
-          Alert.alert(
-            'Внимание',
-            'Перезапустите приложение для включения новых функций!',
-          );
+          Alert.alert('Внимание', 'Перезапустите приложение!');
         }
       } catch (e) {
         console.log(e);
@@ -82,7 +78,7 @@ const EmployerProfileScreen = () => {
     if (userData) {
       setIsEmployer(userData.employer);
     }
-  }, [toggleSwitch, userData]);
+  }, [toggleSwitch]);
 
   // USER QUERY
   const {data, loading, error} = useQuery(getUser, {

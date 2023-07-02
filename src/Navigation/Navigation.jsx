@@ -23,6 +23,7 @@ const linking = {
 const Navigation = () => {
   const [check, setCheck] = useState(null);
   //Check AsyncStorage
+
   useEffect(() => {
     const checkedHandler = async () => {
       try {
@@ -45,10 +46,9 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}
+        initialRouteName={'Tab'}
         drawerContent={props => <CustomDrawerNavigation {...props} />}>
-        {!check ? (
-          <Drawer.Screen name="Welcome" component={WelcomeScreen} />
-        ) : null}
+        <Drawer.Screen name="Welcome" component={WelcomeScreen} />
         <Drawer.Screen name="Tab" component={TabNavigation} />
         <Drawer.Screen name="About" component={AboutScreen} />
         <Drawer.Screen name="Applied" component={JobAppliedScreen} />

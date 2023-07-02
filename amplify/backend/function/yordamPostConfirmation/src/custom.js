@@ -15,7 +15,6 @@ const AppSyncId = process.env.API_YORDAM_GRAPHQLAPIIDOUTPUT;
 const env = process.env.ENV;
 const TableName = `User-${AppSyncId}-${env}`;
 
-console.log('Hello lamda');
 let date = new Date();
 const versionNumber = '1';
 
@@ -87,12 +86,13 @@ exports.handler = async (event, context) => {
         phoneNumber: {S: ''},
         createdAt: {S: date.toISOString()},
         updatedAt: {S: date.toISOString()},
-        _lastChangedAt: {S: date.toISOString()},
+        _lastChangedAt: {N: date.getTime().toString()},
         _version: {N: versionNumber},
       },
       TableName,
     };
     try {
+      console.log(params);
       await ddb.putItem(params).promise();
       console.log('Success');
     } catch (err) {

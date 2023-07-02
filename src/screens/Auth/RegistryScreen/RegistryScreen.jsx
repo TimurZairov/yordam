@@ -10,6 +10,7 @@ import Button from '../../../Components/Button';
 import SocialAuth from '../../../Components/SocialAuth';
 import {useForm} from 'react-hook-form';
 import {useNavigation} from '@react-navigation/native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const RegistryScreen = () => {
   const [loading, setLoading] = useState(false);
@@ -25,8 +26,9 @@ const RegistryScreen = () => {
     }
     setLoading(true);
     if (data.confirmPassword === data.password) {
+      await AsyncStorage.removeItem('profile');
       try {
-        const res = await Auth.signUp({
+        await Auth.signUp({
           username: data.email,
           password: data.password,
           attributes: {
