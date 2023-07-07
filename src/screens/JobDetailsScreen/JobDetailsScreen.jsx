@@ -57,7 +57,7 @@ const JobDetailsScreen = () => {
       {id ? (
         <View style={styles.jobInfoContainer}>
           <View style={styles.jobInfo}>
-            <Text style={styles.jobUserName}>{jobDetails.User.name}</Text>
+            <Text style={styles.jobUserName}>{jobDetails.User?.name}</Text>
             <Text style={styles.title}>{jobDetails.title}</Text>
             <Text style={styles.title}>{jobDetails.description}</Text>
             <Button title={'Откликнуться'} onPress={applyJobHandler} />
