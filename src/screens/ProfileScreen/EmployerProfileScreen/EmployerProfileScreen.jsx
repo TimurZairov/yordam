@@ -46,6 +46,7 @@ const EmployerProfileScreen = () => {
   };
   // get Role
   const [onUpdateUserProfile] = useMutation(updateUser);
+  // toggle switch
   const toggleSwitch = async (id, version) => {
     if (isEmployer !== null) {
       try {

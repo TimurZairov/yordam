@@ -91,6 +91,7 @@ const TabNavigation = () => {
           tabBarIcon: ({color}) => {
             return <MessageIcon height={30} fill={color} />;
           },
+          tabBarHideOnKeyboard: true,
         }}
       />
       {/*Profile*/}

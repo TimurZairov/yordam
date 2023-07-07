@@ -7,15 +7,16 @@ const TabButton = ({title, active}) => {
   const [workers, setWorkers] = useState(false);
   const refBtn = useRef();
 
-  const activeBtn = () => {
-    console.log(refBtn.current._internalFiberInstanceHandleDEV.title);
+  const activeBtn = e => {
+    console.log(e.nativeEvent);
   };
 
   return (
     <Pressable style={styles.button} onPress={activeBtn}>
       <Text
         style={[active ? styles.tabScreenText : styles.tabScreenTextActive]}
-        ref={refBtn}>
+        ref={refBtn}
+        selectable>
         {title}
       </Text>
     </Pressable>
