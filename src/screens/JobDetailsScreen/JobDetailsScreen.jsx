@@ -15,9 +15,8 @@ const JobDetailsScreen = () => {
   const route = useRoute();
   const {id} = route.params;
   // Get Post details
-  const {data, loading, error} = useQuery(getPost, {variables: {id}});
-
-  const jobDetails = data?.getPost || {};
+  const {data: post, loading, error} = useQuery(getPost, {variables: {id}});
+  const jobDetails = post?.getPost || {};
   if (loading) {
     return <ActivityIndicator color={colors.purpleColor} />;
   }

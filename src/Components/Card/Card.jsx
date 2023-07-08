@@ -17,6 +17,7 @@ const Card = ({post}) => {
   const getJobDetailsHandler = id => {
     navigation.navigate('Details', {id});
   };
+  console.log(post);
   //getComments || number of Comments
   const {data, loading, error} = useQuery(commentsByPost, {
     variables: {
@@ -50,7 +51,7 @@ const Card = ({post}) => {
           <View style={styles.userInfo}>
             <Text style={styles.userInfoText}>{post?.name}</Text>
             <Text style={styles.userInfoText}>
-              Дата: <Text style={styles.userText}>{post?.date}</Text>
+              Категория: <Text style={styles.userText}>{post?.category}</Text>
             </Text>
             <Text style={styles.userInfoText}>
               Город: <Text style={styles.userText}>{post?.adress}</Text>

@@ -26,6 +26,7 @@ export const postsByDate = gql/* GraphQL */ `
         long
         description
         userID
+        category
         createdAt
         updatedAt
         _version

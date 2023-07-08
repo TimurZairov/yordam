@@ -4,7 +4,7 @@ import styles from './style';
 
 const filterButtonArray = ['Все', 'Ремонт', 'Уборка', 'Водитель', 'Няня'];
 
-const TabFilter = () => {
+const TabFilter = ({setCategory = () => {}}) => {
   const [activeItem, setActiveItem] = useState(0);
 
   const activeHandler = item => {
@@ -13,6 +13,7 @@ const TabFilter = () => {
         setActiveItem(idx);
       }
     });
+    setCategory(item);
   };
 
   return (

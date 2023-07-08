@@ -62,6 +62,7 @@ export const getComment = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -113,6 +114,7 @@ export const listComments = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted
@@ -173,6 +175,7 @@ export const syncComments = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted
@@ -235,6 +238,7 @@ export const commentsByUserID = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted
@@ -299,6 +303,7 @@ export const commentsByPost = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted
@@ -365,6 +370,7 @@ export const getPost = /* GraphQL */ `
       userID
       lat
       long
+      category
       updatedAt
       _version
       _deleted
@@ -409,6 +415,7 @@ export const listPosts = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -462,6 +469,7 @@ export const syncPosts = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -519,6 +527,7 @@ export const postsByDate = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -574,6 +583,7 @@ export const postsByUserID = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -607,6 +617,7 @@ export const getUser = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted

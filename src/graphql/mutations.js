@@ -65,6 +65,7 @@ export const createComment = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -141,6 +142,7 @@ export const updateComment = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -217,6 +219,7 @@ export const deleteComment = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -283,6 +286,7 @@ export const createPost = /* GraphQL */ `
       userID
       lat
       long
+      category
       updatedAt
       _version
       _deleted
@@ -344,6 +348,7 @@ export const updatePost = /* GraphQL */ `
       userID
       lat
       long
+      category
       updatedAt
       _version
       _deleted
@@ -405,6 +410,7 @@ export const deletePost = /* GraphQL */ `
       userID
       lat
       long
+      category
       updatedAt
       _version
       _deleted
@@ -438,6 +444,7 @@ export const createUser = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted
@@ -495,6 +502,7 @@ export const updateUser = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted
@@ -552,6 +560,7 @@ export const deleteUser = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted

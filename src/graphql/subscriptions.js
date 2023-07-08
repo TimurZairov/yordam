@@ -62,6 +62,7 @@ export const onCommentByPostId = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -135,6 +136,7 @@ export const onCreateComment = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -208,6 +210,7 @@ export const onUpdateComment = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -281,6 +284,7 @@ export const onDeleteComment = /* GraphQL */ `
         userID
         lat
         long
+        category
         updatedAt
         _version
         _deleted
@@ -344,6 +348,7 @@ export const onCreatePost = /* GraphQL */ `
       userID
       lat
       long
+      category
       updatedAt
       _version
       _deleted
@@ -402,6 +407,7 @@ export const onUpdatePost = /* GraphQL */ `
       userID
       lat
       long
+      category
       updatedAt
       _version
       _deleted
@@ -460,6 +466,7 @@ export const onDeletePost = /* GraphQL */ `
       userID
       lat
       long
+      category
       updatedAt
       _version
       _deleted
@@ -490,6 +497,7 @@ export const onCreateUser = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted
@@ -544,6 +552,7 @@ export const onUpdateUser = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted
@@ -598,6 +607,7 @@ export const onDeleteUser = /* GraphQL */ `
           userID
           lat
           long
+          category
           updatedAt
           _version
           _deleted

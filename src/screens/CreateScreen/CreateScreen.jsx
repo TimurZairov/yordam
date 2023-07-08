@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {ScrollView, Text, View} from 'react-native';
 import Header from '../../Components/Header';
 import styles from './style';
@@ -11,16 +11,18 @@ import {AppContext} from '../../context/Context';
 import {useMutation} from '@apollo/client';
 import {createPost} from './queries';
 import {useNavigation} from '@react-navigation/native';
+import TabFilter from '../../Components/TabFilter';
 
 const CreateScreen = () => {
+  const [category, setCategory] = useState(null);
   const {userId} = useContext(AppContext);
   const [doCreatePost] = useMutation(createPost);
   const {coordinates, setCoordinates} = useContext(AppContext);
   const navigation = useNavigation();
-
   const {control, handleSubmit, reset} = useForm();
 
   const createPostSubmit = async data => {
+    console.log(category);
     try {
       await doCreatePost({
         variables: {
@@ -33,6 +35,7 @@ const CreateScreen = () => {
             userID: userId,
             lat: coordinates?.latitude,
             long: coordinates?.longitude,
+            category: category,
           },
         },
       });
@@ -56,6 +59,7 @@ const CreateScreen = () => {
         <Text style={styles.logoText}>Yordam</Text>
       </View>
       <Text style={styles.createTitle}>Что нужно сделать?</Text>
+      <TabFilter setCategory={setCategory} />
       <Input
         placeholder={'Напишите коротко, тему работ*'}
         name={'title'}
