@@ -8,8 +8,17 @@ import {postsByDate} from './queries';
 
 const PostsList = () => {
   const [isLoadMore, setIsLoadMore] = useState(false);
+  const [category, setCategory] = useState('');
+
   const {data, loading, error, refetch, fetchMore} = useQuery(postsByDate, {
-    variables: {type: 'POST', sortDirection: 'DESC', limit: 1},
+    variables: {
+      type: 'POST',
+      sortDirection: 'DESC',
+      limit: 10,
+      filter: {
+        category: {contains: category}, // Фильтрация по значению
+      },
+    },
   }); // second parameter of options = {limits of query}
   if (loading) {
     return <ActivityIndicator />;
@@ -19,9 +28,7 @@ const PostsList = () => {
     return <Text>{error.message}</Text>;
   }
   //POSTS from hook useQuery
-  const posts = (data?.postsByDate?.items || []).filter(
-    posts => !posts._deleted,
-  );
+  let posts = (data?.postsByDate?.items || []).filter(posts => !posts._deleted);
 
   const nextToken = data?.postsByDate?.nextToken;
 
@@ -40,7 +47,7 @@ const PostsList = () => {
         <>
           <Text style={styles.titleHeader}>Популярные</Text>
           <View style={styles.flatHeader}>
-            <TabFilter />
+            <TabFilter setCategory={setCategory} />
           </View>
         </>
       }

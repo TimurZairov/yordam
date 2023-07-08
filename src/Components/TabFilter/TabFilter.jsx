@@ -4,7 +4,9 @@ import styles from './style';
 
 const filterButtonArray = ['Все', 'Ремонт', 'Уборка', 'Водитель', 'Няня'];
 
-const TabFilter = ({setCategory = () => {}}) => {
+const arr = filterButtonArray.slice(1);
+
+const TabFilter = ({setCategory = () => {}, create}) => {
   const [activeItem, setActiveItem] = useState(0);
 
   const activeHandler = item => {
@@ -13,12 +15,16 @@ const TabFilter = ({setCategory = () => {}}) => {
         setActiveItem(idx);
       }
     });
-    setCategory(item);
+    if (item === 'Все') {
+      setCategory('');
+    } else {
+      setCategory(item);
+    }
   };
 
   return (
     <FlatList
-      data={filterButtonArray}
+      data={create ? filterButtonArray.slice(1) : filterButtonArray}
       keyExtractor={(item, index) => item + index}
       horizontal={true}
       showsHorizontalScrollIndicator={false}

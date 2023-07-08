@@ -17,7 +17,6 @@ const Card = ({post}) => {
   const getJobDetailsHandler = id => {
     navigation.navigate('Details', {id});
   };
-  console.log(post);
   //getComments || number of Comments
   const {data, loading, error} = useQuery(commentsByPost, {
     variables: {

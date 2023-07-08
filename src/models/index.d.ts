@@ -1,15 +1,14 @@
 // @ts-ignore
 import {
-    __modelMeta__,
-    AsyncCollection,
-    AsyncItem,
-    LazyLoading,
-    LazyLoadingDisabled,
-    ManagedIdentifier,
-    ModelInit,
-    MutableModel
-} from "@aws-amplify/datastore";
-
+  __modelMeta__,
+  AsyncCollection,
+  AsyncItem,
+  LazyLoading,
+  LazyLoadingDisabled,
+  ManagedIdentifier,
+  ModelInit,
+  MutableModel,
+} from '@aws-amplify/datastore';
 
 type EagerComment = {
   readonly [__modelMeta__]: {
@@ -24,7 +23,7 @@ type EagerComment = {
   readonly User?: User | null;
   readonly Post?: Post | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyComment = {
   readonly [__modelMeta__]: {
@@ -39,13 +38,18 @@ type LazyComment = {
   readonly User: AsyncItem<User | undefined>;
   readonly Post: AsyncItem<Post | undefined>;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Comment = LazyLoading extends LazyLoadingDisabled ? EagerComment : LazyComment
+export declare type Comment = LazyLoading extends LazyLoadingDisabled
+  ? EagerComment
+  : LazyComment;
 
 export declare const Comment: (new (init: ModelInit<Comment>) => Comment) & {
-  copyOf(source: Comment, mutator: (draft: MutableModel<Comment>) => MutableModel<Comment> | void): Comment;
-}
+  copyOf(
+    source: Comment,
+    mutator: (draft: MutableModel<Comment>) => MutableModel<Comment> | void,
+  ): Comment;
+};
 
 type EagerPost = {
   readonly [__modelMeta__]: {
@@ -66,7 +70,7 @@ type EagerPost = {
   readonly long?: string | null;
   readonly category?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyPost = {
   readonly [__modelMeta__]: {
@@ -87,13 +91,18 @@ type LazyPost = {
   readonly long?: string | null;
   readonly category?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Post = LazyLoading extends LazyLoadingDisabled ? EagerPost : LazyPost
+export declare type Post = LazyLoading extends LazyLoadingDisabled
+  ? EagerPost
+  : LazyPost;
 
 export declare const Post: (new (init: ModelInit<Post>) => Post) & {
-  copyOf(source: Post, mutator: (draft: MutableModel<Post>) => MutableModel<Post> | void): Post;
-}
+  copyOf(
+    source: Post,
+    mutator: (draft: MutableModel<Post>) => MutableModel<Post> | void,
+  ): Post;
+};
 
 type EagerUser = {
   readonly [__modelMeta__]: {
@@ -112,7 +121,7 @@ type EagerUser = {
   readonly Comments?: (Comment | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyUser = {
   readonly [__modelMeta__]: {
@@ -131,10 +140,15 @@ type LazyUser = {
   readonly Comments: AsyncCollection<Comment>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser
+export declare type User = LazyLoading extends LazyLoadingDisabled
+  ? EagerUser
+  : LazyUser;
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
-  copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
-}
+  copyOf(
+    source: User,
+    mutator: (draft: MutableModel<User>) => MutableModel<User> | void,
+  ): User;
+};
