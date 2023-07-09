@@ -8,7 +8,6 @@ import {Storage} from 'aws-amplify';
 
 const UserInfo = ({userLocation, userName, postNum, userData}) => {
   const [url, setUrl] = useState('');
-
   useEffect(() => {
     if (userData) {
       const getImageHandler = async () => {
@@ -26,9 +25,9 @@ const UserInfo = ({userLocation, userName, postNum, userData}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        {url?.length !== 0 ? (
+        {url?.length ? (
           <Image
-            source={{uri: url}}
+            source={{uri: url || undefined}}
             style={styles.userImage}
             resizeMode="cover"
           />

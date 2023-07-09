@@ -19,6 +19,11 @@ import DefaultAvatar from './DefaultAvatar.svg';
 import AboutIcon from './AboutIcon.svg';
 import SignInIcon from './SignInIcon.svg';
 import SignOutIcon from './SignOutIcon.svg';
+import RepairIcon from './RepairIcon.svg';
+import CleanIcon from './CleanIcon.svg';
+import DriverIcon from './DriverIcon.svg';
+import FoundationIcon from './FoundationIcon.svg';
+import TaskIcon from './TaskIcon.svg';
 
 export {
   Logo,
@@ -42,4 +47,9 @@ export {
   AboutIcon,
   SignInIcon,
   SignOutIcon,
+  RepairIcon,
+  CleanIcon,
+  DriverIcon,
+  FoundationIcon,
+  TaskIcon,
 };

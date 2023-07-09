@@ -1,10 +1,15 @@
 import React from 'react';
-import {ActivityIndicator, Image, Pressable, Text, View} from 'react-native';
+import {ActivityIndicator, Pressable, Text, View} from 'react-native';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
 import styles from './style';
-import {ArrowRightIcon} from '../../assets/icons';
+import {
+  ArrowRightIcon,
+  CleanIcon,
+  RepairIcon,
+  TaskIcon,
+} from '../../assets/icons';
 import {colors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@apollo/client';
@@ -39,16 +44,15 @@ const Card = ({post}) => {
       onPress={() => getJobDetailsHandler(post.id)}>
       <View style={styles.info}>
         <View style={styles.userInfoContainer}>
-          <Image
-            source={{
-              uri:
-                post?.image ||
-                'https://abrakadabra.fun/uploads/posts/2021-12/1639614002_3-abrakadabra-fun-p-avatarki-na-vatsap-iz-pinterest-3.jpg',
-            }}
-            style={styles.userInfoImage}
-          />
+          {post.category === 'Ремонт' ? (
+            <RepairIcon style={styles.icon} fill={colors.purpleColor} />
+          ) : post.category === 'Уборка' ? (
+            <CleanIcon style={styles.icon} fill={colors.purpleColor} />
+          ) : (
+            <TaskIcon style={styles.icon} fill={colors.purpleColor} />
+          )}
           <View style={styles.userInfo}>
-            <Text style={styles.userInfoText}>{post?.name}</Text>
+            {/*<Text style={styles.userInfoText}>{post?.name}</Text>*/}
             <Text style={styles.userInfoText}>
               Категория: <Text style={styles.userText}>{post?.category}</Text>
             </Text>

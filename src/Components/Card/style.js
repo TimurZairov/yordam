@@ -17,15 +17,15 @@ export default StyleSheet.create({
   },
   userInfoContainer: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignSelf: 'center',
   },
-  userInfoImage: {
-    width: 50,
-    aspectRatio: 1,
-    borderRadius: 30,
-    marginRight: 7,
+  userInfo: {
+    marginLeft: 15,
   },
-  userInfo: {},
+  icon: {
+    backgroundColor: colors.lightGrayColor,
+    borderRadius: 10,
+  },
   userInfoText: {
     fontFamily: fonts.fontFamily.bold,
     color: colors.blackColor,

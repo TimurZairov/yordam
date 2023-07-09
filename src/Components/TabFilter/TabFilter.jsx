@@ -4,8 +4,6 @@ import styles from './style';
 
 const filterButtonArray = ['Все', 'Ремонт', 'Уборка', 'Водитель', 'Няня'];
 
-const arr = filterButtonArray.slice(1);
-
 const TabFilter = ({setCategory = () => {}, create}) => {
   const [activeItem, setActiveItem] = useState(0);
 

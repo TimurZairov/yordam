@@ -22,7 +22,6 @@ const CreateScreen = () => {
   const {control, handleSubmit, reset} = useForm();
 
   const createPostSubmit = async data => {
-    console.log(category);
     try {
       await doCreatePost({
         variables: {
