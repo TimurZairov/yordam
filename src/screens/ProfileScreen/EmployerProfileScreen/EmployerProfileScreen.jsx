@@ -48,32 +48,20 @@ const EmployerProfileScreen = () => {
   const [onUpdateUserProfile] = useMutation(updateUser);
   // toggle switch
   const toggleSwitch = async (id, version) => {
-    if (isEmployer !== null) {
-      try {
-        const res = await onUpdateUserProfile({
-          variables: {input: {id, employer: !isEmployer, _version: version}},
-        });
-        if (res) {
-          const user = res.data.updateUser;
-          const userRole = JSON.stringify(user.employer);
-          await AsyncStorage.setItem('profile', userRole);
-          Alert.alert('Внимание', 'Перезапустите приложение!');
-        }
-      } catch (e) {
-        console.log(e);
+    try {
+      const res = await onUpdateUserProfile({
+        variables: {input: {id, employer: !isEmployer, _version: version}},
+      });
+      if (res) {
+        const user = res.data.updateUser;
+        const userRole = JSON.stringify(user.employer);
+        await AsyncStorage.setItem('profile', userRole);
+        Alert.alert('Внимание', 'Перезапустите приложение!');
       }
+    } catch (e) {
+      console.log(e);
     }
   };
-
-  // useEffect(() => {
-  //   const checkRoleHandler = async () => {
-  //     const res = await AsyncStorage.getItem('profile');
-  //     if (res) {
-  //       setIsEnabled(JSON.parse(res));
-  //     }
-  //   };
-  //   checkRoleHandler();
-  // }, []);
 
   useEffect(() => {
     if (userData) {

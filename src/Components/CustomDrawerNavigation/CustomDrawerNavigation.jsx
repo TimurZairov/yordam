@@ -66,14 +66,14 @@ const CustomDrawerNavigation = props => {
             <View style={styles.image}>
               <View style={styles.imageContainer}>
                 <View style={styles.background}>
-                  {imageKey?.length !== 0 ? (
+                  {imageKey?.length === 0 ? (
+                    <DefaultAvatar width={85} />
+                  ) : (
                     <Image
                       source={{uri: imageKey || null}}
                       resizeMode={'contain'}
                       style={{width: 85, height: 85, borderRadius: 45}}
                     />
-                  ) : (
-                    <DefaultAvatar width={85} />
                   )}
                 </View>
               </View>

@@ -6,6 +6,7 @@ import TabButton from '../../Components/TabButton';
 import PostsList from '../../Components/PostsList';
 
 const HomeScreen = () => {
+  const tabButtonsArr = ['Объявления', 'Специалисты'];
   return (
     <SafeAreaView style={styles.saveArea}>
       <View style={styles.container}>
@@ -13,8 +14,8 @@ const HomeScreen = () => {
         <Header />
         {/*TabButton*/}
         <View style={styles.tabContainer}>
-          <TabButton title="Объявления" active post />
-          <TabButton title="Специалисты" work />
+          <TabButton title={'Объявления'} />
+          <TabButton title={'Специалисты'} />
         </View>
         {/*Posts*/}
         <PostsList />
@@ -23,4 +24,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default React.memo(HomeScreen);

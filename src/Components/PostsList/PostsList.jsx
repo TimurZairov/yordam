@@ -20,6 +20,7 @@ const PostsList = () => {
       },
     },
   }); // second parameter of options = {limits of query}
+
   if (loading) {
     return <ActivityIndicator />;
   }
@@ -64,4 +65,4 @@ const PostsList = () => {
   );
 };
 
-export default PostsList;
+export default React.memo(PostsList);

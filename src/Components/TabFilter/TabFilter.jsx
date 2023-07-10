@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {FlatList, Pressable, Text} from 'react-native';
 import styles from './style';
+import {AppContext} from '../../context/Context';
 
 const filterButtonArray = ['Все', 'Ремонт', 'Уборка', 'Водитель', 'Няня'];
 
-const TabFilter = ({setCategory = () => {}, create}) => {
-  const [activeItem, setActiveItem] = useState(0);
+const TabFilter = ({setCategory, create}) => {
+  const {activeTab, setActiveTab} = useContext(AppContext);
 
   const activeHandler = item => {
-    filterButtonArray.forEach((i, idx) => {
+    filterButtonArray.map((i, idx) => {
       if (i === item) {
-        setActiveItem(idx);
+        setActiveTab(idx);
       }
     });
     if (item === 'Все') {
@@ -31,8 +32,7 @@ const TabFilter = ({setCategory = () => {}, create}) => {
           <Pressable
             style={styles.filterButton}
             onPress={() => activeHandler(item)}>
-            <Text
-              style={activeItem === index ? styles.textActive : styles.text}>
+            <Text style={activeTab === index ? styles.textActive : styles.text}>
               {item}
             </Text>
           </Pressable>
@@ -42,20 +42,4 @@ const TabFilter = ({setCategory = () => {}, create}) => {
   );
 };
 
-export default TabFilter;
-
-// <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-//   {filterButtonArray.map((item, index) => {
-//     return (
-//         <Pressable
-//             style={styles.filterButton}
-//             onPress={() => activeHandler(item)}
-//             key={index}>
-//           <Text
-//               style={activeItem === index ? styles.textActive : styles.text}>
-//             {item}
-//           </Text>
-//         </Pressable>
-//     );
-//   })}
-// </ScrollView>
+export default React.memo(TabFilter);

@@ -6,11 +6,14 @@ export const AppContext = createContext({
   userId: undefined,
   coordinates: null,
   setCoordinates: Function,
+  activeTab: 0,
+  setActiveTab: Function,
 });
 
 const AppProvider = ({children}) => {
   const [user, setUser] = useState(undefined);
   const [coordinates, setCoordinates] = useState(undefined);
+  const [activeTab, setActiveTab] = useState(0);
 
   const isSigned = async () => {
     try {
@@ -50,7 +53,14 @@ const AppProvider = ({children}) => {
 
   return (
     <AppContext.Provider
-      value={{user, userId: user?.attributes.sub, coordinates, setCoordinates}}>
+      value={{
+        user,
+        userId: user?.attributes.sub,
+        coordinates,
+        setCoordinates,
+        activeTab,
+        setActiveTab,
+      }}>
       {children}
     </AppContext.Provider>
   );
