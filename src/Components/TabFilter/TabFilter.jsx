@@ -22,11 +22,19 @@ const TabFilter = ({setCategory, create}) => {
     }
   };
 
+  const getItemLayout = (data, index) => {
+    const width = 50;
+    return {
+      length: width,
+      offset: width * index,
+      index,
+    };
+  };
+
   useEffect(() => {
     flatListRef.current.scrollToIndex({
       index: activeTab,
       animated: true,
-      viewOffset: 60,
     });
   }, [activeTab]);
 
@@ -48,6 +56,7 @@ const TabFilter = ({setCategory, create}) => {
           </Pressable>
         );
       }}
+      getItemLayout={getItemLayout}
     />
   );
 };
