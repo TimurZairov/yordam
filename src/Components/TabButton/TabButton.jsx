@@ -1,22 +1,18 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import {Pressable, Text} from 'react-native';
 import styles from './style';
 
-const TabButton = ({title}) => {
-  const [posts, setPost] = useState(true);
-  const [workers, setWorkers] = useState(false);
-  const refBtn = useRef();
-
+const TabButton = ({title, active}) => {
   const activeBtn = e => {
-    console.log(e.nativeEvent);
+    console.log(active);
   };
 
   return (
     <Pressable style={styles.button} onPress={activeBtn}>
       <Text
-        style={[posts ? styles.tabScreenText : styles.tabScreenTextActive]}
-        ref={refBtn}
-        selectable>
+        style={[
+          active === 'post' ? styles.tabScreenText : styles.tabScreenTextActive,
+        ]}>
         {title}
       </Text>
     </Pressable>

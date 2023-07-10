@@ -14,8 +14,8 @@ const HomeScreen = () => {
         <Header />
         {/*TabButton*/}
         <View style={styles.tabContainer}>
-          <TabButton title={'Объявления'} />
-          <TabButton title={'Специалисты'} />
+          <TabButton title={'Объявления'} active={'post'} />
+          <TabButton title={'Специалисты'} active={'specialists'} />
         </View>
         {/*Posts*/}
         <PostsList />
