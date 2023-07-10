@@ -23,7 +23,11 @@ const TabFilter = ({setCategory, create}) => {
   };
 
   useEffect(() => {
-    flatListRef.current.scrollToIndex({index: activeTab, animated: true});
+    flatListRef.current.scrollToIndex({
+      index: activeTab,
+      animated: true,
+      viewOffset: 60,
+    });
   }, [activeTab]);
 
   return (
@@ -48,4 +52,4 @@ const TabFilter = ({setCategory, create}) => {
   );
 };
 
-export default React.memo(TabFilter);
+export default TabFilter;

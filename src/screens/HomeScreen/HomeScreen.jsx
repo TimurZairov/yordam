@@ -6,7 +6,6 @@ import TabButton from '../../Components/TabButton';
 import PostsList from '../../Components/PostsList';
 
 const HomeScreen = () => {
-  const tabButtonsArr = ['Объявления', 'Специалисты'];
   return (
     <SafeAreaView style={styles.saveArea}>
       <View style={styles.container}>
@@ -15,7 +14,6 @@ const HomeScreen = () => {
         {/*TabButton*/}
         <View style={styles.tabContainer}>
           <TabButton title={'Объявления'} active={'post'} />
-          <TabButton title={'Специалисты'} active={'specialists'} />
         </View>
         {/*Posts*/}
         <PostsList />
