@@ -1,0 +1,14 @@
+{
+  "resourceName": "storage",
+  "policyUUID": "092052c5",
+  "bucketName": "yordam-media",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

@@ -18,6 +18,8 @@ import ErrorScreen from '../ErrorScreen';
 import {useNavigation} from '@react-navigation/native';
 
 const EditProfileScreen = () => {
+  const [changeAvatar, setChangeAvatar] = useState(null);
+  const [image, setImage] = useState(null);
   //GetUser
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
@@ -27,6 +29,22 @@ const EditProfileScreen = () => {
     },
   });
 
+  //userImage
+
+  useEffect(() => {
+    if (user) {
+      const getImageHandler = async () => {
+        try {
+          const res = await Storage.get(user.image);
+          setImage(res);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      getImageHandler();
+    }
+  }, []);
+
   const user = data?.getUser;
   //UpdateUser
   const [
@@ -34,10 +52,8 @@ const EditProfileScreen = () => {
     {loading: updateLoading, error: updateError}, // change name if exist
   ] = useMutation(updateUser);
 
-  const [changeAvatar, setChangeAvatar] = useState(null);
   // //Hook form
   const {control, handleSubmit, setValue} = useForm();
-
   //ImagePicker
   const imageHandler = async () => {
     try {
@@ -105,9 +121,9 @@ const EditProfileScreen = () => {
     <ScrollView style={styles.container}>
       <Header />
       <View style={styles.imageContainer}>
-        {changeAvatar ? (
+        {user.image ? (
           <Image
-            source={{uri: changeAvatar?.uri || user.image}}
+            source={{uri: changeAvatar?.uri || image}}
             style={styles.image}
           />
         ) : (
