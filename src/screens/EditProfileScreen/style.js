@@ -24,4 +24,32 @@ export default StyleSheet.create({
   label: {
     marginTop: 10,
   },
+  jobCategory: {
+    backgroundColor: colors.whiteColor,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    marginRight: 8,
+    marginVertical: 8,
+    borderColor: colors.purpleColor,
+  },
+  text: {
+    color: colors.purpleColor,
+    fontSize: fonts.fontSize.md,
+    fontFamily: fonts.fontFamily.bold,
+  },
+  active: {
+    backgroundColor: colors.purpleColor,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderWidth: 1,
+    borderRadius: 10,
+    marginRight: 8,
+    marginVertical: 8,
+    borderColor: colors.purpleColor,
+  },
+  activeText: {
+    color: colors.whiteColor,
+  },
 });

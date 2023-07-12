@@ -17,9 +17,12 @@ import {DefaultAvatar} from '../../assets/icons';
 import ErrorScreen from '../ErrorScreen';
 import {useNavigation} from '@react-navigation/native';
 
+const jobCategory = ['Все', 'Ремонт', 'Уборка', 'Водитель', 'Няня'];
+
 const EditProfileScreen = () => {
   const [changeAvatar, setChangeAvatar] = useState(null);
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState('');
+  const [category, setCategory] = useState([]);
   //GetUser
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
@@ -30,7 +33,6 @@ const EditProfileScreen = () => {
   });
 
   //userImage
-
   useEffect(() => {
     if (user) {
       const getImageHandler = async () => {
@@ -117,6 +119,21 @@ const EditProfileScreen = () => {
     setValue('phoneNumber', user.phoneNumber);
   }, [user, setValue]);
 
+  const addJobCategoryHandler = job => {
+    const isGot = category.includes(job);
+    if (!isGot) {
+      setCategory([job, ...category]);
+    }
+  };
+
+  const removeJobCategoryHandler = job => {
+    console.log(job);
+    const filtered = category.filter(item => item !== job);
+    setCategory(filtered);
+  };
+
+  console.log(category);
+
   return (
     <ScrollView style={styles.container}>
       <Header />
@@ -133,6 +150,43 @@ const EditProfileScreen = () => {
           Сменить Фото
         </Text>
       </View>
+      <View>
+        {user.employer ? (
+          <View>
+            <Text style={styles.label}>Что вы умеет делать?</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                flexWrap: 'wrap',
+              }}>
+              {jobCategory &&
+                jobCategory.map((item, index) => {
+                  return (
+                    <View
+                      style={
+                        category.includes(item)
+                          ? styles.active
+                          : styles.jobCategory
+                      }>
+                      <Text
+                        key={item.toString()}
+                        style={[
+                          category.includes(item)
+                            ? styles.activeText
+                            : styles.text,
+                        ]}
+                        onPress={() => addJobCategoryHandler(item)}
+                        onLongPress={() => removeJobCategoryHandler(item)}>
+                        {item}
+                      </Text>
+                    </View>
+                  );
+                })}
+            </View>
+          </View>
+        ) : null}
+      </View>
+
       <Text style={styles.label}> Ваше имя</Text>
       <Input
         control={control}
