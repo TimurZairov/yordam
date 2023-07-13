@@ -101,10 +101,11 @@ const EditProfileScreen = () => {
   };
 
   //remove from jobCategory
-  // const removeJobCategoryHandler = job => {
-  //   const filtered = user?.userJob.filter(item => item !== job);
-  //   setCategory(filtered);
-  // };
+  const removeJobCategoryHandler = job => {
+    const filtered = jobItems.filter(item => item !== job);
+    setJobItems(filtered);
+    console.log(jobItems);
+  };
 
   //add to jobCategory
   const addJobCategoryHandler = item => {
@@ -190,7 +191,7 @@ const EditProfileScreen = () => {
                             : styles.text,
                         ]}
                         onPress={() => addJobCategoryHandler(item)}
-                        onLongPress={() => {}}>
+                        onLongPress={() => removeJobCategoryHandler(item)}>
                         {item}
                       </Text>
                     </View>
