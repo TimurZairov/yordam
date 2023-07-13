@@ -22,41 +22,29 @@ const jobCategory = ['Все', 'Ремонт', 'Уборка', 'Водитель
 const EditProfileScreen = () => {
   const [changeAvatar, setChangeAvatar] = useState(null);
   const [image, setImage] = useState('');
-  const [category, setCategory] = useState([]);
-  //GetUser
+  const [jobItems, setJobItems] = useState([]);
+
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);
+
+  //GET USER
   const {data, loading, error} = useQuery(getUser, {
     variables: {
       id: userId,
     },
   });
 
-  //userImage
-  useEffect(() => {
-    if (user) {
-      const getImageHandler = async () => {
-        try {
-          const res = await Storage.get(user.image);
-          setImage(res);
-        } catch (e) {
-          console.log(e);
-        }
-      };
-      getImageHandler();
-    }
-  }, []);
+  const {control, handleSubmit, setValue} = useForm();
 
+  //USER
   const user = data?.getUser;
-  console.log(user);
+
   //UpdateUser mutation
   const [
     doUpdateUser,
     {loading: updateLoading, error: updateError}, // change name if exist
   ] = useMutation(updateUser);
 
-  // //Hook form
-  const {control, handleSubmit, setValue} = useForm();
   //ImagePicker
   const imageHandler = async () => {
     try {
@@ -88,7 +76,7 @@ const EditProfileScreen = () => {
             ...formUpdate,
             _version: user?._version,
             image,
-            userJob: category,
+            userJob: jobItems,
           },
         },
       });
@@ -112,6 +100,46 @@ const EditProfileScreen = () => {
     }
   };
 
+  //remove from jobCategory
+  // const removeJobCategoryHandler = job => {
+  //   const filtered = user?.userJob.filter(item => item !== job);
+  //   setCategory(filtered);
+  // };
+
+  //add to jobCategory
+  const addJobCategoryHandler = item => {
+    const isGot = jobItems?.includes(item);
+    if (!isGot) {
+      setJobItems([item, ...jobItems]);
+    }
+    console.log(jobItems);
+  };
+
+  //react hook form setValue
+  useEffect(() => {
+    if (user) {
+      setValue('name', user.name);
+      setValue('email', user.email);
+      setValue('location', user.location);
+      setValue('phoneNumber', user.phoneNumber);
+      const getImageHandler = async () => {
+        try {
+          const res = await Storage.get(user.image);
+          setImage(res);
+        } catch (e) {
+          console.log(e);
+        }
+      };
+      getImageHandler();
+    }
+  }, [user, setValue]);
+
+  useEffect(() => {
+    if (user) {
+      setJobItems([...user?.userJob]);
+    }
+  }, [user]);
+
   if (loading) {
     return <ActivityIndicator color={colors.purpleColor} />;
   }
@@ -119,26 +147,6 @@ const EditProfileScreen = () => {
   if (error || updateError) {
     return <ErrorScreen error={updateError.message} />;
   }
-  //react hook form setValue
-  useEffect(() => {
-    setValue('name', user.name);
-    setValue('email', user.email);
-    setValue('location', user.location);
-    setValue('phoneNumber', user.phoneNumber);
-  }, [user, setValue]);
-
-  const addJobCategoryHandler = job => {
-    const isGot = category.includes(job);
-    if (!isGot) {
-      setCategory([job, ...category]);
-    }
-  };
-
-  const removeJobCategoryHandler = job => {
-    console.log(job);
-    const filtered = category.filter(item => item !== job);
-    setCategory(filtered);
-  };
 
   return (
     <ScrollView style={styles.container}>
@@ -165,24 +173,24 @@ const EditProfileScreen = () => {
                 flexDirection: 'row',
                 flexWrap: 'wrap',
               }}>
-              {jobCategory &&
+              {user?.userJob &&
                 jobCategory.map((item, index) => {
                   return (
                     <View
                       key={item.toString()}
                       style={
-                        user?.userJob?.includes(item)
+                        jobItems?.includes(item)
                           ? styles.active
                           : styles.jobCategory
                       }>
                       <Text
                         style={[
-                          user?.userJob?.includes(item)
+                          jobItems?.includes(item)
                             ? styles.activeText
                             : styles.text,
                         ]}
                         onPress={() => addJobCategoryHandler(item)}
-                        onLongPress={() => removeJobCategoryHandler(item)}>
+                        onLongPress={() => {}}>
                         {item}
                       </Text>
                     </View>
