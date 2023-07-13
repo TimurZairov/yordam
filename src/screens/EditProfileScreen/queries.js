@@ -11,6 +11,7 @@ export const getUser = gql`
       phoneNumber
       employer
       about
+      userJob
       Posts {
         nextToken
         startedAt
@@ -37,6 +38,7 @@ export const updateUser = gql`
       phoneNumber
       employer
       about
+      userJob
       createdAt
       updatedAt
       _deleted

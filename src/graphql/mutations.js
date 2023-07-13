@@ -21,6 +21,7 @@ export const createComment = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -51,6 +52,7 @@ export const createComment = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -98,6 +100,7 @@ export const updateComment = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -128,6 +131,7 @@ export const updateComment = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -175,6 +179,7 @@ export const deleteComment = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -205,6 +210,7 @@ export const deleteComment = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -253,6 +259,7 @@ export const createPost = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -315,6 +322,7 @@ export const updatePost = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -377,6 +385,7 @@ export const deletePost = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -432,6 +441,7 @@ export const createUser = /* GraphQL */ `
       phoneNumber
       employer
       about
+      userJob
       Posts {
         items {
           id
@@ -490,6 +500,7 @@ export const updateUser = /* GraphQL */ `
       phoneNumber
       employer
       about
+      userJob
       Posts {
         items {
           id
@@ -548,6 +559,7 @@ export const deleteUser = /* GraphQL */ `
       phoneNumber
       employer
       about
+      userJob
       Posts {
         items {
           id

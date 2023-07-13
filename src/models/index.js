@@ -4,4 +4,8 @@ import {schema} from './schema';
 
 const {Comment, Post, User} = initSchema(schema);
 
-export {Comment, Post, User};
+export {
+  Comment,
+  Post,
+  User
+};

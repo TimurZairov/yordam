@@ -346,6 +346,14 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "userJob": {
+                    "name": "userJob",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "Posts": {
                     "name": "Posts",
                     "isArray": true,
@@ -424,5 +432,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.3",
-    "version": "b2772c350f2b37c7c3b4e8cf5ce6142e"
+    "version": "2181d581c1a5fa0165bf088f98684ca8"
 };

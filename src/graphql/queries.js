@@ -18,6 +18,7 @@ export const getComment = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -48,6 +49,7 @@ export const getComment = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -97,6 +99,7 @@ export const listComments = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -158,6 +161,7 @@ export const syncComments = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -221,6 +225,7 @@ export const commentsByUserID = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -286,6 +291,7 @@ export const commentsByPost = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -337,6 +343,7 @@ export const getPost = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -401,6 +408,7 @@ export const listPosts = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -455,6 +463,7 @@ export const syncPosts = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -513,6 +522,7 @@ export const postsByDate = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -569,6 +579,7 @@ export const postsByUserID = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -605,6 +616,7 @@ export const getUser = /* GraphQL */ `
       phoneNumber
       employer
       about
+      userJob
       Posts {
         items {
           id
@@ -665,6 +677,7 @@ export const listUsers = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -706,6 +719,7 @@ export const syncUsers = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt

@@ -48,7 +48,8 @@ const EditProfileScreen = () => {
   }, []);
 
   const user = data?.getUser;
-  //UpdateUser
+  console.log(user);
+  //UpdateUser mutation
   const [
     doUpdateUser,
     {loading: updateLoading, error: updateError}, // change name if exist
@@ -72,6 +73,7 @@ const EditProfileScreen = () => {
     }
   };
 
+  //update function
   const submitUpdateUserHandler = async formUpdate => {
     //upload image profile and get the key
     let image;
@@ -81,7 +83,13 @@ const EditProfileScreen = () => {
     try {
       await doUpdateUser({
         variables: {
-          input: {id: userId, ...formUpdate, _version: user?._version, image},
+          input: {
+            id: userId,
+            ...formUpdate,
+            _version: user?._version,
+            image,
+            userJob: category,
+          },
         },
       });
       navigation.goBack();
@@ -132,8 +140,6 @@ const EditProfileScreen = () => {
     setCategory(filtered);
   };
 
-  console.log(category);
-
   return (
     <ScrollView style={styles.container}>
       <Header />
@@ -163,15 +169,15 @@ const EditProfileScreen = () => {
                 jobCategory.map((item, index) => {
                   return (
                     <View
+                      key={item.toString()}
                       style={
-                        category.includes(item)
+                        user?.userJob?.includes(item)
                           ? styles.active
                           : styles.jobCategory
                       }>
                       <Text
-                        key={item.toString()}
                         style={[
-                          category.includes(item)
+                          user?.userJob?.includes(item)
                             ? styles.activeText
                             : styles.text,
                         ]}

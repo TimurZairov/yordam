@@ -18,6 +18,7 @@ export const onCommentByPostId = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -48,6 +49,7 @@ export const onCommentByPostId = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -92,6 +94,7 @@ export const onCreateComment = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -122,6 +125,7 @@ export const onCreateComment = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -166,6 +170,7 @@ export const onUpdateComment = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -196,6 +201,7 @@ export const onUpdateComment = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -240,6 +246,7 @@ export const onDeleteComment = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -270,6 +277,7 @@ export const onDeleteComment = /* GraphQL */ `
           phoneNumber
           employer
           about
+          userJob
           createdAt
           updatedAt
           _version
@@ -315,6 +323,7 @@ export const onCreatePost = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -374,6 +383,7 @@ export const onUpdatePost = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -433,6 +443,7 @@ export const onDeletePost = /* GraphQL */ `
         phoneNumber
         employer
         about
+        userJob
         Posts {
           nextToken
           startedAt
@@ -485,6 +496,7 @@ export const onCreateUser = /* GraphQL */ `
       phoneNumber
       employer
       about
+      userJob
       Posts {
         items {
           id
@@ -540,6 +552,7 @@ export const onUpdateUser = /* GraphQL */ `
       phoneNumber
       employer
       about
+      userJob
       Posts {
         items {
           id
@@ -595,6 +608,7 @@ export const onDeleteUser = /* GraphQL */ `
       phoneNumber
       employer
       about
+      userJob
       Posts {
         items {
           id

@@ -33,6 +33,7 @@ type User @model @auth(rules: [{allow: public}]) {
     phoneNumber: String
     employer: Boolean!
     about: String
+    userJob: [String]
     Posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
     Comments: [Comment] @hasMany(indexName: "byUser", fields: ["id"])
 }
