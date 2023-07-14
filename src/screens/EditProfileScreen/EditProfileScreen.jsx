@@ -167,7 +167,7 @@ const EditProfileScreen = () => {
         </Text>
       </View>
       <View>
-        {user.employer ? (
+        {!user.employer ? (
           <View>
             <Text style={styles.label}>Что вы умеет делать?</Text>
             <View

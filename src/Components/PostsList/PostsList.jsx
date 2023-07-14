@@ -35,7 +35,9 @@ const PostsList = ({fetchValue}) => {
     },
   });
   //Get userList
-  const userList = usersData?.listUsers;
+  const userList = (usersData?.listUsers.items || []).filter(user => {
+    return !user.employer;
+  });
 
   if (loading || usersLoading) {
     return <ActivityIndicator />;
@@ -69,7 +71,7 @@ const PostsList = ({fetchValue}) => {
           </View>
         </>
       }
-      data={fetchValue === 'tabPost' ? posts : userList.items}
+      data={fetchValue === 'tabPost' ? posts : userList}
       renderItem={({item}) => {
         return fetchValue === 'tabPost' ? (
           <Card post={item} />

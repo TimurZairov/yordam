@@ -76,6 +76,5 @@ const UserCard = ({userList}) => {
     </View>
   );
 };
-1;
 
 export default UserCard;
