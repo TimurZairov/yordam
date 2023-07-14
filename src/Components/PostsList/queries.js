@@ -43,3 +43,40 @@ export const postsByDate = gql/* GraphQL */ `
     }
   }
 `;
+
+export const listUsers = gql/* GraphQL */ `
+  query ListUsers(
+    $filter: ModelUserFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;

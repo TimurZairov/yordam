@@ -33,7 +33,7 @@ const EditProfileScreen = () => {
       id: userId,
     },
   });
-
+  //Hook Form
   const {control, handleSubmit, setValue} = useForm();
 
   //USER
@@ -104,7 +104,6 @@ const EditProfileScreen = () => {
   const removeJobCategoryHandler = job => {
     const filtered = jobItems.filter(item => item !== job);
     setJobItems(filtered);
-    console.log(jobItems);
   };
 
   //add to jobCategory
@@ -116,7 +115,7 @@ const EditProfileScreen = () => {
     console.log(jobItems);
   };
 
-  //react hook form setValue
+  //react hook form setValue | get Image
   useEffect(() => {
     if (user) {
       setValue('name', user.name);
@@ -134,6 +133,8 @@ const EditProfileScreen = () => {
       getImageHandler();
     }
   }, [user, setValue]);
+
+  // userJob | jobItems
 
   useEffect(() => {
     if (user) {

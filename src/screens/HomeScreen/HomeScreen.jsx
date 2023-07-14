@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import styles from './style';
 import Header from '../../Components/Header/';
@@ -6,6 +6,7 @@ import TabButton from '../../Components/TabButton';
 import PostsList from '../../Components/PostsList';
 
 const HomeScreen = () => {
+  const [fetchValue, setFetchValue] = useState('tabPost');
   return (
     <SafeAreaView style={styles.saveArea}>
       <View style={styles.container}>
@@ -13,10 +14,10 @@ const HomeScreen = () => {
         <Header />
         {/*TabButton*/}
         <View style={styles.tabContainer}>
-          <TabButton title={'Объявления'} active={'post'} />
+          <TabButton setFetchValue={setFetchValue} />
         </View>
         {/*Posts*/}
-        <PostsList />
+        <PostsList fetchValue={fetchValue} />
       </View>
     </SafeAreaView>
   );

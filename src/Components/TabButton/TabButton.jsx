@@ -2,11 +2,12 @@ import React, {useState} from 'react';
 import {Pressable, Text} from 'react-native';
 import styles from './style';
 
-const TabButton = ({title}) => {
-  const [isActive, setIsActive] = useState('tabPost');
+const TabButton = ({setFetchValue}) => {
+  const [isActiveBtn, setIsActiveDtn] = useState('tabPost');
 
   const activeBtn = tab => {
-    setIsActive(tab);
+    setIsActiveDtn(tab);
+    setFetchValue(tab);
   };
 
   return (
@@ -14,11 +15,11 @@ const TabButton = ({title}) => {
       <Pressable style={styles.button} onPress={() => activeBtn('tabPost')}>
         <Text
           style={[
-            isActive === 'tabPost'
+            isActiveBtn === 'tabPost'
               ? styles.tabScreenText
               : styles.tabScreenTextActive,
           ]}>
-          {title}
+          Объявления
         </Text>
       </Pressable>
 
@@ -27,11 +28,11 @@ const TabButton = ({title}) => {
         onPress={() => activeBtn('tabSpecialist')}>
         <Text
           style={[
-            isActive === 'tabSpecialist'
+            isActiveBtn === 'tabSpecialist'
               ? styles.tabScreenText
               : styles.tabScreenTextActive,
           ]}>
-          {title}
+          Специалисты
         </Text>
       </Pressable>
     </>

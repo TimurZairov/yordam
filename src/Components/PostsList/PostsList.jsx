@@ -4,9 +4,10 @@ import Card from '../Card';
 import TabFilter from '../TabFilter';
 import styles from '../Button/styles';
 import {useQuery} from '@apollo/client';
-import {postsByDate} from './queries';
+import {listUsers, postsByDate} from './queries';
+import UserCard from '../UserCard/UserCard';
 
-const PostsList = () => {
+const PostsList = ({fetchValue}) => {
   const [isLoadMore, setIsLoadMore] = useState(false);
   const [category, setCategory] = useState('');
 
@@ -21,16 +22,32 @@ const PostsList = () => {
     },
   }); // second parameter of options = {limits of query}
 
-  if (loading) {
+  //query userList
+  const {
+    data: usersData,
+    loading: usersLoading,
+    error: usersError,
+    refetch: usersRefetch,
+    fetchMore: usersFetchMore,
+  } = useQuery(listUsers, {
+    variables: {
+      limit: 10,
+    },
+  });
+  //Get userList
+  const userList = usersData?.listUsers;
+
+  if (loading || usersLoading) {
     return <ActivityIndicator />;
   }
   //add component for Error message
-  if (error) {
+  if (error || usersError) {
     return <Text>{error.message}</Text>;
   }
+
   //POSTS from hook useQuery
   let posts = (data?.postsByDate?.items || []).filter(posts => !posts._deleted);
-
+  //token for next 10 post load
   const nextToken = data?.postsByDate?.nextToken;
 
   const loadMore = async () => {
@@ -52,13 +69,17 @@ const PostsList = () => {
           </View>
         </>
       }
-      data={posts}
+      data={fetchValue === 'tabPost' ? posts : userList.items}
       renderItem={({item}) => {
-        return <Card post={item} />;
+        return fetchValue === 'tabPost' ? (
+          <Card post={item} />
+        ) : (
+          <UserCard userList={item} />
+        );
       }}
       keyExtractor={item => item.id}
       showsVerticalScrollIndicator={false}
-      onRefresh={() => refetch()}
+      onRefresh={() => refetch() || usersRefetch()}
       refreshing={loading}
       onEndReached={loadMore}
     />
