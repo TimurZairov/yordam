@@ -23,7 +23,6 @@ import ErrorScreen from '../../ErrorScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EmployerProfileScreen = () => {
-  const [isEnabled, setIsEnabled] = useState(false);
   const [isEmployer, setIsEmployer] = useState(null);
   const navigation = useNavigation();
   const {userId} = useContext(AppContext);

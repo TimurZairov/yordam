@@ -24,6 +24,7 @@ import CleanIcon from './CleanIcon.svg';
 import DriverIcon from './DriverIcon.svg';
 import FoundationIcon from './FoundationIcon.svg';
 import TaskIcon from './TaskIcon.svg';
+import PhoneIcon from './PhoneIcon.svg';
 
 export {
   Logo,
@@ -52,4 +53,5 @@ export {
   DriverIcon,
   FoundationIcon,
   TaskIcon,
+  PhoneIcon,
 };
