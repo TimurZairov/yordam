@@ -20,7 +20,40 @@
         "yordamPostConfirmation": {
           "deploymentBucketName": "amplify-yordam-staging-123915-deployment",
           "s3Key": "amplify-builds/yordamPostConfirmation-3372737834446c487a33-build.zip"
-        }
+        },
+        "yordam": {}
+      },
+      "api": {
+        "yordam": {}
+      },
+      "storage": {
+        "storage": {}
+      }
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yordam-dev-164506-authRole",
+      "UnauthRoleArn": "arn:aws:iam::286416869436:role/amplify-yordam-dev-164506-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::286416869436:role/amplify-yordam-dev-164506-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-yordam-dev-164506-deployment",
+      "UnauthRoleName": "amplify-yordam-dev-164506-unauthRole",
+      "StackName": "amplify-yordam-dev-164506",
+      "StackId": "arn:aws:cloudformation:eu-central-1:286416869436:stack/amplify-yordam-dev-164506/661f1a00-2497-11ee-aa6a-062800af1b86",
+      "AmplifyAppId": "dnn1e69k5z557",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-yordam-dev-164506-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "yordam": {}
+      },
+      "function": {
+        "yordamPostConfirmation": {
+          "deploymentBucketName": "amplify-yordam-dev-164506-deployment",
+          "s3Key": "amplify-builds/yordamPostConfirmation-3372737834446c487a33-build.zip"
+        },
+        "yordam": {}
       },
       "api": {
         "yordam": {}
