@@ -7,7 +7,8 @@ import {colors} from '../../theme/colors';
 import {Storage} from 'aws-amplify';
 
 const UserInfo = ({userLocation, userName, postNum, userData}) => {
-  const [url, setUrl] = useState('');
+  console.log(userLocation);
+  const [url, setUrl] = useState(null);
   useEffect(() => {
     if (userData) {
       const getImageHandler = async () => {
@@ -25,14 +26,14 @@ const UserInfo = ({userLocation, userName, postNum, userData}) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        {url?.length ? (
+        {url === null ? (
+          <DefaultAvatar width={85} fill={colors.whiteColor} />
+        ) : (
           <Image
-            source={{uri: url || undefined}}
+            source={{uri: url}}
             style={styles.userImage}
             resizeMode="cover"
           />
-        ) : (
-          <DefaultAvatar width={85} fill={colors.whiteColor} />
         )}
       </View>
 
