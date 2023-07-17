@@ -64,9 +64,40 @@
     }
   },
   "prod": {
+<<<<<<< HEAD
+    "categories": {
+      "auth": {
+        "yordam": {},
+=======
+    "awscloudformation": {
+      "AuthRoleName": "amplify-yordam-prod-172905-authRole",
+      "UnauthRoleArn": "arn:aws:iam::286416869436:role/amplify-yordam-prod-172905-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::286416869436:role/amplify-yordam-prod-172905-authRole",
+      "Region": "eu-central-1",
+      "DeploymentBucketName": "amplify-yordam-prod-172905-deployment",
+      "UnauthRoleName": "amplify-yordam-prod-172905-unauthRole",
+      "StackName": "amplify-yordam-prod-172905",
+      "StackId": "arn:aws:cloudformation:eu-central-1:286416869436:stack/amplify-yordam-prod-172905/8a291e40-249d-11ee-847f-02fd91d1450a",
+      "AmplifyAppId": "dnn1e69k5z557",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-yordam-prod-172905-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
     "categories": {
       "auth": {
         "yordam": {}
+      },
+      "function": {
+        "yordamPostConfirmation": {
+          "deploymentBucketName": "amplify-yordam-prod-172905-deployment",
+          "s3Key": "amplify-builds/yordamPostConfirmation-3372737834446c487a33-build.zip"
+        },
+        "yordam": {}
+      },
+      "api": {
+        "yordam": {}
+      },
+      "storage": {
+        "storage": {},
+>>>>>>> main
       }
     }
   }
