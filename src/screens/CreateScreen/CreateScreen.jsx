@@ -58,7 +58,7 @@ const CreateScreen = () => {
         <Text style={styles.logoText}>Yordam</Text>
       </View>
       <Text style={styles.createTitle}>Что нужно сделать?</Text>
-      <TabFilter setCategory={setCategory} create />
+      <TabFilter setCategory={setCategory} />
       <Input
         placeholder={'Напишите коротко, тему работ*'}
         name={'title'}

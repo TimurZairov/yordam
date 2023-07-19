@@ -112,7 +112,6 @@ const EditProfileScreen = () => {
     if (!isGot) {
       setJobItems([item, ...jobItems]);
     }
-    console.log(jobItems);
   };
 
   //react hook form setValue | get Image
@@ -137,7 +136,7 @@ const EditProfileScreen = () => {
   // userJob | jobItems
 
   useEffect(() => {
-    if (user) {
+    if (user && user?.userJob) {
       setJobItems([...user?.userJob]);
     }
   }, [user]);

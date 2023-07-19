@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import AboutScreen from '../screens/AboutScreen';
@@ -21,24 +20,24 @@ const linking = {
 };
 
 const Navigation = () => {
-  const [check, setCheck] = useState(null);
-  //Check AsyncStorage
-
-  useEffect(() => {
-    const checkedHandler = async () => {
-      try {
-        const isChecked = await AsyncStorage.getItem('profile');
-        if (isChecked) {
-          setCheck(true);
-        } else {
-          setCheck(false);
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    checkedHandler();
-  }, []);
+  // const [check, setCheck] = useState(null);
+  // //Check AsyncStorage
+  //
+  // useEffect(() => {
+  //   const checkedHandler = async () => {
+  //     try {
+  //       const isChecked = await AsyncStorage.getItem('profile');
+  //       if (isChecked) {
+  //         setCheck(true);
+  //       } else {
+  //         setCheck(false);
+  //       }
+  //     } catch (e) {
+  //       console.log(e);
+  //     }
+  //   };
+  //   checkedHandler();
+  // }, []);
 
   return (
     <NavigationContainer linking={linking}>
