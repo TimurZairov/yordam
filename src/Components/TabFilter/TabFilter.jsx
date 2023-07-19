@@ -1,12 +1,11 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef} from 'react';
 import {FlatList, Pressable, Text} from 'react-native';
 import styles from './style';
 import {AppContext} from '../../context/Context';
 
-const filterButtonArray = ['Все', 'Ремонт', 'Уборка', 'Водитель', 'Няня'];
+const filterButtonArray = ['Ремонт', 'Уборка', 'Водитель', 'Няня'];
 
-const TabFilter = ({setCategory, create, edit}) => {
-  const [jobsArray, setJobsArray] = useState([]);
+const TabFilter = ({setCategory, edit}) => {
   const {activeTab, setActiveTab} = useContext(AppContext);
   const flatListRef = useRef();
 
@@ -27,7 +26,7 @@ const TabFilter = ({setCategory, create, edit}) => {
   };
 
   const getItemLayout = (data, index) => {
-    let width = 50;
+    const width = 100;
     return {
       length: width,
       offset: width * index,
@@ -44,7 +43,7 @@ const TabFilter = ({setCategory, create, edit}) => {
 
   return (
     <FlatList
-      data={create || edit ? filterButtonArray.slice(1) : filterButtonArray}
+      data={filterButtonArray}
       keyExtractor={(item, index) => item + index}
       horizontal={true}
       ref={flatListRef}

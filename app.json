@@ -1,4 +1,11 @@
 {
   "name": "yordam",
-  "displayName": "yordam"
+  "displayName": "yordam",
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "a9aa7094-bde1-46fa-98b4-2fac3ed38c0a"
+      }
+    }
+  }
 }

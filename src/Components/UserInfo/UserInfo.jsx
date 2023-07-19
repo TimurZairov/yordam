@@ -7,7 +7,6 @@ import {colors} from '../../theme/colors';
 import {Storage} from 'aws-amplify';
 
 const UserInfo = ({userLocation, userName, postNum, userData}) => {
-  console.log(userLocation);
   const [url, setUrl] = useState(null);
   useEffect(() => {
     if (userData) {
