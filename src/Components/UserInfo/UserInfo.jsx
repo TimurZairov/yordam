@@ -21,11 +21,10 @@ const UserInfo = ({userLocation, userName, postNum, userData}) => {
       getImageHandler();
     }
   }, []);
-
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        {url === null ? (
+        {userData?.image === null || userData?.image === '' ? (
           <DefaultAvatar width={85} fill={colors.whiteColor} />
         ) : (
           <Image

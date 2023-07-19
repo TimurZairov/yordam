@@ -8,12 +8,15 @@ export const AppContext = createContext({
   setCoordinates: Function,
   activeTab: 0,
   setActiveTab: Function,
+  switchRole: null,
+  setSwitchRole: Function,
 });
 
 const AppProvider = ({children}) => {
   const [user, setUser] = useState(undefined);
   const [coordinates, setCoordinates] = useState(undefined);
   const [activeTab, setActiveTab] = useState(0);
+  const [switchRole, setSwitchRole] = useState(undefined);
 
   const isSigned = async () => {
     try {
@@ -60,6 +63,8 @@ const AppProvider = ({children}) => {
         setCoordinates,
         activeTab,
         setActiveTab,
+        switchRole,
+        setSwitchRole,
       }}>
       {children}
     </AppContext.Provider>

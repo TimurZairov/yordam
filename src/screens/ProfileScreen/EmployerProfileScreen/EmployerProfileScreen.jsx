@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -23,9 +23,8 @@ import ErrorScreen from '../../ErrorScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EmployerProfileScreen = () => {
-  const [isEmployer, setIsEmployer] = useState(null);
   const navigation = useNavigation();
-  const {userId} = useContext(AppContext);
+  const {userId, setSwitchRole, switchRole} = useContext(AppContext);
   //Delete POST
   const [onDeletePost] = useMutation(deletePost);
 
@@ -45,11 +44,13 @@ const EmployerProfileScreen = () => {
   };
   // get Role
   const [onUpdateUserProfile] = useMutation(updateUser);
+
   // toggle switch
   const toggleSwitch = async (id, version) => {
+    setSwitchRole(!switchRole);
     try {
       const res = await onUpdateUserProfile({
-        variables: {input: {id, employer: !isEmployer, _version: version}},
+        variables: {input: {id, employer: !switchRole, _version: version}},
       });
       if (res) {
         const user = res.data.updateUser;
@@ -64,9 +65,9 @@ const EmployerProfileScreen = () => {
 
   useEffect(() => {
     if (userData) {
-      setIsEmployer(userData.employer);
+      setSwitchRole(userData.employer);
     }
-  }, [toggleSwitch]);
+  }, [switchRole, toggleSwitch]);
 
   // USER QUERY
   const {data, loading, error} = useQuery(getUser, {
@@ -76,12 +77,12 @@ const EmployerProfileScreen = () => {
     pollInterval: 500,
   });
   if (error) {
-    return <ErrorScreen error={error.message}/>;
+    return <ErrorScreen error={error.message} />;
   }
 
   if (loading) {
     return (
-        <ActivityIndicator style={styles.activity} color={colors.purpleColor}/>
+      <ActivityIndicator style={styles.activity} color={colors.purpleColor} />
     );
   }
 
@@ -98,8 +99,7 @@ const EmployerProfileScreen = () => {
     Alert.alert('Удалить?', '', [
       {
         text: 'Отмена',
-        onPress: () => {
-        },
+        onPress: () => {},
         style: 'cancel',
       },
       {
@@ -113,64 +113,66 @@ const EmployerProfileScreen = () => {
   const postedPost = userData?.Posts.items.filter(post => !post._deleted);
 
   return (
-      <View style={styles.container}>
-        <Header profile onPress={editProfileHandler}/>
-        <FlatList
-            data={(userData?.Posts.items || []).filter(post => !post._deleted)}
-            ListHeaderComponent={() => {
-              return (
-                  <>
-                    <UserInfo
-                        userName={userData.name}
-                        userLocation={userData.location}
-                        postNum={postedPost.length || 0}
-                        userData={userData}
-                    />
-                    <UserData name={'Почта'} info={userData.email}/>
-                    <UserData name={'Телефон'} info={userData.phoneNumber}/>
-                    <View style={styles.userData}>
-                      <Text style={styles.userText}>Я работодатель</Text>
-                      <Switch
-                          trackColor={{false: '#767577', true: '#81b0ff'}}
-                          thumbColor={colors.purpleColor}
-                          value={isEmployer}
-                          onChange={() => toggleSwitch(userData.id, userData._version)}
-                      />
-                    </View>
+    <View style={styles.container}>
+      <Header profile onPress={editProfileHandler} />
+      <FlatList
+        data={(userData?.Posts.items || []).filter(post => !post._deleted)}
+        ListHeaderComponent={() => {
+          return (
+            <>
+              <UserInfo
+                userName={userData.name}
+                userLocation={userData.location}
+                postNum={postedPost.length || 0}
+                userData={userData}
+              />
+              <UserData name={'Почта'} info={userData.email} />
+              <UserData name={'Телефон'} info={userData.phoneNumber} />
+              <View style={styles.userData}>
+                <Text style={styles.userText}>Я работодатель</Text>
+                <Switch
+                  trackColor={{false: '#767577', true: '#81b0ff'}}
+                  thumbColor={colors.purpleColor}
+                  value={switchRole}
+                  onValueChange={() =>
+                    toggleSwitch(userData.id, userData._version)
+                  }
+                />
+              </View>
 
-                    <Text style={styles.comments}>
-                      {userData?.Posts.items.length
-                          ? 'Ваши посты'
-                          : 'У Вас нет постов'}
-                    </Text>
-                  </>
-              );
-            }}
-            renderItem={({item}) => {
-              return (
-                  <View style={styles.commentContainer}>
-                    <View style={styles.textContainer}>
-                      <Text style={styles.commentName}>{item.title}</Text>
-                      <Text style={styles.commentName}>{item.price}</Text>
-                      <Text style={styles.commentText}>{item.description}</Text>
-                    </View>
-                    <Pressable
-                        style={styles.postBtn}
-                        onPress={() => deletePostHandler(item.id, item._version)}>
-                      <Text style={styles.btnText}>Удалить</Text>
-                    </Pressable>
-                    <Pressable
-                        style={styles.postBtn}
-                        onPress={() => editPostHandler(item.id)}>
-                      <Text>Реадактировать</Text>
-                    </Pressable>
-                  </View>
-              );
-            }}
-            keyExtractor={item => item.id}
-            showsVerticalScrollIndicator={false}
-        />
-      </View>
+              <Text style={styles.comments}>
+                {userData?.Posts.items.length
+                  ? 'Ваши посты'
+                  : 'У Вас нет постов'}
+              </Text>
+            </>
+          );
+        }}
+        renderItem={({item}) => {
+          return (
+            <View style={styles.commentContainer}>
+              <View style={styles.textContainer}>
+                <Text style={styles.commentName}>{item.title}</Text>
+                <Text style={styles.commentName}>{item.price}</Text>
+                <Text style={styles.commentText}>{item.description}</Text>
+              </View>
+              <Pressable
+                style={styles.postBtn}
+                onPress={() => deletePostHandler(item.id, item._version)}>
+                <Text style={styles.btnText}>Удалить</Text>
+              </Pressable>
+              <Pressable
+                style={styles.postBtn}
+                onPress={() => editPostHandler(item.id)}>
+                <Text>Реадактировать</Text>
+              </Pressable>
+            </View>
+          );
+        }}
+        keyExtractor={item => item.id}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 };
 
