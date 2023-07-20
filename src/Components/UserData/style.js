@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   userData: {
     borderBottomWidth: 1,
-    borderBottomColor: colors.darkGrayColor,
+    borderBottomColor: mainColors.grayColor,
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 27,

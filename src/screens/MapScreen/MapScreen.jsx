@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import {Image, PermissionsAndroid, View} from 'react-native';
+import {PermissionsAndroid, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {MapMarker, MyLocationIcon} from '../../assets/icons';
-import {colors, mapStyle} from '../../theme/colors';
+import {mainColors, mapStyle} from '../../theme/colors';
 import styles from './style';
 import posts from '../../data/posts.json';
 import Geolocation from 'react-native-geolocation-service';
@@ -58,13 +58,7 @@ const MapScreen = () => {
                 anchor={{x: 0.5, y: 0.5}}
                 key={index}>
                 <View style={styles.markerContainer}>
-                  <Image
-                    source={{
-                      uri: job.user.image,
-                    }}
-                    style={styles.userImage}
-                  />
-                  <MapMarker width={50} fill={colors.purpleColor} />
+                  <MapMarker width={50} fill={mainColors.mainColor} />
                 </View>
               </Marker>
             );
@@ -81,12 +75,11 @@ const MapScreen = () => {
         {/*  </View>*/}
         {/*</Marker>*/}
       </MapView>
-
       <View style={styles.myLocation}>
         <MyLocationIcon
           width={45}
           onPress={getPermissions}
-          fill={colors.blackColor}
+          fill={mainColors.mainColor}
         />
       </View>
     </View>

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../../theme/colors';
+import {colors, mainColors} from '../../../theme/colors';
 import fonts from '../../../theme/fonts';
 
 export default StyleSheet.create({
@@ -8,10 +8,11 @@ export default StyleSheet.create({
   },
   saveContainer: {
     flex: 1,
+    backgroundColor: mainColors.whiteColor,
   },
   container: {
     paddingHorizontal: 15,
-    backgroundColor: colors.backgroundColor,
+    backgroundColor: mainColors.whiteColor,
     flex: 1,
   },
   logoContainer: {
@@ -39,7 +40,7 @@ export default StyleSheet.create({
     marginTop: 15,
   },
   registry: {
-    color: colors.purpleColor,
+    color: mainColors.mainColor,
     fontSize: fonts.fontSize.md,
     fontFamily: fonts.fontFamily.bold,
     marginTop: 15,

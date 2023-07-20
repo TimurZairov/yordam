@@ -12,10 +12,13 @@ const Input = ({
   rules,
   secureTextEntry,
 }) => {
-  const [colorBg, setColorBg] = useState(colors.blackColor);
+  const [focus, setFocus] = useState(false);
+  const onFocusHandler = () => {
+    setFocus(true);
+  };
 
-  const onFocus = () => {
-    setColorBg(colors.purpleColor);
+  const onBlurHandler = () => {
+    setFocus(false);
   };
 
   return (
@@ -27,11 +30,11 @@ const Input = ({
         return (
           <>
             <TextInput
-              style={{...styles.input, shadowColor: colorBg}}
+              style={[focus ? styles.inputActive : styles.input]}
               placeholder={placeholder}
               placeholderTextColor={colors.lightGrayColor}
-              onFocus={onFocus}
-              onBlur={onBlur}
+              onBlur={onBlurHandler}
+              onFocus={onFocusHandler}
               multiline={multiline}
               onChangeText={onChange}
               value={value}

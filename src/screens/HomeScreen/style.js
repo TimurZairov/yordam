@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {mainColors} from '../../theme/colors';
 
 export default StyleSheet.create({
   saveArea: {
@@ -7,7 +7,7 @@ export default StyleSheet.create({
   },
   container: {
     paddingHorizontal: 15,
-    backgroundColor: colors.backgroundColor,
+    backgroundColor: mainColors.whiteColor,
     flex: 1,
   },
   tabContainer: {

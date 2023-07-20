@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: mainColors.whiteColor,
   },
   headerContainer: {
     paddingHorizontal: 15,
@@ -20,7 +21,7 @@ export default StyleSheet.create({
   },
   jobInfo: {
     padding: 11,
-    backgroundColor: colors.whiteColor,
+    backgroundColor: mainColors.whiteColor,
     borderRadius: 15,
   },
   jobUserName: {

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {colors} from '../theme/colors';
+import {mainColors} from '../theme/colors';
 import HomeStack from './HomeStack';
 import {
   AddIcon,
@@ -30,12 +30,13 @@ const TabNavigation = () => {
     <Tab.Navigator
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: colors.purpleColor,
-        tabBarInactiveTintColor: colors.blackColor,
+        tabBarActiveTintColor: mainColors.mainColor,
+        tabBarInactiveTintColor: mainColors.grayColor,
         tabBarStyle: {
           height: 60,
           borderTopLeftRadius: 15,
           borderTopRightRadius: 15,
+          backgroundColor: mainColors.whiteColor,
         },
         tabBarShowLabel: false,
         tabBarHideOnKeyboard: true,
@@ -50,7 +51,7 @@ const TabNavigation = () => {
             return (
               <HomeIcon
                 height={30}
-                fill={focused ? color : colors.blackColor}
+                fill={focused ? color : mainColors.grayColor}
               />
             );
           },

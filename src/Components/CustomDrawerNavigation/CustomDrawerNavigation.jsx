@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {Image, Pressable, Text, View} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import styles from './style';
 import {
   AboutIcon,
@@ -58,7 +58,7 @@ const CustomDrawerNavigation = props => {
       <View style={styles.header}>
         <View style={styles.drawerHeader}>
           <Pressable style={styles.drawerBack} onPress={closeDrawer}>
-            <ArrowLeftIcon width={25} fill={colors.whiteColor} />
+            <ArrowLeftIcon width={25} fill={mainColors.mainColor} />
           </Pressable>
         </View>
         {user ? (
@@ -87,7 +87,7 @@ const CustomDrawerNavigation = props => {
         ) : null}
       </View>
       <View style={styles.listContainer}>
-        <AboutIcon width={15} height={15} fill={colors.blackColor} />
+        <AboutIcon width={15} height={15} fill={mainColors.mainColor} />
         <Text
           style={styles.about}
           onPress={navigateAboutScreenHandler}

@@ -1,14 +1,14 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   drawerContainer: {
     flex: 1,
-    backgroundColor: colors.backgroundColor,
+    backgroundColor: mainColors.lightGrayColor,
   },
   header: {
-    backgroundColor: colors.drawerColor,
+    backgroundColor: mainColors.whiteColor,
   },
   drawerHeader: {
     paddingVertical: 17,
@@ -19,7 +19,7 @@ export default StyleSheet.create({
   drawerBack: {
     width: 37,
     aspectRatio: 1,
-    backgroundColor: colors.blackColor,
+    backgroundColor: mainColors.lightGrayColor,
     borderRadius: 18,
     alignItems: 'center',
     justifyContent: 'center',
@@ -29,7 +29,6 @@ export default StyleSheet.create({
     aspectRatio: 1,
     borderRadius: 50,
     backgroundColor: colors.whiteColor,
-    elevation: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },

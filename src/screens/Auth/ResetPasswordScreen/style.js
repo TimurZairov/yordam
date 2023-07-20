@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../../theme/colors';
+import {colors, mainColors} from '../../../theme/colors';
 import fonts from '../../../theme/fonts';
 
 export default StyleSheet.create({
@@ -15,7 +15,7 @@ export default StyleSheet.create({
     color: colors.blackColor,
   },
   auth: {
-    color: colors.darkGrayColor,
+    color: mainColors.mainColor,
     textAlign: 'center',
     marginTop: 20,
   },

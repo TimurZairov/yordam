@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   container: {
     paddingHorizontal: 15,
-    backgroundColor: colors.backgroundColor,
+    backgroundColor: mainColors.whiteColor,
     flex: 1,
   },
   messageContainer: {
@@ -14,16 +14,16 @@ export default StyleSheet.create({
     paddingBottom: 15,
   },
   message: {
-    padding: 8,
-    backgroundColor: colors.purpleColor,
+    padding: 15,
+    backgroundColor: mainColors.mainColor,
     borderRadius: 15,
     alignSelf: 'flex-end',
     marginVertical: 10,
     color: colors.whiteColor,
   },
   messageReceived: {
-    padding: 8,
-    backgroundColor: colors.lightGrayColor,
+    padding: 15,
+    backgroundColor: mainColors.orangeColor,
     borderRadius: 15,
     alignSelf: 'flex-start',
   },

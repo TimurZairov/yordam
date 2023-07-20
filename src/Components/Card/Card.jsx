@@ -10,7 +10,7 @@ import {
   RepairIcon,
   TaskIcon,
 } from '../../assets/icons';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
 import {useQuery} from '@apollo/client';
 import {commentsByPost} from './queries';
@@ -81,7 +81,7 @@ const Card = ({post}) => {
           </Text>
         )}
 
-        <ArrowRightIcon width={15} fill={colors.purpleColor} />
+        <ArrowRightIcon width={15} fill={mainColors.mainColor} />
       </View>
     </Pressable>
   );

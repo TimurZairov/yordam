@@ -1,12 +1,12 @@
 import React, {useContext} from 'react';
 import {TouchableOpacity, View} from 'react-native';
 import styles from './style';
-import {DrawerIcon, EditIcon, Notifications} from '../../assets/icons';
-import {colors} from '../../theme/colors';
+import {DrawerIcon, EditIcon} from '../../assets/icons';
+import {mainColors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
 import {AppContext} from '../../context/Context';
 
-const Header = ({registry, profile, onPress}) => {
+const Header = ({profile, onPress}) => {
   const navigation = useNavigation();
 
   const {user} = useContext(AppContext);
@@ -21,17 +21,13 @@ const Header = ({registry, profile, onPress}) => {
         <TouchableOpacity onPress={drawerHandler}>
           <DrawerIcon
             height={19}
-            fill={colors.blackColor}
+            fill={mainColors.mainColor}
             style={styles.drawerIcon}
           />
         </TouchableOpacity>
       </View>
-      {user && !profile && (
-        <Notifications height={19} fill={colors.blackColor} />
-      )}
-
       {profile ? (
-        <EditIcon width={30} fill={colors.blackColor} onPress={onPress} />
+        <EditIcon width={30} fill={mainColors.mainColor} onPress={onPress} />
       ) : null}
     </View>
   );

@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
 import fonts from '../../theme/fonts';
-import {colors} from '../../theme/colors';
 
 export default StyleSheet.create({
   headerContainer: {
-    marginVertical: 25,
+    marginTop: 25,
+    marginBottom: 16,
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
@@ -16,14 +16,7 @@ export default StyleSheet.create({
   drawerIcon: {
     marginRight: 28,
   },
-  greetingText: {
-    fontSize: fonts.fontSize.lg,
-    lineHeight: 21,
-    color: colors.blackColor,
-    fontFamily: fonts.fontFamily.light,
-  },
   userName: {
-    // fontWeight: fonts.fontWeight.full,
     fontFamily: fonts.fontFamily.bold,
   },
 });

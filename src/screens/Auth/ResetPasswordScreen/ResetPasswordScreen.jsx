@@ -27,6 +27,10 @@ const ResetPasswordScreen = () => {
     }
   };
 
+  const goBackHandler = () => {
+    navigation.goBack();
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.reset}>Восстановить пароль</Text>
@@ -40,7 +44,9 @@ const ResetPasswordScreen = () => {
         onPress={handleSubmit(resetPasswordHandler)}
         title={'Восстановить'}
       />
-      <Text style={[styles.reset, styles.auth]}>Авторизоваться</Text>
+      <Text style={[styles.reset, styles.auth]} onPress={goBackHandler}>
+        Авторизоваться
+      </Text>
     </View>
   );
 };

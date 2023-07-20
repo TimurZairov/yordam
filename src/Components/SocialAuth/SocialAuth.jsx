@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, View} from 'react-native';
 import {FacebookIcon, GoogleIcon} from '../../assets/icons';
-import {colors} from '../../theme/colors';
+import {mainColors} from '../../theme/colors';
 import styles from './style';
 import {Auth} from 'aws-amplify';
 import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth/src/types/Auth';
@@ -31,10 +31,10 @@ const SocialAuth = () => {
   return (
     <View style={styles.socialContainer}>
       <Pressable style={styles.google} onPress={facebookSingUpHandler}>
-        <GoogleIcon width={22} fill={colors.purpleColor} />
+        <GoogleIcon width={22} fill={mainColors.whiteColor} />
       </Pressable>
       <Pressable style={styles.google} onPress={goggleSingUpHandler}>
-        <FacebookIcon width={22} fill={colors.purpleColor} />
+        <FacebookIcon width={22} fill={mainColors.whiteColor} />
       </Pressable>
     </View>
   );

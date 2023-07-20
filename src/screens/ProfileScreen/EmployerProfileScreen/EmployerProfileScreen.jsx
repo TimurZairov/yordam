@@ -18,7 +18,7 @@ import {useNavigation} from '@react-navigation/native';
 import Header from '../../../Components/Header';
 import styles from './style';
 import UserInfo from '../../../Components/UserInfo';
-import {colors} from '../../../theme/colors';
+import {colors, mainColors} from '../../../theme/colors';
 import ErrorScreen from '../../ErrorScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -131,8 +131,8 @@ const EmployerProfileScreen = () => {
               <View style={styles.userData}>
                 <Text style={styles.userText}>Я работодатель</Text>
                 <Switch
-                  trackColor={{false: '#767577', true: '#81b0ff'}}
-                  thumbColor={colors.purpleColor}
+                  trackColor={{false: mainColors.grayColor, true: '#81b0ff'}}
+                  thumbColor={mainColors.mainColor}
                   value={switchRole}
                   onValueChange={() =>
                     toggleSwitch(userData.id, userData._version)

@@ -12,7 +12,11 @@ const TabButton = ({setFetchValue}) => {
 
   return (
     <>
-      <Pressable style={styles.button} onPress={() => activeBtn('tabPost')}>
+      <Pressable
+        style={[
+          isActiveBtn === 'tabPost' ? styles.buttonActive : styles.button,
+        ]}
+        onPress={() => activeBtn('tabPost')}>
         <Text
           style={[
             isActiveBtn === 'tabPost'
@@ -24,7 +28,9 @@ const TabButton = ({setFetchValue}) => {
       </Pressable>
 
       <Pressable
-        style={styles.button}
+        style={[
+          isActiveBtn === 'tabSpecialist' ? styles.buttonActive : styles.button,
+        ]}
         onPress={() => activeBtn('tabSpecialist')}>
         <Text
           style={[

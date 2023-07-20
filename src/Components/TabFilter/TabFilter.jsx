@@ -3,9 +3,7 @@ import {FlatList, Pressable, Text} from 'react-native';
 import styles from './style';
 import {AppContext} from '../../context/Context';
 
-const filterButtonArray = ['Ремонт', 'Уборка', 'Водитель', 'Няня'];
-
-const TabFilter = ({setCategory, edit}) => {
+const TabFilter = ({setCategory, edit, filterButtonArray}) => {
   const {activeTab, setActiveTab} = useContext(AppContext);
   const flatListRef = useRef();
 
@@ -26,7 +24,7 @@ const TabFilter = ({setCategory, edit}) => {
   };
 
   const getItemLayout = (data, index) => {
-    const width = 100;
+    const width = 60;
     return {
       length: width,
       offset: width * index,
@@ -51,7 +49,11 @@ const TabFilter = ({setCategory, edit}) => {
       renderItem={({item, index}) => {
         return (
           <Pressable
-            style={styles.filterButton}
+            style={
+              activeTab === index
+                ? styles.filterButtonActive
+                : styles.filterButton
+            }
             onPress={() => activeHandler(item)}>
             <Text style={activeTab === index ? styles.textActive : styles.text}>
               {item}

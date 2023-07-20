@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   button: {
-    paddingVertical: 15,
-    backgroundColor: colors.purpleColor,
+    paddingVertical: 16,
+    backgroundColor: mainColors.mainColor,
     borderRadius: 10,
     alignItems: 'center',
     marginTop: 15,
@@ -16,12 +16,12 @@ export default StyleSheet.create({
     fontSize: fonts.fontSize.lg,
   },
   flatHeader: {
-    paddingVertical: 5,
+    paddingVertical: 10,
   },
   titleHeader: {
     fontSize: fonts.fontSize.md,
     color: colors.blackColor,
     fontFamily: fonts.fontFamily.light,
-    marginTop: 15,
+    marginTop: 12,
   },
 });

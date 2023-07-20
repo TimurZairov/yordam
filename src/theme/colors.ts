@@ -11,6 +11,19 @@ export const colors = {
   drawerColor: '#EDEDED',
 };
 
+export const mainColors = {
+  whiteColor: '#FFFFFF',
+  whiteFilterColor: '#FBFAFB',
+  blackColor: '#0F0F0F',
+  lightGrayColor: '#FBFBFB',
+  grayColor: '#DBDBDB',
+  darkGrayColor: '#C8C8C8',
+  mainColor: '#28D225',
+  transparentColor: '#E7F6EA',
+  blueColor: '#3B26E1',
+  orangeColor: '#FFC107',
+};
+
 export const mapStyle = [
   {
     elementType: 'geometry',

@@ -27,7 +27,7 @@ const ForgotPasswordScreen = () => {
   };
 
   const loginScreenHandler = () => {
-    navigation.navigate('Login');
+    navigation.goBack();
   };
 
   return (
@@ -56,9 +56,7 @@ const ForgotPasswordScreen = () => {
         title={loading ? 'Загрузка...' : 'Сохранить'}
         onPress={handleSubmit(forgotPassHandler)}
       />
-      <Text
-        style={[styles.loginScreen, styles.loginScreen]}
-        onPress={loginScreenHandler}>
+      <Text style={styles.loginScreen} onPress={loginScreenHandler}>
         Авторизрваться
       </Text>
     </View>

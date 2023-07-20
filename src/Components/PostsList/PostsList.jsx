@@ -7,6 +7,8 @@ import {useQuery} from '@apollo/client';
 import {listUsers, postsByDate} from './queries';
 import UserCard from '../UserCard/UserCard';
 
+const filterButtonArray = ['Все', 'Ремонт', 'Уборка', 'Водитель', 'Няня'];
+
 const PostsList = ({fetchValue}) => {
   const [isLoadMore, setIsLoadMore] = useState(false);
   const [category, setCategory] = useState('');
@@ -67,7 +69,10 @@ const PostsList = ({fetchValue}) => {
         <>
           <Text style={styles.titleHeader}>Популярные</Text>
           <View style={styles.flatHeader}>
-            <TabFilter setCategory={setCategory} />
+            <TabFilter
+              setCategory={setCategory}
+              filterButtonArray={filterButtonArray}
+            />
           </View>
         </>
       }

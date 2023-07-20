@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   cardContainer: {
     width: '100%',
-    backgroundColor: colors.whiteColor,
+    backgroundColor: mainColors.whiteColor,
     padding: 11,
     borderRadius: 15,
     elevation: 2,
@@ -23,8 +23,8 @@ export default StyleSheet.create({
     marginLeft: 15,
   },
   icon: {
-    backgroundColor: colors.lightGrayColor,
     borderRadius: 10,
+    backgroundColor: mainColors.transparentColor,
   },
   userInfoText: {
     fontFamily: fonts.fontFamily.bold,
@@ -41,7 +41,7 @@ export default StyleSheet.create({
   price: {
     paddingVertical: 3,
     paddingHorizontal: 5,
-    backgroundColor: colors.blackColor,
+    backgroundColor: mainColors.orangeColor,
     borderRadius: 5,
     marginBottom: 3,
   },
