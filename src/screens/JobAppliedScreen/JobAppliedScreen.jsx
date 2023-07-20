@@ -15,10 +15,11 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import {AppContext} from '../../context/Context';
 import {useMutation, useQuery, useSubscription} from '@apollo/client';
 import {commentsByPost, createComment, onCommentByPostId} from './queries';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import ErrorScreen from '../ErrorScreen';
 import Button from '../../Components/Button';
 import dayjs from 'dayjs';
+import {DefaultAvatar, SendIcon} from '../../assets/icons';
 
 const JobAppliedScreen = () => {
   const [isApplied, setIsApplied] = useState(false);
@@ -36,7 +37,9 @@ const JobAppliedScreen = () => {
     return (
       <View style={styles.commentContainer}>
         <View>
-          <View style={styles.avatar}></View>
+          <View style={styles.avatar}>
+            <DefaultAvatar width={35} fill={mainColors.gray} />
+          </View>
         </View>
         <View>
           <Text style={styles.name}>{item?.User.name}</Text>
@@ -124,7 +127,7 @@ const JobAppliedScreen = () => {
   return (
     <>
       <Pressable style={styles.container} onPress={Keyboard.dismiss}>
-        <Header />
+        <Header job />
         <FlatList
           data={[...newComments, ...comments]}
           renderItem={renderItem}
@@ -146,9 +149,9 @@ const JobAppliedScreen = () => {
             value={comment}
             onChangeText={setComment}
           />
-          <Text style={styles.submit} onPress={createCommentHandler}>
-            Оправить
-          </Text>
+          <Pressable style={styles.submit} onPress={createCommentHandler}>
+            <SendIcon fill={mainColors.mainColor} width={30} />
+          </Pressable>
         </View>
       )}
     </>

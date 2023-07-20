@@ -22,6 +22,7 @@ export const mainColors = {
   transparentColor: '#E7F6EA',
   blueColor: '#3B26E1',
   orangeColor: '#FFC107',
+  gray: '#F4F4F4',
 };
 
 export const mapStyle = [

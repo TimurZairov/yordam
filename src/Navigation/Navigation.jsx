@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import AboutScreen from '../screens/AboutScreen';
@@ -20,9 +20,9 @@ const linking = {
 };
 
 const Navigation = () => {
-  // const [check, setCheck] = useState(null);
-  // //Check AsyncStorage
-  //
+  const [welcome, setWelcome] = useState(true);
+  //Check AsyncStorage
+
   // useEffect(() => {
   //   const checkedHandler = async () => {
   //     try {
@@ -45,9 +45,9 @@ const Navigation = () => {
         screenOptions={{
           headerShown: false,
         }}
-        initialRouteName={'Tab'}
+        initialRouteName={'Welcome'}
         drawerContent={props => <CustomDrawerNavigation {...props} />}>
-        <Drawer.Screen name="Welcome" component={WelcomeScreen} />
+        {!welcome && <Drawer.Screen name="Welcome" component={WelcomeScreen} />}
         <Drawer.Screen name="Tab" component={TabNavigation} />
         <Drawer.Screen name="About" component={AboutScreen} />
         <Drawer.Screen name="Applied" component={JobAppliedScreen} />

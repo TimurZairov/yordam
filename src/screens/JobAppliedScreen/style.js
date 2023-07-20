@@ -1,12 +1,12 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
     paddingHorizontal: 15,
-    backgroundColor: colors.backgroundColor,
+    backgroundColor: mainColors.whiteColor,
     paddingBottom: 15,
   },
   inputContainer: {
@@ -18,9 +18,11 @@ export default StyleSheet.create({
     backgroundColor: colors.whiteColor,
     position: 'absolute',
     bottom: 0,
+    borderTopWidth: 1,
+    borderColor: mainColors.grayColor,
   },
   input: {
-    width: '75%',
+    width: '80%',
   },
   submit: {
     color: colors.purpleColor,
@@ -32,7 +34,7 @@ export default StyleSheet.create({
   },
   commentContainer: {
     padding: 10,
-    backgroundColor: colors.whiteColor,
+    backgroundColor: mainColors.gray,
     marginVertical: 5,
     flexDirection: 'row',
     alignItems: 'center',
@@ -41,9 +43,11 @@ export default StyleSheet.create({
   avatar: {
     width: 40,
     aspectRatio: 1,
-    backgroundColor: colors.lightGrayColor,
+    backgroundColor: mainColors.whiteColor,
     borderRadius: 20,
     marginRight: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   emptyList: {
     textAlign: 'center',

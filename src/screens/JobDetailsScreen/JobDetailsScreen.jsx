@@ -32,7 +32,7 @@ const JobDetailsScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Header />
+        <Header jobDetails />
       </View>
       <MapView
         provider={PROVIDER_GOOGLE}

@@ -1,18 +1,22 @@
 import React, {useContext} from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {Pressable, TouchableOpacity, View} from 'react-native';
 import styles from './style';
-import {DrawerIcon, EditIcon} from '../../assets/icons';
+import {ArrowLeftIcon, DrawerIcon, EditIcon} from '../../assets/icons';
 import {mainColors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
 import {AppContext} from '../../context/Context';
 
-const Header = ({profile, onPress}) => {
+const Header = ({profile, onPress, job, jobDetails}) => {
   const navigation = useNavigation();
 
   const {user} = useContext(AppContext);
 
   const drawerHandler = () => {
     navigation.openDrawer();
+  };
+
+  const goToMainScreen = () => {
+    navigation.goBack();
   };
 
   return (
@@ -28,6 +32,12 @@ const Header = ({profile, onPress}) => {
       </View>
       {profile ? (
         <EditIcon width={30} fill={mainColors.mainColor} onPress={onPress} />
+      ) : null}
+
+      {job || jobDetails ? (
+        <Pressable style={styles.drawerBack} onPress={goToMainScreen}>
+          <ArrowLeftIcon width={25} fill={mainColors.mainColor} />
+        </Pressable>
       ) : null}
     </View>
   );
