@@ -9,7 +9,7 @@ export default StyleSheet.create({
   imageContainer: {
     width: 100,
     height: 100,
-    backgroundColor: mainColors.lightGrayColor,
+    backgroundColor: mainColors.gray,
     borderRadius: 50,
     alignItems: 'center',
     justifyContent: 'center',

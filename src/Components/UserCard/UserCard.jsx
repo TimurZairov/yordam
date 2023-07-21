@@ -1,15 +1,22 @@
 import React, {useEffect, useState} from 'react';
-import {Image, Linking, Pressable, Text, View} from 'react-native';
+import {Linking, Pressable, Text, View} from 'react-native';
 import styles from './style';
 import {Storage} from 'aws-amplify';
-import {DefaultAvatar, PhoneIcon} from '../../assets/icons';
-import {colors} from '../../theme/colors';
+import {PhoneIcon} from '../../assets/icons';
+import {mainColors} from '../../theme/colors';
 
 const UserCard = ({userList}) => {
   const [image, setImage] = useState(null);
 
   //call To Specialist
   const dialPressHandler = phoneNumber => {
+    if (
+      phoneNumber === '' ||
+      phoneNumber === null ||
+      phoneNumber === undefined
+    ) {
+      return;
+    }
     const url = `tel:${phoneNumber}`;
     Linking.openURL(url)
       .then(supported => {
@@ -35,23 +42,18 @@ const UserCard = ({userList}) => {
   return (
     <View style={styles.container}>
       <View style={styles.userInfo}>
-        {image !== null ? (
-          <Image source={{uri: image}} style={styles.userImage} />
-        ) : (
-          <DefaultAvatar
-            fill={colors.grayColor}
-            width={50}
-            style={styles.defaultAvatar}
-          />
-        )}
         <View style={styles.contact}>
           <View>
-            <Text style={styles.name}>{userList.name}</Text>
-            <Text style={styles.phone}>{userList.phoneNumber}</Text>
-            <Text style={styles.phone}>{userList.email}</Text>
+            <Text>
+              Имя: {'  '} <Text style={styles.name}>{userList.name}</Text>
+            </Text>
+            <Text>
+              Номер телефона: {'  '}
+              <Text style={styles.name}>{userList.phoneNumber}</Text>
+            </Text>
           </View>
           <Pressable onPress={() => dialPressHandler(userList?.phoneNumber)}>
-            <PhoneIcon width={20} />
+            <PhoneIcon width={20} fill={mainColors.mainColor} />
           </Pressable>
         </View>
       </View>

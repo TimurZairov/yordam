@@ -19,9 +19,10 @@ export default StyleSheet.create({
     paddingVertical: 10,
   },
   titleHeader: {
-    fontSize: fonts.fontSize.md,
+    fontSize: fonts.fontSize.lg,
     color: colors.blackColor,
-    fontFamily: fonts.fontFamily.light,
+    fontFamily: fonts.fontFamily.bold,
     marginTop: 12,
+    marginBottom: 8,
   },
 });

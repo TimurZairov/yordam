@@ -35,4 +35,10 @@ export default StyleSheet.create({
     backgroundColor: colors.purpleColor,
     borderRadius: 10,
   },
+
+  jobInfo: {
+    position: 'absolute',
+    bottom: -15,
+    padding: 10,
+  },
 });

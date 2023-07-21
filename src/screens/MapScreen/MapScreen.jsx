@@ -1,15 +1,20 @@
 import React, {useState} from 'react';
-import {PermissionsAndroid, View} from 'react-native';
+import {ActivityIndicator, PermissionsAndroid, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {MapMarker, MyLocationIcon} from '../../assets/icons';
 import {mainColors, mapStyle} from '../../theme/colors';
 import styles from './style';
-import posts from '../../data/posts.json';
 import Geolocation from 'react-native-geolocation-service';
+import {useQuery} from '@apollo/client';
+import {postsByDate} from './queries';
+import ErrorScreen from '../ErrorScreen';
+import Card from '../../Components/Card';
 
 const MapScreen = () => {
-  const [myLocation, setMyLocation] = useState(null);
+  const [showInfo, setShowInfo] = useState(false);
+  const [post, setPost] = useState(null);
 
+  //location
   const getPermissions = async () => {
     try {
       const granted = await PermissionsAndroid.request(
@@ -34,6 +39,36 @@ const MapScreen = () => {
     }
   };
 
+  //showJobInfo
+
+  const showJobInfoHandler = job => {
+    setShowInfo(true);
+    setPost(job);
+  };
+
+  const closeJobInfoHandler = job => {
+    setShowInfo(false);
+    setPost(null);
+  };
+
+  //jobLocation
+  const {data, error, loading} = useQuery(postsByDate, {
+    variables: {
+      type: 'POST',
+      limit: 10,
+    },
+  });
+
+  const location = data?.postsByDate?.items;
+
+  if (error) {
+    return <ErrorScreen error={error.message} />;
+  }
+
+  if (loading) {
+    return <ActivityIndicator color={mainColors.mainColor} />;
+  }
+
   return (
     <View style={styles.mapContainer}>
       <MapView
@@ -44,19 +79,21 @@ const MapScreen = () => {
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+        onPress={closeJobInfoHandler}
         customMapStyle={mapStyle}
         style={styles.map}>
         {/*MARKER*/}
-        {posts.length &&
-          posts.map((job, index) => {
+        {location &&
+          location?.map((job, index) => {
             return (
               <Marker
                 coordinate={{
-                  latitude: job?.jobLocation?.lat,
-                  longitude: job?.jobLocation?.loong,
+                  latitude: Number(job?.lat),
+                  longitude: Number(job?.long),
                 }}
                 anchor={{x: 0.5, y: 0.5}}
-                key={index}>
+                key={index}
+                onPress={() => showJobInfoHandler(job)}>
                 <View style={styles.markerContainer}>
                   <MapMarker width={50} fill={mainColors.mainColor} />
                 </View>
@@ -75,13 +112,20 @@ const MapScreen = () => {
         {/*  </View>*/}
         {/*</Marker>*/}
       </MapView>
-      <View style={styles.myLocation}>
-        <MyLocationIcon
-          width={45}
-          onPress={getPermissions}
-          fill={mainColors.mainColor}
-        />
-      </View>
+      {showInfo ? (
+        <View style={styles.jobInfo}>
+          <Card post={post} />
+        </View>
+      ) : null}
+      {!showInfo ? (
+        <View style={styles.myLocation}>
+          <MyLocationIcon
+            width={45}
+            onPress={getPermissions}
+            fill={mainColors.mainColor}
+          />
+        </View>
+      ) : null}
     </View>
   );
 };

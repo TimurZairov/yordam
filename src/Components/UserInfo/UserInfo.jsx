@@ -24,7 +24,7 @@ const UserInfo = ({userLocation, userName, postNum, userData}) => {
     <View style={styles.container}>
       <View style={styles.imageContainer}>
         {userData?.image === null || userData?.image === '' ? (
-          <DefaultAvatar width={85} fill={mainColors.darkGrayColor} />
+          <DefaultAvatar width={85} fill={mainColors.whiteColor} />
         ) : (
           <Image
             source={{uri: url}}

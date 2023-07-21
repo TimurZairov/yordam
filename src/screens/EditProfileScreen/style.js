@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   container: {
     paddingHorizontal: 15,
-    backgroundColor: colors.backgroundColor,
+    backgroundColor: mainColors.whiteColor,
     flex: 1,
   },
   imageContainer: {

@@ -1,29 +1,22 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   container: {
     padding: 10,
-    backgroundColor: colors.whiteColor,
+    backgroundColor: mainColors.whiteColor,
     marginVertical: 8,
     borderRadius: 10,
-  },
-  userImage: {
-    width: 50,
-    aspectRatio: 1,
-    borderRadius: 25,
-    marginRight: 16,
+    elevation: 2,
   },
   userInfo: {
     flexDirection: 'row',
-    alignItems: 'center',
   },
-  defaultAvatar: {marginRight: 16},
   name: {
-    fontSize: fonts.fontSize.lg,
+    fontSize: fonts.fontSize.md,
     color: colors.blackColor,
-    fontFamily: fonts.fontFamily.regular,
+    fontFamily: fonts.fontFamily.bold,
   },
   contact: {
     flexDirection: 'row',
@@ -38,16 +31,16 @@ export default StyleSheet.create({
   jobs: {
     paddingHorizontal: 20,
     paddingVertical: 5,
-    backgroundColor: colors.whiteColor,
     borderWidth: 1,
-    borderColor: colors.purpleColor,
+    borderColor: mainColors.darkGrayColor,
+    backgroundColor: mainColors.gray,
     marginRight: 10,
     borderRadius: 50,
   },
   jobTitle: {
     fontSize: fonts.fontSize.md,
-    fontFamily: fonts.fontFamily.regular,
+    fontFamily: fonts.fontFamily.bold,
     color: colors.blackColor,
-    marginTop: 10,
+    marginTop: 5,
   },
 });

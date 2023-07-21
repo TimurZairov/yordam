@@ -10,7 +10,7 @@ import Header from '../../Components/Header';
 import Input from '../../Components/Input';
 import {useForm} from 'react-hook-form';
 import Button from '../../Components/Button';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import ButtonOnPress from '../../Components/Button/ButtonOnPress';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {DefaultAvatar} from '../../assets/icons';
@@ -159,7 +159,7 @@ const EditProfileScreen = () => {
             style={styles.image}
           />
         ) : (
-          <DefaultAvatar width={85} fill={colors.grayColor} />
+          <DefaultAvatar width={85} fill={mainColors.gray} />
         )}
         <Text style={styles.imageText} onPress={imageHandler}>
           Сменить Фото

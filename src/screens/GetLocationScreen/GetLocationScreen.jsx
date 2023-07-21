@@ -29,7 +29,7 @@ const GetLocationScreen = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerContainer}>
-        <Header />
+        <Header location />
       </View>
       <MapView
         provider={PROVIDER_GOOGLE}

@@ -1,10 +1,11 @@
 import {StyleSheet} from 'react-native';
-import {colors} from '../../theme/colors';
+import {colors, mainColors} from '../../theme/colors';
 import fonts from '../../theme/fonts';
 
 export default StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: mainColors.whiteColor,
   },
   headerContainer: {
     paddingHorizontal: 15,
