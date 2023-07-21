@@ -10,34 +10,34 @@ import {updateUser} from './queries';
 import {AppContext} from '../../context/Context';
 import useGetUser from '../../utils/custom/useGetUser/useGetUser';
 
-import imageWelcomeOne from '../../assets/images/MainImageOne.png';
-import imageWelcomeTwo from '../../assets/images/MainImageTwo.png';
-
-const content = [
-  {
-    image: imageWelcomeOne,
-    title: 'Услуги для вас',
-    description:
-      'Усли у вас есть работа котрую необходимо выполнить за определенную\n' +
-      '          сумму, разместите свое работу и пользователи котрым нужен заработок\n' +
-      '          будут готовы его выполнить, или же сразу найдите исполнителья из\n' +
-      '          списка.',
-  },
-  {
-    image: imageWelcomeTwo,
-    title: 'Хотите заработать?',
-    description:
-      'Если вы хотите заработать,\n' +
-      'или вам нужна подработка, следите \n' +
-      'за последними постами, откликайтесь \n' +
-      'комментариями, что бы получить\n' +
-      'заказ. Укажите в профиле какие\n' +
-      'виды работ вы делаете что бы\n' +
-      'вас было легко найти.',
-  },
-];
-
 const WelcomeScreen = () => {
+  const imageWelcomeOne = require('../../assets/images/MainImageOne.png');
+  const imageWelcomeTwo = require('../../assets/images/MainImageTwo.png');
+  console.log(imageWelcomeOne);
+  const content = [
+    {
+      image: imageWelcomeOne,
+      title: 'Услуги для вас',
+      description:
+        'Усли у вас есть работа котрую необходимо выполнить за определенную\n' +
+        '          сумму, разместите свое работу и пользователи котрым нужен заработок\n' +
+        '          будут готовы его выполнить, или же сразу найдите исполнителья из\n' +
+        '          списка.',
+    },
+    {
+      image: imageWelcomeTwo,
+      title: 'Хотите заработать?',
+      description:
+        'Если вы хотите заработать,\n' +
+        'или вам нужна подработка, следите \n' +
+        'за последними постами, откликайтесь \n' +
+        'комментариями, что бы получить\n' +
+        'заказ. Укажите в профиле какие\n' +
+        'виды работ вы делаете что бы\n' +
+        'вас было легко найти.',
+    },
+  ];
+
   const navigation = useNavigation();
   const [profile, setProfile] = useState(false);
   const [onGetProfile] = useMutation(updateUser);
@@ -72,29 +72,31 @@ const WelcomeScreen = () => {
 
   return (
     <SafeAreaView style={styles.saveContainer}>
-      <FlatList
-        data={content}
-        ListHeaderComponent={
-          <View style={styles.logoContainer}>
-            <Logo width={65} fill={colors.blackColor} />
-            <Text style={styles.logoText}>Yordam</Text>
-          </View>
-        }
-        renderItem={({item}) => {
-          return (
-            <View style={{width: 300, height: 300}}>
-              <Image
-                source={{
-                  uri: String(item.image),
-                }}
-                style={{width: 200, height: 200}}
-                resizeMode={'cover'}
-              />
-              <Text>{item.title}</Text>
-            </View>
-          );
-        }}
-      />
+      <View style={styles.logoContainer}>
+        <Logo width={65} fill={colors.blackColor} />
+        <Text style={styles.logoText}>Yordam</Text>
+      </View>
+      <View>
+        <FlatList
+          data={content}
+          renderItem={({item}) => {
+            return (
+              <View style={{flex: 1}}>
+                <Image
+                  source={{
+                    uri: String(item.image),
+                    width: 300,
+                    height: 300,
+                  }}
+                  style={{width: 300, height: 300}}
+                  resizeMode={'cover'}
+                />
+                <Text>{item.title}</Text>
+              </View>
+            );
+          }}
+        />
+      </View>
     </SafeAreaView>
   );
 };
