@@ -20,7 +20,7 @@ const linking = {
 };
 
 const Navigation = () => {
-  const [welcome, setWelcome] = useState(true);
+  const [welcome, setWelcome] = useState(false);
   //Check AsyncStorage
 
   // useEffect(() => {

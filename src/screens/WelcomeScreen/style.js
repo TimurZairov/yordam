@@ -10,31 +10,31 @@ export default StyleSheet.create({
     flex: 1,
   },
   container: {
-    paddingHorizontal: 15,
     backgroundColor: colors.backgroundColor,
     flex: 1,
   },
   logoContainer: {
     alignItems: 'center',
-    marginTop: '40%',
+    marginTop: '15%',
   },
   logoText: {
     fontSize: fonts.fontSize.lg,
     fontFamily: fonts.fontFamily.bold,
     color: colors.blackColor,
   },
+  image: {
+    width: 300,
+    height: 300,
+  },
   authText: {
     color: colors.blackColor,
     fontFamily: fonts.fontFamily.bold,
     fontSize: fonts.fontSize.lg,
-    marginTop: 45,
     textAlign: 'center',
   },
   forgotPassword: {
     textAlign: 'center',
-    marginTop: 15,
     color: colors.darkGrayColor,
     fontSize: fonts.fontSize.md,
-    marginBottom: 25,
   },
 });

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, PermissionsAndroid, View} from 'react-native';
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 import {MapMarker, MyLocationIcon} from '../../assets/icons';
@@ -68,6 +68,13 @@ const MapScreen = () => {
   if (loading) {
     return <ActivityIndicator color={mainColors.mainColor} />;
   }
+
+  useEffect(() => {
+    return () => {
+      setPost(null);
+      setShowInfo(false);
+    };
+  }, []);
 
   return (
     <View style={styles.mapContainer}>
