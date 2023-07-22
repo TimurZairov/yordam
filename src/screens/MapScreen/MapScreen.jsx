@@ -51,6 +51,13 @@ const MapScreen = () => {
     setPost(null);
   };
 
+  useEffect(() => {
+    return () => {
+      setPost(null);
+      setShowInfo(false);
+    };
+  }, []);
+
   //jobLocation
   const {data, error, loading} = useQuery(postsByDate, {
     variables: {
@@ -68,13 +75,6 @@ const MapScreen = () => {
   if (loading) {
     return <ActivityIndicator color={mainColors.mainColor} />;
   }
-
-  useEffect(() => {
-    return () => {
-      setPost(null);
-      setShowInfo(false);
-    };
-  }, []);
 
   return (
     <View style={styles.mapContainer}>

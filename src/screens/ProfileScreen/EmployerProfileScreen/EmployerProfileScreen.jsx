@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -20,17 +20,17 @@ import styles from './style';
 import UserInfo from '../../../Components/UserInfo';
 import {colors, mainColors} from '../../../theme/colors';
 import ErrorScreen from '../../ErrorScreen';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const EmployerProfileScreen = () => {
   const navigation = useNavigation();
   const {userId, setSwitchRole, switchRole} = useContext(AppContext);
+  const [switchLoading, setSwitchLoading] = useState(false);
   //Delete POST
   const [onDeletePost] = useMutation(deletePost);
-
+  //delete post
   const postDelete = async (id, version) => {
     try {
-      const response = await onDeletePost({
+      await onDeletePost({
         variables: {input: {id, _version: version}},
       });
     } catch (e) {
@@ -44,25 +44,31 @@ const EmployerProfileScreen = () => {
   };
   // get Role
   const [onUpdateUserProfile] = useMutation(updateUser);
+  //switch
+  const switchHandler = () => {
+    setSwitchRole(!switchRole);
+  };
 
   // toggle switch
   const toggleSwitch = async (id, version) => {
-    setSwitchRole(!switchRole);
+    if (switchLoading) {
+      return;
+    }
     try {
-      const res = await onUpdateUserProfile({
+      setSwitchLoading(true);
+
+      await onUpdateUserProfile({
         variables: {input: {id, employer: !switchRole, _version: version}},
       });
-      if (res) {
-        const user = res.data.updateUser;
-        const userRole = JSON.stringify(user.employer);
-        await AsyncStorage.setItem('profile', userRole);
-        Alert.alert('Внимание', 'Перезапустите приложение!');
-      }
+      Alert.alert('Внимание', 'Перезапустите приложение!');
+      switchHandler();
     } catch (e) {
       console.log(e);
+    } finally {
+      setSwitchLoading(false);
     }
   };
-
+  //setSwitch
   useEffect(() => {
     if (userData) {
       setSwitchRole(userData.employer);
@@ -133,7 +139,7 @@ const EmployerProfileScreen = () => {
                 <Switch
                   trackColor={{false: mainColors.grayColor, true: '#81b0ff'}}
                   thumbColor={mainColors.mainColor}
-                  value={switchRole}
+                  value={userData.employer}
                   onValueChange={() =>
                     toggleSwitch(userData.id, userData._version)
                   }

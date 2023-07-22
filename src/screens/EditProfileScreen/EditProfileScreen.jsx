@@ -11,7 +11,6 @@ import Input from '../../Components/Input';
 import {useForm} from 'react-hook-form';
 import Button from '../../Components/Button';
 import {colors, mainColors} from '../../theme/colors';
-import ButtonOnPress from '../../Components/Button/ButtonOnPress';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {DefaultAvatar} from '../../assets/icons';
 import ErrorScreen from '../ErrorScreen';
@@ -151,7 +150,7 @@ const EditProfileScreen = () => {
 
   return (
     <ScrollView style={styles.container}>
-      <Header />
+      <Header edit />
       <View style={styles.imageContainer}>
         {user.image ? (
           <Image
@@ -222,7 +221,6 @@ const EditProfileScreen = () => {
         onPress={handleSubmit(submitUpdateUserHandler)}
         title={updateLoading ? 'Сохряняем...' : 'Сохранить'}
       />
-      <ButtonOnPress title={'Отмена'} color={colors.blackColor} />
     </ScrollView>
   );
 };
