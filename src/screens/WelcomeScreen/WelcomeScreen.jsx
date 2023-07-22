@@ -1,31 +1,26 @@
-import React, {useContext, useState} from 'react';
-import {FlatList, Image, SafeAreaView, Text, View} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {FlatList, Image, Text, useWindowDimensions, View} from 'react-native';
 import styles from './style';
 import {Logo} from '../../assets/icons';
-import {colors} from '../../theme/colors';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import {useMutation} from '@apollo/client';
-import {updateUser} from './queries';
-import {AppContext} from '../../context/Context';
-import useGetUser from '../../utils/custom/useGetUser/useGetUser';
+import Button from '../../Components/Button';
+import {mainColors} from '../../theme/colors';
 
 const WelcomeScreen = () => {
-  const imageWelcomeOne = require('../../assets/images/MainImageOne.png');
-  const imageWelcomeTwo = require('../../assets/images/MainImageTwo.png');
-  console.log(imageWelcomeOne);
+  const {width, height} = useWindowDimensions();
   const content = [
     {
-      image: imageWelcomeOne,
+      image: require('../../assets/images/MainImageOne.png'),
       title: 'Услуги для вас',
       description:
         'Усли у вас есть работа котрую необходимо выполнить за определенную\n' +
-        '          сумму, разместите свое работу и пользователи котрым нужен заработок\n' +
-        '          будут готовы его выполнить, или же сразу найдите исполнителья из\n' +
-        '          списка.',
+        'сумму, разместите свою работу и пользователи котрым нужен заработок\n' +
+        'будут готовы его выполнить, или же сразу найдите исполнителья из\n' +
+        'списка.',
     },
     {
-      image: imageWelcomeTwo,
+      image: require('../../assets/images/MainImageTwo.png'),
       title: 'Хотите заработать?',
       description:
         'Если вы хотите заработать,\n' +
@@ -38,99 +33,69 @@ const WelcomeScreen = () => {
     },
   ];
 
+  const flatListRef = useRef(<FlatList />);
+  const [indexScroll, setIndexScroll] = useState(0);
   const navigation = useNavigation();
-  const [profile, setProfile] = useState(false);
-  const [onGetProfile] = useMutation(updateUser);
-  const {userId} = useContext(AppContext);
-
-  const [data, loading, error] = useGetUser();
-  const user = data;
 
   //put to Storage
-  const putToStorage = async (id, version) => {
-    const userProfileRole = JSON.stringify(profile);
-    try {
-      await AsyncStorage.setItem('profile', userProfileRole);
-      await onGetProfile({
-        variables: {input: {id, employer: userProfileRole, _version: version}},
-      });
-      navigation.navigate('Tab', {screen: 'Home'});
-    } catch (e) {
-      console.log(e);
+  const putToStorage = async () => {
+    await AsyncStorage.setItem('user', 'done');
+    navigation.navigate('Tab', {screen: 'Home'});
+  };
+  //nextScreen
+  const nextScreenHandler = () => {
+    if (indexScroll + 1 === content.length) {
+      return;
     }
-  };
-  //worker
-  const workerProfileHandler = async () => {
-    setProfile(false);
-    putToStorage(userId);
-  };
-  //employer
-  const employerProfileHandler = async () => {
-    setProfile(true);
-    putToStorage();
+    setIndexScroll(indexScroll + 1);
   };
 
+  //useEffect
+
+  useEffect(() => {
+    flatListRef.current.scrollToIndex({
+      index: indexScroll,
+      animated: true,
+    });
+  }, [indexScroll]);
+
   return (
-    <SafeAreaView style={styles.saveContainer}>
-      <View style={styles.logoContainer}>
-        <Logo width={65} fill={colors.blackColor} />
-        <Text style={styles.logoText}>Yordam</Text>
-      </View>
-      <View>
-        <FlatList
-          data={content}
-          renderItem={({item}) => {
-            return (
-              <View style={{flex: 1}}>
+    <View style={{width}}>
+      <FlatList
+        data={content}
+        horizontal
+        pagingEnabled={true}
+        renderItem={({item, index}) => {
+          return (
+            <View style={{width, height, paddingHorizontal: 15}}>
+              <View style={styles.logoContainer}>
+                <Logo width={50} fill={mainColors.mainColor} />
                 <Image
-                  source={{
-                    uri: String(item.image),
-                    width: 300,
-                    height: 300,
-                  }}
-                  style={{width: 300, height: 300}}
-                  resizeMode={'cover'}
+                  source={item.image}
+                  style={styles.image}
+                  resizeMode={'contain'}
                 />
-                <Text>{item.title}</Text>
+                <Text style={styles.logoText}>{item.title}</Text>
+                <Text style={styles.authText}>{item.description}</Text>
               </View>
-            );
-          }}
-        />
-      </View>
-    </SafeAreaView>
+              <Button
+                title={index + 1 === content.length ? 'Начать' : 'Далее'}
+                onPress={
+                  index + 1 === content.length
+                    ? putToStorage
+                    : nextScreenHandler
+                }
+              />
+            </View>
+          );
+        }}
+        showsHorizontalScrollIndicator={false}
+        ref={flatListRef}
+        initialScrollIndex={indexScroll}
+        scrollEnabled={false}
+      />
+    </View>
   );
 };
 
 export default WelcomeScreen;
-
-// <ScrollView
-//     style={styles.container}
-//     contentContainerStyle={{
-//       justifyContent: 'center',
-//       paddingHorizontal: 15,
-//     }}>
-//   <View style={styles.logoContainer}>
-//     <Logo width={65} fill={colors.blackColor} />
-//     <Text style={styles.logoText}>Yordam</Text>
-//     <Image
-//         source={require('../../assets/images/MainImageOne.png')}
-//         style={styles.image}
-//         resizeMode={'contain'}
-//     />
-//   </View>
-//
-//   <Text style={styles.authText}>Услуги для вас</Text>
-//   <Text style={styles.forgotPassword}>
-//     Усли у вас есть работа котрую необходимо выполнить за определенную
-//     сумму, разместите свое работу и пользователи котрым нужен заработок
-//     будут готовы его выполнить, или же сразу найдите исполнителья из
-//     списка.
-//   </Text>
-//   {/*<Button title={'Я ищу подработку'} onPress={workerProfileHandler} />*/}
-//   {/*<Button*/}
-//   {/*  title={'Мне нужен помощник'}*/}
-//   {/*  onPress={employerProfileHandler}*/}
-//   {/*  color={colors.blackColor}*/}
-//   {/*/>*/}
-//   <Button title={'Далее'} />
-// </ScrollView>
