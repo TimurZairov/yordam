@@ -60,7 +60,6 @@ const EmployerProfileScreen = () => {
       await onUpdateUserProfile({
         variables: {input: {id, employer: !switchRole, _version: version}},
       });
-      Alert.alert('Внимание', 'Перезапустите приложение!');
       switchHandler();
     } catch (e) {
       console.log(e);

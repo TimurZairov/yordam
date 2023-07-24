@@ -19,13 +19,15 @@ import {AppContext} from '../context/Context';
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
-  const [userRole, setUserRole] = useState(null);
+  const [userRole, setUserRole] = useState(false);
   const {userId} = useContext(AppContext);
   const [data] = useGetUser(userId);
 
   useEffect(() => {
     if (data?.getUser?.employer) {
       setUserRole(true);
+    } else {
+      setUserRole(false);
     }
   }, [useGetUser, data?.getUser?.employer]);
 
