@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {mainColors} from '../theme/colors';
 import HomeStack from './HomeStack';
 import {
@@ -13,18 +13,21 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import MessageScreen from '../screens/MessageScreen';
 import SignedStack from './SignedStack';
 import CreateStack from './CreateStack';
-import useGetRole from '../utils/custom/useGetRole';
+import useGetUser from '../utils/custom/useGetUser/useGetUser';
+import {AppContext} from '../context/Context';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
-  const [isChecked] = useGetRole();
   const [userRole, setUserRole] = useState(null);
+  const {userId} = useContext(AppContext);
+  const [data] = useGetUser(userId);
 
-  // Custom hook
   useEffect(() => {
-    setUserRole(isChecked);
-  }, [isChecked]);
+    if (data?.getUser?.employer) {
+      setUserRole(true);
+    }
+  }, [useGetUser, data?.getUser?.employer]);
 
   return (
     <Tab.Navigator
