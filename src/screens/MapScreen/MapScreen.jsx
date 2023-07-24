@@ -13,19 +13,20 @@ import Card from '../../Components/Card';
 const MapScreen = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [post, setPost] = useState(null);
-
+  const [locationGRanted, setLocationGranted] = useState(false);
+  const [myLocation, setMyLocation] = useState({
+    latitude: 39.652451,
+    longitude: 66.970139,
+  });
+  console.log(myLocation);
   //location
   const getPermissions = async () => {
     try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
-      );
-      if (!granted) {
+      if (!locationGRanted) {
         return;
       } else {
         await Geolocation.getCurrentPosition(
           position => {
-            console.log(position);
             setMyLocation(position.coords);
           },
           error => {
@@ -58,6 +59,18 @@ const MapScreen = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const getAccessToLocation = async () => {
+      const granted = await PermissionsAndroid.request(
+        PermissionsAndroid.PERMISSIONS.ACCESS_COARSE_LOCATION,
+      );
+      if (granted === 'granted') {
+        setLocationGranted(true);
+      }
+    };
+    getAccessToLocation();
+  }, []);
+
   //jobLocation
   const {data, error, loading} = useQuery(postsByDate, {
     variables: {
@@ -81,11 +94,12 @@ const MapScreen = () => {
       <MapView
         provider={PROVIDER_GOOGLE}
         initialRegion={{
-          latitude: 39.652451,
-          longitude: 66.970139,
+          latitude: myLocation?.latitude,
+          longitude: myLocation?.longitude,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
+        rotateEnabled={false}
         onPress={closeJobInfoHandler}
         customMapStyle={mapStyle}
         style={styles.map}>
