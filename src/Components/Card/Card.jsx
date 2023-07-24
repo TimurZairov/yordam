@@ -36,6 +36,12 @@ const Card = ({post, userProfile, onPress}) => {
     },
   });
 
+  //navigate to JobApplied Screen
+
+  const goToJobAppliedScreenHandler = id => {
+    navigation.navigate('Applied', {id: id, myJob: true});
+  };
+
   //EDit Post
   const editPostHandler = id => {
     navigation.navigate('UpdatePost', {id: id});
@@ -70,7 +76,11 @@ const Card = ({post, userProfile, onPress}) => {
   return (
     <Pressable
       style={styles.cardContainer}
-      onPress={!userProfile ? () => getJobDetailsHandler(post.id) : null}>
+      onPress={
+        !userProfile
+          ? () => getJobDetailsHandler(post.id)
+          : () => goToJobAppliedScreenHandler(post.id)
+      }>
       <View style={styles.info}>
         <View style={styles.userInfoContainer}>
           {post.category === 'Ремонт' ? (

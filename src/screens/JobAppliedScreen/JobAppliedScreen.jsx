@@ -28,7 +28,7 @@ const JobAppliedScreen = () => {
   const {userId} = useContext(AppContext);
   const route = useRoute();
   const navigation = useNavigation();
-  const {id} = route.params;
+  const {id, myJob = false} = route.params;
   //dayjs for time
   dayjs.extend(relativeTime);
 
@@ -134,26 +134,29 @@ const JobAppliedScreen = () => {
           ListEmptyComponent={() => {
             return (
               <Text style={styles.emptyList}>
-                Будьте первым кто откликнулся
+                {!myJob
+                  ? 'Будьте первым кто откликнулся'
+                  : 'Еще никто не откликнулся'}
               </Text>
             );
           }}
         />
         {isApplied && <Button title={'На главную'} onPress={goToMainHandler} />}
       </Pressable>
-      {!isApplied && (
-        <View style={styles.inputContainer}>
-          <TextInput
-            multiline={true}
-            style={styles.input}
-            value={comment}
-            onChangeText={setComment}
-          />
-          <Pressable style={styles.submit} onPress={createCommentHandler}>
-            <SendIcon fill={mainColors.mainColor} width={30} />
-          </Pressable>
-        </View>
-      )}
+      {!isApplied ||
+        (myJob && (
+          <View style={styles.inputContainer}>
+            <TextInput
+              multiline={true}
+              style={styles.input}
+              value={comment}
+              onChangeText={setComment}
+            />
+            <Pressable style={styles.submit} onPress={createCommentHandler}>
+              <SendIcon fill={mainColors.mainColor} width={30} />
+            </Pressable>
+          </View>
+        ))}
     </>
   );
 };
