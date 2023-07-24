@@ -17,6 +17,7 @@ export const getUser = gql`
           title
           price
           adress
+          category
           description
           _version
           _deleted

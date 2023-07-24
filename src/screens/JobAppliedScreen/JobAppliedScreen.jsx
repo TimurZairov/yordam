@@ -143,20 +143,23 @@ const JobAppliedScreen = () => {
         />
         {isApplied && <Button title={'На главную'} onPress={goToMainHandler} />}
       </Pressable>
-      {!isApplied ||
-        (myJob && (
-          <View style={styles.inputContainer}>
-            <TextInput
-              multiline={true}
-              style={styles.input}
-              value={comment}
-              onChangeText={setComment}
-            />
-            <Pressable style={styles.submit} onPress={createCommentHandler}>
-              <SendIcon fill={mainColors.mainColor} width={30} />
-            </Pressable>
-          </View>
-        ))}
+      {!myJob && (
+        <View>
+          {!isApplied && (
+            <View style={styles.inputContainer}>
+              <TextInput
+                multiline={true}
+                style={styles.input}
+                value={comment}
+                onChangeText={setComment}
+              />
+              <Pressable style={styles.submit} onPress={createCommentHandler}>
+                <SendIcon fill={mainColors.mainColor} width={30} />
+              </Pressable>
+            </View>
+          )}
+        </View>
+      )}
     </>
   );
 };
