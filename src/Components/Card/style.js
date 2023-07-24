@@ -71,4 +71,19 @@ export default StyleSheet.create({
     fontFamily: fonts.fontFamily.bold,
     color: colors.blackColor,
   },
+  btnContainer: {
+    flexDirection: 'row',
+    marginTop: 10,
+  },
+  btnRemove: {
+    paddingHorizontal: 15,
+    paddingVertical: 6,
+    backgroundColor: mainColors.orangeColor,
+    marginRight: 12,
+    borderRadius: 5,
+  },
+  btnText: {
+    fontSize: fonts.fontSize.default,
+    fontFamily: fonts.fontFamily.semiBold,
+  },
 });

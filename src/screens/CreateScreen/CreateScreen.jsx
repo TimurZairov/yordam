@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import {ScrollView, Text} from 'react-native';
+import {ActivityIndicator, ScrollView, Text} from 'react-native';
 import Header from '../../Components/Header';
 import styles from './style';
 import {mainColors} from '../../theme/colors';
@@ -15,15 +15,18 @@ import TabFilter from '../../Components/TabFilter';
 const filterButtonArray = ['Ремонт', 'Уборка', 'Водитель', 'Няня'];
 
 const CreateScreen = () => {
-  const [category, setCategory] = useState(null);
+  const [category, setCategory] = useState('Ремонт');
   const {userId} = useContext(AppContext);
   const [doCreatePost] = useMutation(createPost);
   const {coordinates, setCoordinates} = useContext(AppContext);
   const navigation = useNavigation();
   const {control, handleSubmit, reset} = useForm();
+  const [loading, setLoading] = useState(false);
 
+  console.log(category);
   const createPostSubmit = async data => {
     try {
+      setLoading(true);
       await doCreatePost({
         variables: {
           input: {
@@ -44,13 +47,18 @@ const CreateScreen = () => {
       reset();
     } catch (e) {
       console.log(e);
+      setLoading(false);
+    } finally {
+      setLoading(false);
     }
   };
+  if (loading) {
+    return <ActivityIndicator color={mainColors.mainColor} />;
+  }
 
   const getLocationScreenHandler = () => {
     navigation.navigate('Location');
   };
-
   return (
     <ScrollView style={styles.container}>
       <Header />
@@ -91,7 +99,10 @@ const CreateScreen = () => {
         color={mainColors.blueColor}
         onPress={getLocationScreenHandler}
       />
-      <Button title={'Создать'} onPress={handleSubmit(createPostSubmit)} />
+      <Button
+        title={loading ? 'Подождите' : 'Создать'}
+        onPress={handleSubmit(createPostSubmit)}
+      />
     </ScrollView>
   );
 };

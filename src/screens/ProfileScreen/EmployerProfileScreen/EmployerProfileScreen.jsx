@@ -1,13 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {
-  ActivityIndicator,
-  Alert,
-  FlatList,
-  Pressable,
-  Switch,
-  Text,
-  View,
-} from 'react-native';
+import {ActivityIndicator, FlatList, Switch, Text, View} from 'react-native';
 
 import {AppContext} from '../../../context/Context';
 import {deletePost, getUser, updateUser} from './queries';
@@ -20,6 +12,7 @@ import styles from './style';
 import UserInfo from '../../../Components/UserInfo';
 import {colors, mainColors} from '../../../theme/colors';
 import ErrorScreen from '../../ErrorScreen';
+import Card from '../../../Components/Card';
 
 const EmployerProfileScreen = () => {
   const navigation = useNavigation();
@@ -38,10 +31,6 @@ const EmployerProfileScreen = () => {
     }
   };
 
-  //EDit Post
-  const editPostHandler = id => {
-    navigation.navigate('UpdatePost', {id: id});
-  };
   // get Role
   const [onUpdateUserProfile] = useMutation(updateUser);
   //switch
@@ -98,23 +87,6 @@ const EmployerProfileScreen = () => {
     navigation.navigate('EditProfileScreen', {user: userData});
   };
 
-  //Alert deleting
-
-  const deletePostHandler = (id, version) => {
-    Alert.alert('Удалить?', '', [
-      {
-        text: 'Отмена',
-        onPress: () => {},
-        style: 'cancel',
-      },
-      {
-        text: 'Удалить',
-        onPress: () => postDelete(id, version),
-        style: 'destructive',
-      },
-    ]);
-  };
-
   const postedPost = userData?.Posts.items.filter(post => !post._deleted);
 
   return (
@@ -155,22 +127,8 @@ const EmployerProfileScreen = () => {
         }}
         renderItem={({item}) => {
           return (
-            <View style={styles.commentContainer}>
-              <View style={styles.textContainer}>
-                <Text style={styles.commentName}>{item.title}</Text>
-                <Text style={styles.commentName}>{item.price}</Text>
-                <Text style={styles.commentText}>{item.description}</Text>
-              </View>
-              <Pressable
-                style={styles.postBtn}
-                onPress={() => deletePostHandler(item.id, item._version)}>
-                <Text style={styles.btnText}>Удалить</Text>
-              </Pressable>
-              <Pressable
-                style={styles.postBtn}
-                onPress={() => editPostHandler(item.id)}>
-                <Text>Реадактировать</Text>
-              </Pressable>
+            <View>
+              <Card post={item} userProfile={true} />
             </View>
           );
         }}

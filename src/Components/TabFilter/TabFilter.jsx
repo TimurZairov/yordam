@@ -24,7 +24,7 @@ const TabFilter = ({setCategory, edit, filterButtonArray}) => {
   };
 
   const getItemLayout = (data, index) => {
-    const width = 60;
+    const width = 50;
     return {
       length: width,
       offset: width * index,

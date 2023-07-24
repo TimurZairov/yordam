@@ -1,5 +1,12 @@
 import React from 'react';
-import {ActivityIndicator, Pressable, Text, View} from 'react-native';
+import {
+  ActivityIndicator,
+  Alert,
+  Pressable,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 
@@ -16,7 +23,7 @@ import {useQuery} from '@apollo/client';
 import {commentsByPost} from './queries';
 import ErrorScreen from '../../screens/ErrorScreen';
 
-const Card = ({post}) => {
+const Card = ({post, userProfile, onPress}) => {
   const navigation = useNavigation();
   dayjs.extend(relativeTime);
   const getJobDetailsHandler = id => {
@@ -29,7 +36,29 @@ const Card = ({post}) => {
     },
   });
 
+  //EDit Post
+  const editPostHandler = id => {
+    navigation.navigate('UpdatePost', {id: id});
+  };
+
+  //Alert deleting post
+  const deletePostHandler = (id, version) => {
+    Alert.alert('Удалить?', '', [
+      {
+        text: 'Отмена',
+        onPress: () => {},
+        style: 'cancel',
+      },
+      {
+        text: 'Удалить',
+        onPress: () => postDelete(id, version),
+        style: 'destructive',
+      },
+    ]);
+  };
+
   const numberOfComments = data?.commentsByPost?.items.length || 0;
+
   if (loading) {
     return <ActivityIndicator color={colors.purpleColor} />;
   }
@@ -41,7 +70,7 @@ const Card = ({post}) => {
   return (
     <Pressable
       style={styles.cardContainer}
-      onPress={() => getJobDetailsHandler(post.id)}>
+      onPress={!userProfile ? () => getJobDetailsHandler(post.id) : null}>
       <View style={styles.info}>
         <View style={styles.userInfoContainer}>
           {post.category === 'Ремонт' ? (
@@ -70,19 +99,36 @@ const Card = ({post}) => {
       </View>
       <Text style={styles.userJobTitle}>{post?.title}</Text>
       <Text numberOfLines={4}>{post?.description}</Text>
-      <View style={styles.userInfoFooter}>
-        {numberOfComments === 0 ? (
-          <Text style={styles.usersAgreed}>
-            Откликнулись: <Text>Будьте первым</Text>
-          </Text>
-        ) : (
-          <Text style={styles.usersAgreed}>
-            Откликнулись: <Text>{numberOfComments} человек</Text>
-          </Text>
-        )}
-
-        <ArrowRightIcon width={15} fill={mainColors.mainColor} />
-      </View>
+      {!userProfile ? (
+        <View style={styles.userInfoFooter}>
+          {numberOfComments === 0 ? (
+            <Text style={styles.usersAgreed}>
+              Откликнулись: <Text>Будьте первым</Text>
+            </Text>
+          ) : (
+            <Text style={styles.usersAgreed}>
+              Откликнулись: <Text>{numberOfComments} человек</Text>
+            </Text>
+          )}
+          <ArrowRightIcon width={15} fill={mainColors.mainColor} />
+        </View>
+      ) : null}
+      {userProfile && (
+        <View style={styles.btnContainer}>
+          <TouchableOpacity
+            style={styles.btnRemove}
+            onPress={() => deletePostHandler(post.id, post._version)}>
+            <Text style={styles.btnText}>Удалить</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => editPostHandler(post.id)}
+            style={[styles.btnRemove, {backgroundColor: mainColors.blueColor}]}>
+            <Text style={[styles.btnText, {color: mainColors.whiteColor}]}>
+              Редактировать
+            </Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </Pressable>
   );
 };
