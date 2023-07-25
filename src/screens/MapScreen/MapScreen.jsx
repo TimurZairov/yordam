@@ -14,11 +14,16 @@ const MapScreen = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [post, setPost] = useState(null);
   const [locationGRanted, setLocationGranted] = useState(false);
-  const [myLocation, setMyLocation] = useState({
+  const [myLocation, setMyLocation] = useState(null);
+  const [region, setRegion] = useState({
     latitude: 39.652451,
     longitude: 66.970139,
+    latitudeDelta: 0.0922,
+    longitudeDelta: 0.0421,
   });
+
   console.log(myLocation);
+
   //location
   const getPermissions = async () => {
     try {
@@ -27,12 +32,18 @@ const MapScreen = () => {
       } else {
         await Geolocation.getCurrentPosition(
           position => {
-            setMyLocation(position.coords);
+            const {latitude, longitude} = position.coords;
+            setMyLocation({latitude, longitude});
+            setRegion(prevRegion => ({
+              ...prevRegion,
+              latitude,
+              longitude,
+            }));
           },
           error => {
             console.log(error.message);
           },
-          {enableHighAccuracy: true, timeout: 5000, maximumAge: 10000},
+          {enableHighAccuracy: true, timeout: 2000, maximumAge: 1000},
         );
       }
     } catch (e) {
@@ -93,12 +104,7 @@ const MapScreen = () => {
     <View style={styles.mapContainer}>
       <MapView
         provider={PROVIDER_GOOGLE}
-        initialRegion={{
-          latitude: myLocation?.latitude,
-          longitude: myLocation?.longitude,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
+        initialRegion={region}
         rotateEnabled={false}
         onPress={closeJobInfoHandler}
         customMapStyle={mapStyle}
@@ -122,16 +128,13 @@ const MapScreen = () => {
             );
           })}
         {/*My location*/}
-        {/*<Marker*/}
-        {/*  coordinate={{*/}
-        {/*    latitude: 39.668715,*/}
-        {/*    longitude: 66.86036,*/}
-        {/*  }}*/}
-        {/*  anchor={{x: 0.5, y: 0.5}}>*/}
-        {/*  <View style={styles.markerContainer}>*/}
-        {/*    <MapMarker width={50} fill={colors.blackColor} />*/}
-        {/*  </View>*/}
-        {/*</Marker>*/}
+        {myLocation !== null ? (
+          <Marker coordinate={myLocation} anchor={{x: 0.5, y: 0.5}}>
+            <View style={styles.markerContainer}>
+              <MapMarker width={50} fill={mainColors.orangeColor} />
+            </View>
+          </Marker>
+        ) : null}
       </MapView>
       {showInfo ? (
         <View style={styles.jobInfo}>
