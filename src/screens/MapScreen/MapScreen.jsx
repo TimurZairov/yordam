@@ -31,6 +31,8 @@ const MapScreen = () => {
         await Geolocation.getCurrentPosition(
           position => {
             const {latitude, longitude} = position.coords;
+            console.log(longitude);
+            console.log(latitude);
             setMyLocation({latitude, longitude});
             setRegion(prevRegion => ({
               ...prevRegion,
@@ -127,7 +129,7 @@ const MapScreen = () => {
           })}
         {/*My location*/}
         {myLocation !== null ? (
-          <Marker coordinate={myLocation} anchor={{x: 0.5, y: 0.5}}>
+          <Marker coordinate={myLocation} anchor={{x: 0, y: 0}}>
             <View style={styles.markerContainer}>
               <MapMarker width={50} fill={mainColors.orangeColor} />
             </View>

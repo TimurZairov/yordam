@@ -47,7 +47,10 @@ const EmployerProfileScreen = () => {
       setSwitchLoading(true);
 
       await onUpdateUserProfile({
-        variables: {input: {id, employer: !switchRole, _version: version}},
+        variables: {
+          input: {id, employer: !switchRole, _version: version},
+          refetchQueries: ['getUser'],
+        },
       });
       switchHandler();
     } catch (e) {
@@ -74,7 +77,7 @@ const EmployerProfileScreen = () => {
     return <ErrorScreen error={error.message} />;
   }
 
-  if (loading) {
+  if (loading || switchLoading) {
     return (
       <ActivityIndicator style={styles.activity} color={colors.purpleColor} />
     );
