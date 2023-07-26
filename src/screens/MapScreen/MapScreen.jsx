@@ -22,8 +22,6 @@ const MapScreen = () => {
     longitudeDelta: 0.0421,
   });
 
-  console.log(myLocation);
-
   //location
   const getPermissions = async () => {
     try {
