@@ -13,7 +13,7 @@ import Button from '../../Components/Button';
 const JobDetailsScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const {id} = route.params;
+  const {id, jobPost} = route.params;
   // Get Post details
   const {data: post, loading, error} = useQuery(getPost, {variables: {id}});
   const jobDetails = post?.getPost || {};
@@ -26,7 +26,7 @@ const JobDetailsScreen = () => {
   }
 
   const applyJobHandler = () => {
-    navigation.navigate('Applied', {id});
+    navigation.navigate('Applied', {id, jobPost: jobPost});
   };
 
   return (

@@ -34,8 +34,30 @@ type User @model @auth(rules: [{allow: public}]) {
     employer: Boolean!
     about: String
     userJob: [String]
+    fcmToken: String
     Posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
     Comments: [Comment] @hasMany(indexName: "byUser", fields: ["id"])
+    Notifications: [Notification] @hasMany(indexName: "byUser", fields: ["id"])
+}
+
+enum NotificationTypes {
+    NEW_POST
+    NEW_COMMENT
+}
+
+type Notification @model @auth(rules: [{allow: public}]) {
+    id: ID!
+    createdAt: AWSDateTime!
+    readAt: AWSTimestamp!
+    type: NotificationTypes
+    #The user who have to notify
+    userId: ID! @index(name: "byUser", sortKeyFields: ["createdAt"], queryField: "userNotifications")
+    User: User @belongsTo(fields: ["userId"])
+    #The user who triggered notification
+    actorId: ID!
+    Actor: User @belongsTo(fields: ["actorId"])
+    Post: Post @hasOne
+    Comment: Comment @hasOne
 }
 
 type Subscription {

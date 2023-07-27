@@ -23,11 +23,11 @@ import {useQuery} from '@apollo/client';
 import {commentsByPost} from './queries';
 import ErrorScreen from '../../screens/ErrorScreen';
 
-const Card = ({post, userProfile, onPress}) => {
+const Card = ({post, userProfile}) => {
   const navigation = useNavigation();
   dayjs.extend(relativeTime);
   const getJobDetailsHandler = id => {
-    navigation.navigate('Details', {id});
+    navigation.navigate('Details', {id, jobPost: post});
   };
   //getComments || number of Comments
   const {data, loading, error} = useQuery(commentsByPost, {
@@ -62,9 +62,10 @@ const Card = ({post, userProfile, onPress}) => {
       },
     ]);
   };
-
+  // check how many applied user
   const numberOfComments = data?.commentsByPost?.items.length || 0;
 
+  //check!
   if (loading) {
     return <ActivityIndicator color={colors.purpleColor} />;
   }
@@ -91,7 +92,6 @@ const Card = ({post, userProfile, onPress}) => {
             <TaskIcon style={styles.icon} fill={colors.purpleColor} />
           )}
           <View style={styles.userInfo}>
-            {/*<Text style={styles.userInfoText}>{post?.name}</Text>*/}
             <Text style={styles.userInfoText}>
               Категория: <Text style={styles.userText}>{post?.category}</Text>
             </Text>
@@ -102,7 +102,7 @@ const Card = ({post, userProfile, onPress}) => {
         </View>
         <View style={styles.priceContainer}>
           <View style={styles.price}>
-            <Text style={styles.priceTExt}>{post.price}</Text>
+            <Text style={styles.priceTExt}>{post.price} сум</Text>
           </View>
           <Text style={styles.time}>{dayjs(post?.createdAt).fromNow()}</Text>
         </View>

@@ -20,6 +20,7 @@ import ErrorScreen from '../ErrorScreen';
 import Button from '../../Components/Button';
 import dayjs from 'dayjs';
 import {DefaultAvatar, SendIcon} from '../../assets/icons';
+import useNotificationService from '../../utils/Notifications/useNotificationService';
 
 const JobAppliedScreen = () => {
   const [isApplied, setIsApplied] = useState(false);
@@ -28,7 +29,11 @@ const JobAppliedScreen = () => {
   const {userId} = useContext(AppContext);
   const route = useRoute();
   const navigation = useNavigation();
-  const {id, myJob = false} = route.params;
+  const {id, myJob = false, jobPost} = route.params;
+  const {doCreateNotification} = useNotificationService({
+    post: jobPost,
+    userId,
+  });
   //dayjs for time
   dayjs.extend(relativeTime);
 
@@ -81,6 +86,7 @@ const JobAppliedScreen = () => {
           },
         },
       });
+      await doCreateNotification();
       setComment('');
       Keyboard.dismiss;
       setIsApplied(true);

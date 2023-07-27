@@ -19,11 +19,16 @@ export const getComment = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -50,6 +55,7 @@ export const getComment = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -100,6 +106,7 @@ export const listComments = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -162,6 +169,7 @@ export const syncComments = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -226,6 +234,7 @@ export const commentsByUserID = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -292,6 +301,7 @@ export const commentsByPost = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -344,11 +354,16 @@ export const getPost = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -409,6 +424,7 @@ export const listPosts = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -464,6 +480,7 @@ export const syncPosts = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -523,6 +540,7 @@ export const postsByDate = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -580,6 +598,7 @@ export const postsByUserID = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -617,6 +636,7 @@ export const getUser = /* GraphQL */ `
       employer
       about
       userJob
+      fcmToken
       Posts {
         items {
           id
@@ -653,6 +673,24 @@ export const getUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      Notifications {
+        items {
+          id
+          createdAt
+          readAt
+          type
+          userId
+          actorId
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          notificationPostId
+          notificationCommentId
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -678,11 +716,16 @@ export const listUsers = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -720,6 +763,7 @@ export const syncUsers = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
@@ -728,11 +772,454 @@ export const syncUsers = /* GraphQL */ `
           nextToken
           startedAt
         }
+        Notifications {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getNotification = /* GraphQL */ `
+  query GetNotification($id: ID!) {
+    getNotification(id: $id) {
+      id
+      createdAt
+      readAt
+      type
+      userId
+      User {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        fcmToken
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      actorId
+      Actor {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        fcmToken
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        createdAt
+        type
+        title
+        price
+        adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        description
+        userID
+        lat
+        long
+        category
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Comment {
+        id
+        createdAt
+        comment
+        userID
+        postID
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          createdAt
+          type
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          category
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      notificationPostId
+      notificationCommentId
+    }
+  }
+`;
+export const listNotifications = /* GraphQL */ `
+  query ListNotifications(
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listNotifications(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        createdAt
+        readAt
+        type
+        userId
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        actorId
+        Actor {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          createdAt
+          type
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          category
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comment {
+          id
+          createdAt
+          comment
+          userID
+          postID
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        notificationPostId
+        notificationCommentId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncNotifications = /* GraphQL */ `
+  query SyncNotifications(
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncNotifications(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        createdAt
+        readAt
+        type
+        userId
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        actorId
+        Actor {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          createdAt
+          type
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          category
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comment {
+          id
+          createdAt
+          comment
+          userID
+          postID
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        notificationPostId
+        notificationCommentId
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const userNotifications = /* GraphQL */ `
+  query UserNotifications(
+    $userId: ID!
+    $createdAt: ModelStringKeyConditionInput
+    $sortDirection: ModelSortDirection
+    $filter: ModelNotificationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    userNotifications(
+      userId: $userId
+      createdAt: $createdAt
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        createdAt
+        readAt
+        type
+        userId
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        actorId
+        Actor {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          createdAt
+          type
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          category
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comment {
+          id
+          createdAt
+          comment
+          userID
+          postID
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        notificationPostId
+        notificationCommentId
       }
       nextToken
       startedAt

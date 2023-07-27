@@ -1,8 +1,19 @@
-import { ModelInit, MutableModel, __modelMeta__, ManagedIdentifier } from "@aws-amplify/datastore";
 // @ts-ignore
-import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@aws-amplify/datastore";
+import {
+  __modelMeta__,
+  AsyncCollection,
+  AsyncItem,
+  LazyLoading,
+  LazyLoadingDisabled,
+  ManagedIdentifier,
+  ModelInit,
+  MutableModel
+} from "@aws-amplify/datastore";
 
-
+export enum NotificationTypes {
+  NEW_POST = "NEW_POST",
+  NEW_COMMENT = "NEW_COMMENT"
+}
 
 
 
@@ -104,8 +115,10 @@ type EagerUser = {
   readonly employer: boolean;
   readonly about?: string | null;
   readonly userJob?: (string | null)[] | null;
+  readonly fcmToken?: string | null;
   readonly Posts?: (Post | null)[] | null;
   readonly Comments?: (Comment | null)[] | null;
+  readonly Notifications?: (Notification | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -124,8 +137,10 @@ type LazyUser = {
   readonly employer: boolean;
   readonly about?: string | null;
   readonly userJob?: (string | null)[] | null;
+  readonly fcmToken?: string | null;
   readonly Posts: AsyncCollection<Post>;
   readonly Comments: AsyncCollection<Comment>;
+  readonly Notifications: AsyncCollection<Notification>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -134,4 +149,50 @@ export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser :
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
   copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
+}
+
+type EagerNotification = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Notification, 'id'>;
+    readOnlyFields: 'updatedAt';
+  };
+  readonly id: string;
+  readonly createdAt: string;
+  readonly readAt: number;
+  readonly type?: NotificationTypes | keyof typeof NotificationTypes | null;
+  readonly userId: string;
+  readonly User?: User | null;
+  readonly actorId: string;
+  readonly Actor?: User | null;
+  readonly Post?: Post | null;
+  readonly Comment?: Comment | null;
+  readonly updatedAt?: string | null;
+  readonly notificationPostId?: string | null;
+  readonly notificationCommentId?: string | null;
+}
+
+type LazyNotification = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Notification, 'id'>;
+    readOnlyFields: 'updatedAt';
+  };
+  readonly id: string;
+  readonly createdAt: string;
+  readonly readAt: number;
+  readonly type?: NotificationTypes | keyof typeof NotificationTypes | null;
+  readonly userId: string;
+  readonly User: AsyncItem<User | undefined>;
+  readonly actorId: string;
+  readonly Actor: AsyncItem<User | undefined>;
+  readonly Post: AsyncItem<Post | undefined>;
+  readonly Comment: AsyncItem<Comment | undefined>;
+  readonly updatedAt?: string | null;
+  readonly notificationPostId?: string | null;
+  readonly notificationCommentId?: string | null;
+}
+
+export declare type Notification = LazyLoading extends LazyLoadingDisabled ? EagerNotification : LazyNotification
+
+export declare const Notification: (new (init: ModelInit<Notification>) => Notification) & {
+  copyOf(source: Notification, mutator: (draft: MutableModel<Notification>) => MutableModel<Notification> | void): Notification;
 }
