@@ -7,15 +7,13 @@ import {
   LazyLoadingDisabled,
   ManagedIdentifier,
   ModelInit,
-  MutableModel
-} from "@aws-amplify/datastore";
+  MutableModel,
+} from '@aws-amplify/datastore';
 
 export enum NotificationTypes {
-  NEW_POST = "NEW_POST",
-  NEW_COMMENT = "NEW_COMMENT"
+  NEW_POST = 'NEW_POST',
+  NEW_COMMENT = 'NEW_COMMENT',
 }
-
-
 
 type EagerComment = {
   readonly [__modelMeta__]: {
@@ -30,7 +28,7 @@ type EagerComment = {
   readonly User?: User | null;
   readonly Post?: Post | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyComment = {
   readonly [__modelMeta__]: {
@@ -45,13 +43,18 @@ type LazyComment = {
   readonly User: AsyncItem<User | undefined>;
   readonly Post: AsyncItem<Post | undefined>;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Comment = LazyLoading extends LazyLoadingDisabled ? EagerComment : LazyComment
+export declare type Comment = LazyLoading extends LazyLoadingDisabled
+  ? EagerComment
+  : LazyComment;
 
 export declare const Comment: (new (init: ModelInit<Comment>) => Comment) & {
-  copyOf(source: Comment, mutator: (draft: MutableModel<Comment>) => MutableModel<Comment> | void): Comment;
-}
+  copyOf(
+    source: Comment,
+    mutator: (draft: MutableModel<Comment>) => MutableModel<Comment> | void,
+  ): Comment;
+};
 
 type EagerPost = {
   readonly [__modelMeta__]: {
@@ -72,7 +75,7 @@ type EagerPost = {
   readonly long?: string | null;
   readonly category?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyPost = {
   readonly [__modelMeta__]: {
@@ -93,13 +96,18 @@ type LazyPost = {
   readonly long?: string | null;
   readonly category?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type Post = LazyLoading extends LazyLoadingDisabled ? EagerPost : LazyPost
+export declare type Post = LazyLoading extends LazyLoadingDisabled
+  ? EagerPost
+  : LazyPost;
 
 export declare const Post: (new (init: ModelInit<Post>) => Post) & {
-  copyOf(source: Post, mutator: (draft: MutableModel<Post>) => MutableModel<Post> | void): Post;
-}
+  copyOf(
+    source: Post,
+    mutator: (draft: MutableModel<Post>) => MutableModel<Post> | void,
+  ): Post;
+};
 
 type EagerUser = {
   readonly [__modelMeta__]: {
@@ -121,7 +129,7 @@ type EagerUser = {
   readonly Notifications?: (Notification | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
 type LazyUser = {
   readonly [__modelMeta__]: {
@@ -143,13 +151,18 @@ type LazyUser = {
   readonly Notifications: AsyncCollection<Notification>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
-}
+};
 
-export declare type User = LazyLoading extends LazyLoadingDisabled ? EagerUser : LazyUser
+export declare type User = LazyLoading extends LazyLoadingDisabled
+  ? EagerUser
+  : LazyUser;
 
 export declare const User: (new (init: ModelInit<User>) => User) & {
-  copyOf(source: User, mutator: (draft: MutableModel<User>) => MutableModel<User> | void): User;
-}
+  copyOf(
+    source: User,
+    mutator: (draft: MutableModel<User>) => MutableModel<User> | void,
+  ): User;
+};
 
 type EagerNotification = {
   readonly [__modelMeta__]: {
@@ -169,7 +182,7 @@ type EagerNotification = {
   readonly updatedAt?: string | null;
   readonly notificationPostId?: string | null;
   readonly notificationCommentId?: string | null;
-}
+};
 
 type LazyNotification = {
   readonly [__modelMeta__]: {
@@ -189,10 +202,19 @@ type LazyNotification = {
   readonly updatedAt?: string | null;
   readonly notificationPostId?: string | null;
   readonly notificationCommentId?: string | null;
-}
+};
 
-export declare type Notification = LazyLoading extends LazyLoadingDisabled ? EagerNotification : LazyNotification
+export declare type Notification = LazyLoading extends LazyLoadingDisabled
+  ? EagerNotification
+  : LazyNotification;
 
-export declare const Notification: (new (init: ModelInit<Notification>) => Notification) & {
-  copyOf(source: Notification, mutator: (draft: MutableModel<Notification>) => MutableModel<Notification> | void): Notification;
-}
+export declare const Notification: (new (
+  init: ModelInit<Notification>,
+) => Notification) & {
+  copyOf(
+    source: Notification,
+    mutator: (
+      draft: MutableModel<Notification>,
+    ) => MutableModel<Notification> | void,
+  ): Notification;
+};

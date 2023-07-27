@@ -15,12 +15,14 @@ import SignedStack from './SignedStack';
 import CreateStack from './CreateStack';
 import useGetUser from '../utils/custom/useGetUser/useGetUser';
 import {AppContext} from '../context/Context';
+import {NotificationContext} from '../context/NotificationContext/NotificationContext';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   const [userRole, setUserRole] = useState(false);
   const {userId} = useContext(AppContext);
+  const {notification} = useContext(NotificationContext);
   const [data] = useGetUser(userId);
 
   useEffect(() => {
@@ -109,6 +111,8 @@ const TabNavigation = () => {
           tabBarIcon: ({color}) => {
             return <ProfileIcon height={30} fill={color} />;
           },
+          tabBarBadge: notification,
+          tabBarBadgeStyle: {marginTop: 5},
         }}
       />
     </Tab.Navigator>

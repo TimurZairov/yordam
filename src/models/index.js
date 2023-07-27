@@ -7,12 +7,6 @@ const NotificationTypes = {
   NEW_COMMENT: 'NEW_COMMENT',
 };
 
-const { Comment, Post, User, Notification } = initSchema(schema);
+const {Comment, Post, User, Notification} = initSchema(schema);
 
-export {
-  Comment,
-  Post,
-  User,
-  Notification,
-  NotificationTypes
-};
+export {Comment, Post, User, Notification, NotificationTypes};

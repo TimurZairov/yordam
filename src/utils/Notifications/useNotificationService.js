@@ -3,7 +3,6 @@ import {createNotification} from './queries';
 import {NotificationTypes} from '../../models';
 
 const useNotificationService = ({post, userId}) => {
-  console.log(post.userID);
   const [doCreateNotification] = useMutation(createNotification, {
     variables: {
       input: {

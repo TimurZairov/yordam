@@ -86,6 +86,7 @@ const JobAppliedScreen = () => {
           },
         },
       });
+      //create notification
       await doCreateNotification();
       setComment('');
       Keyboard.dismiss;
