@@ -111,7 +111,7 @@ const TabNavigation = () => {
           tabBarIcon: ({color}) => {
             return <ProfileIcon height={30} fill={color} />;
           },
-          tabBarBadge: notification,
+          tabBarBadge: notification || undefined,
           tabBarBadgeStyle: {marginTop: 5},
         }}
       />

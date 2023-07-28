@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, Switch, Text, View} from 'react-native';
 
 import {AppContext} from '../../../context/Context';
-import {deletePost, getUser, updateUser} from './queries';
+import {getUser, updateNotification, updateUser} from './queries';
 import {useMutation, useQuery} from '@apollo/client';
 import UserData from '../../../Components/UserData';
 import {useNavigation} from '@react-navigation/native';
@@ -13,23 +13,15 @@ import UserInfo from '../../../Components/UserInfo';
 import {colors, mainColors} from '../../../theme/colors';
 import ErrorScreen from '../../ErrorScreen';
 import Card from '../../../Components/Card';
+import {NotificationContext} from '../../../context/NotificationContext/NotificationContext';
 
 const EmployerProfileScreen = () => {
   const navigation = useNavigation();
   const {userId, setSwitchRole, switchRole} = useContext(AppContext);
+  const {postIds, newNotification} = useContext(NotificationContext);
+  const [doUpdateNotification] = useMutation(updateNotification);
+
   const [switchLoading, setSwitchLoading] = useState(false);
-  //Delete POST
-  const [onDeletePost] = useMutation(deletePost);
-  //delete post
-  const postDelete = async (id, version) => {
-    try {
-      await onDeletePost({
-        variables: {input: {id, _version: version}},
-      });
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   // get Role
   const [onUpdateUserProfile] = useMutation(updateUser);
@@ -63,32 +55,60 @@ const EmployerProfileScreen = () => {
     }
   }, [switchRole, toggleSwitch]);
 
-  // USER QUERY
+  useEffect(() => {
+    const unreadNotification = newNotification.filter(n => !n?.readAt);
+    Promise.all(
+      unreadNotification.map(n => {
+        n &&
+          doUpdateNotification({
+            variables: {
+              input: {
+                id: n?.id,
+                _version: n?._version,
+                readAt: new Date().getTime(),
+              },
+            },
+          });
+      }),
+    );
+  }, []);
+
+  // USER QUERY User
   const {data, loading, error} = useQuery(getUser, {
     variables: {
       id: userId,
     },
     pollInterval: 500,
   });
+
+  //check
   if (error) {
     return <ErrorScreen error={error.message} />;
   }
 
-  if (loading) {
+  if (loading || switchLoading) {
     return (
       <ActivityIndicator style={styles.activity} color={colors.purpleColor} />
     );
   }
+  //read notification in profile
 
   const userData = data.getUser;
 
+  // const isEnableHandler = (arr1, arr2) => {
+  //   for (let i = 0; i < arr1.length; i++) {
+  //     console.log(arr1[i]);
+  //   }
+  //   const check = arr2?.filter(item => {
+  //     console.log(item.id);
+  //   });
+  // };
+  //
+  // isEnableHandler(postIds, posts);
   //Edit Profile Screen
   const editProfileHandler = () => {
     navigation.navigate('EditProfileScreen', {user: userData});
   };
-
-  const postedPost = userData?.Posts.items.filter(post => !post._deleted);
-
   return (
     <View style={styles.container}>
       <Header profile onPress={editProfileHandler} />
@@ -100,7 +120,7 @@ const EmployerProfileScreen = () => {
               <UserInfo
                 userName={userData.name}
                 userLocation={userData.location}
-                postNum={postedPost.length || 0}
+                postNum={0}
                 userData={userData}
               />
               <UserData name={'Почта'} info={userData.email} />

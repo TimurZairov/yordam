@@ -5,7 +5,7 @@ import {DefaultAvatar} from '../../assets/icons';
 import {mainColors} from '../../theme/colors';
 import {Storage} from 'aws-amplify';
 
-const UserInfo = ({userLocation, userName, postNum, userData}) => {
+const UserInfo = ({userLocation, userName, userData}) => {
   const [url, setUrl] = useState(null);
   useEffect(() => {
     if (userData) {

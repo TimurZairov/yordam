@@ -26,6 +26,7 @@ import ErrorScreen from '../../screens/ErrorScreen';
 const Card = ({post, userProfile}) => {
   const navigation = useNavigation();
   dayjs.extend(relativeTime);
+
   const getJobDetailsHandler = id => {
     navigation.navigate('Details', {id, jobPost: post});
   };
