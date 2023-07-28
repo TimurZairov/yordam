@@ -18,8 +18,8 @@ const MapScreen = () => {
   const [region, setRegion] = useState({
     latitude: 39.652451,
     longitude: 66.970139,
-    latitudeDelta: 0.0922,
-    longitudeDelta: 0.0421,
+    latitudeDelta: 0.05,
+    longitudeDelta: 0.04,
   });
 
   //location
@@ -116,7 +116,7 @@ const MapScreen = () => {
                   latitude: Number(job?.lat),
                   longitude: Number(job?.long),
                 }}
-                anchor={{x: 0.5, y: 0.5}}
+                anchor={{x: 0.18, y: 0.8}}
                 key={index}
                 onPress={() => showJobInfoHandler(job)}>
                 <View style={styles.markerContainer}>
@@ -127,7 +127,7 @@ const MapScreen = () => {
           })}
         {/*My location*/}
         {myLocation !== null ? (
-          <Marker coordinate={myLocation} anchor={{x: 0.5, y: 0.5}}>
+          <Marker coordinate={myLocation} anchor={{x: 0.18, y: 0.7}}>
             <View style={styles.markerContainer}>
               <MapMarker width={50} fill={mainColors.orangeColor} />
             </View>
