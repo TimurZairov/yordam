@@ -23,7 +23,7 @@ const NotificationContextProvider = ({children}) => {
   //show notifications in tabBarBadge & if more than 10 show +10
 
   let countNotification = newNotification.length;
-  if (newNotification.length >= 10) {
+  if (newNotification.length > 10) {
     countNotification = '10+';
   }
 
