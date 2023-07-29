@@ -7,6 +7,7 @@ import CustomDrawerNavigation from '../Components/CustomDrawerNavigation/CustomD
 import JobAppliedScreen from '../screens/JobAppliedScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import PushNotifications from '../utils/PushNotifications';
 
 const Drawer = createDrawerNavigator();
 
@@ -36,6 +37,7 @@ const Navigation = () => {
 
   return (
     <NavigationContainer linking={linking}>
+      <PushNotifications />
       <Drawer.Navigator
         screenOptions={{
           headerShown: false,

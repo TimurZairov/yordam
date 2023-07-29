@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "560921427549",
+    "project_id": "yordam-a3ea6",
+    "storage_bucket": "yordam-a3ea6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:560921427549:android:9b18fcc89163f188d917b4",
+        "android_client_info": {
+          "package_name": "com.yordam"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "560921427549-glqfs5829gs8oon77tes9v7hes9lg1sg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yordam",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "560921427549-knpkt5joa6b5d6sl3litidhkag8t2ra4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0PqWQnhMpeWOqn7LLjh_dKda4nWdOw1c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "560921427549-knpkt5joa6b5d6sl3litidhkag8t2ra4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
