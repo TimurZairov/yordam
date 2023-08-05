@@ -24,7 +24,7 @@ const PostsList = ({fetchValue}) => {
     },
   }); // second parameter of options = {limits of query}
 
-  //query userList
+  //query usersList
   const {
     data: usersData,
     loading: usersLoading,

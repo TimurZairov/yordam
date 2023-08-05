@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState, useCallback} from 'react';
 import {View} from 'react-native';
 import styles from './style';
 import Header from '../../Components/Header';
@@ -12,9 +12,9 @@ const GetLocationScreen = () => {
   const [markerCoordinates, setMarkerCoordinates] = useState(null);
   const navigation = useNavigation();
 
-  const getJobLocation = event => {
+  const getJobLocation = useCallback(event => {
     setCoordinates(event.nativeEvent.coordinate);
-  };
+  });
 
   const backHandler = () => {
     navigation.navigate('CreateScreen');
@@ -49,7 +49,8 @@ const GetLocationScreen = () => {
               latitude: markerCoordinates?.latitude,
               longitude: markerCoordinates?.longitude,
             }}
-            anchor={{x: 0.5, y: 0.5}}></Marker>
+            anchor={{x: 0.5, y: 0.5}}
+          />
         ) : null}
       </MapView>
       <View style={styles.btn}>

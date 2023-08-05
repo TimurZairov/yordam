@@ -26,7 +26,6 @@ const TabButton = ({setFetchValue}) => {
           Объявления
         </Text>
       </Pressable>
-
       <Pressable
         style={[
           isActiveBtn === 'tabSpecialist' ? styles.buttonActive : styles.button,
