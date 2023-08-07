@@ -8,6 +8,7 @@ import JobAppliedScreen from '../screens/JobAppliedScreen';
 import WelcomeScreen from '../screens/WelcomeScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotifications from '../utils/PushNotifications';
+import MessageScreen from '../screens/MessageScreen/MessageScreen';
 
 const Drawer = createDrawerNavigator();
 
@@ -48,6 +49,7 @@ const Navigation = () => {
         <Drawer.Screen name="Tab" component={TabNavigation} />
         <Drawer.Screen name="About" component={AboutScreen} />
         <Drawer.Screen name="Applied" component={JobAppliedScreen} />
+        <Drawer.Screen name="Message" component={MessageScreen} />
       </Drawer.Navigator>
     </NavigationContainer>
   );

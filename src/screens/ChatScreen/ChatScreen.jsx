@@ -6,11 +6,19 @@ import users from '../../data/chatUsers.json';
 import styles from './style';
 import {DefaultAvatar} from '../../assets/icons';
 import dayjs from 'dayjs';
+import {useNavigation} from '@react-navigation/native';
 
 const ChatScreen = () => {
+  const navigation = useNavigation();
+  const chatMessageHandler = id => {
+    navigation.navigate('Message', {id});
+  };
+
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity style={styles.chatUserCard}>
+      <TouchableOpacity
+        style={styles.chatUserCard}
+        onPress={() => chatMessageHandler(item.id)}>
         <View style={styles.userAvatarContainer}>
           {item.photo === '' ||
           item.photo === null ||

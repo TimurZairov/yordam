@@ -6,7 +6,7 @@ import {mainColors} from '../../theme/colors';
 import {useNavigation} from '@react-navigation/native';
 import {AppContext} from '../../context/Context';
 
-const Header = ({profile, onPress, job, jobDetails, location, edit}) => {
+const Header = ({profile, onPress, job, jobDetails, location, edit, chat}) => {
   const navigation = useNavigation();
 
   const {user} = useContext(AppContext);
@@ -34,7 +34,7 @@ const Header = ({profile, onPress, job, jobDetails, location, edit}) => {
         <EditIcon width={30} fill={mainColors.mainColor} onPress={onPress} />
       ) : null}
 
-      {job || jobDetails || location || edit ? (
+      {job || jobDetails || location || edit || chat ? (
         <Pressable style={styles.drawerBack} onPress={goToMainScreen}>
           <ArrowLeftIcon width={25} fill={mainColors.mainColor} />
         </Pressable>
