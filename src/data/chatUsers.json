@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "name": "Иван",
+    "photo": "https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676295806139337963.png",
+    "timestamp": "2023-08-07T10:00:00Z"
+  },
+  {
+    "id": 2,
+    "name": "Мария",
+    "photo": "",
+    "timestamp": "2023-08-07T10:15:00Z"
+  },
+  {
+    "id": 3,
+    "name": "Алексей",
+    "photo": "https://cs13.pikabu.ru/post_img/big/2023/02/13/8/1676295805154099895.png",
+    "timestamp": "2023-08-07T10:30:00Z"
+  },
+  {
+    "id": 4,
+    "name": "Екатерина",
+    "photo": "",
+    "timestamp": "2023-08-07T10:45:00Z"
+  },
+  {
+    "id": 5,
+    "name": "Дмитрий",
+    "photo": "https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676296367166243426.png",
+    "timestamp": "2023-08-07T11:00:00Z"
+  },
+  {
+    "id": 6,
+    "name": "Анна",
+    "photo": "",
+    "timestamp": "2023-08-07T11:15:00Z"
+  },
+  {
+    "id": 7,
+    "name": "Артем",
+    "photo": "https://cs14.pikabu.ru/post_img/big/2023/02/13/8/1676296328152964201.png",
+    "timestamp": "2023-08-07T11:30:00Z"
+  },
+  {
+    "id": 8,
+    "name": "Елена",
+    "photo": "",
+    "timestamp": "2023-08-07T11:45:00Z"
+  },
+  {
+    "id": 9,
+    "name": "Максим",
+    "photo": "https://cs13.pikabu.ru/post_img/big/2023/02/13/8/16762962261328396.png",
+    "timestamp": "2023-08-07T12:00:00Z"
+  },
+  {
+    "id": 10,
+    "name": "Ольга",
+    "photo": "",
+    "timestamp": "2023-08-07T12:15:00Z"
+  }
+]
