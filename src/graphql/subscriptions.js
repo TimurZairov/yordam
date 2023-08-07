@@ -19,11 +19,16 @@ export const onCommentByPostId = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -50,6 +55,7 @@ export const onCommentByPostId = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -95,11 +101,16 @@ export const onCreateComment = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -126,6 +137,7 @@ export const onCreateComment = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -171,11 +183,16 @@ export const onUpdateComment = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -202,6 +219,7 @@ export const onUpdateComment = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -247,11 +265,16 @@ export const onDeleteComment = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -278,6 +301,7 @@ export const onDeleteComment = /* GraphQL */ `
           employer
           about
           userJob
+          fcmToken
           createdAt
           updatedAt
           _version
@@ -324,11 +348,16 @@ export const onCreatePost = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -384,11 +413,16 @@ export const onUpdatePost = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -444,11 +478,16 @@ export const onDeletePost = /* GraphQL */ `
         employer
         about
         userJob
+        fcmToken
         Posts {
           nextToken
           startedAt
         }
         Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
           nextToken
           startedAt
         }
@@ -497,6 +536,7 @@ export const onCreateUser = /* GraphQL */ `
       employer
       about
       userJob
+      fcmToken
       Posts {
         items {
           id
@@ -529,6 +569,24 @@ export const onCreateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      Notifications {
+        items {
+          id
+          createdAt
+          readAt
+          type
+          userId
+          actorId
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          notificationPostId
+          notificationCommentId
         }
         nextToken
         startedAt
@@ -553,6 +611,7 @@ export const onUpdateUser = /* GraphQL */ `
       employer
       about
       userJob
+      fcmToken
       Posts {
         items {
           id
@@ -585,6 +644,24 @@ export const onUpdateUser = /* GraphQL */ `
           _version
           _deleted
           _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      Notifications {
+        items {
+          id
+          createdAt
+          readAt
+          type
+          userId
+          actorId
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          notificationPostId
+          notificationCommentId
         }
         nextToken
         startedAt
@@ -609,6 +686,7 @@ export const onDeleteUser = /* GraphQL */ `
       employer
       about
       userJob
+      fcmToken
       Posts {
         items {
           id
@@ -645,11 +723,512 @@ export const onDeleteUser = /* GraphQL */ `
         nextToken
         startedAt
       }
+      Notifications {
+        items {
+          id
+          createdAt
+          readAt
+          type
+          userId
+          actorId
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          notificationPostId
+          notificationCommentId
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+    }
+  }
+`;
+export const onCreateNotification = /* GraphQL */ `
+  subscription OnCreateNotification(
+    $filter: ModelSubscriptionNotificationFilterInput
+  ) {
+    onCreateNotification(filter: $filter) {
+      id
+      createdAt
+      readAt
+      type
+      userId
+      User {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        fcmToken
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      actorId
+      Actor {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        fcmToken
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        createdAt
+        type
+        title
+        price
+        adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        description
+        userID
+        lat
+        long
+        category
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Comment {
+        id
+        createdAt
+        comment
+        userID
+        postID
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          createdAt
+          type
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          category
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      notificationPostId
+      notificationCommentId
+    }
+  }
+`;
+export const onUpdateNotification = /* GraphQL */ `
+  subscription OnUpdateNotification(
+    $filter: ModelSubscriptionNotificationFilterInput
+  ) {
+    onUpdateNotification(filter: $filter) {
+      id
+      createdAt
+      readAt
+      type
+      userId
+      User {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        fcmToken
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      actorId
+      Actor {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        fcmToken
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        createdAt
+        type
+        title
+        price
+        adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        description
+        userID
+        lat
+        long
+        category
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Comment {
+        id
+        createdAt
+        comment
+        userID
+        postID
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          createdAt
+          type
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          category
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      notificationPostId
+      notificationCommentId
+    }
+  }
+`;
+export const onDeleteNotification = /* GraphQL */ `
+  subscription OnDeleteNotification(
+    $filter: ModelSubscriptionNotificationFilterInput
+  ) {
+    onDeleteNotification(filter: $filter) {
+      id
+      createdAt
+      readAt
+      type
+      userId
+      User {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        fcmToken
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      actorId
+      Actor {
+        id
+        email
+        name
+        location
+        image
+        phoneNumber
+        employer
+        about
+        userJob
+        fcmToken
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Notifications {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        createdAt
+        type
+        title
+        price
+        adress
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        description
+        userID
+        lat
+        long
+        category
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Comment {
+        id
+        createdAt
+        comment
+        userID
+        postID
+        User {
+          id
+          email
+          name
+          location
+          image
+          phoneNumber
+          employer
+          about
+          userJob
+          fcmToken
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          createdAt
+          type
+          title
+          price
+          adress
+          description
+          userID
+          lat
+          long
+          category
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      notificationPostId
+      notificationCommentId
     }
   }
 `;

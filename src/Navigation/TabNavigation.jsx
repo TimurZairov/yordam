@@ -10,17 +10,20 @@ import {
 } from '../assets/icons';
 import MapScreen from '../screens/MapScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import MessageScreen from '../screens/MessageScreen';
+// import MessageScreen from '../screens/MessageScreen';
 import SignedStack from './SignedStack';
 import CreateStack from './CreateStack';
 import useGetUser from '../utils/custom/useGetUser/useGetUser';
 import {AppContext} from '../context/Context';
+import {NotificationContext} from '../context/NotificationContext/NotificationContext';
+import ChatScreen from '../screens/ChatScreen';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = () => {
   const [userRole, setUserRole] = useState(false);
   const {userId} = useContext(AppContext);
+  const {notification} = useContext(NotificationContext);
   const [data] = useGetUser(userId);
 
   useEffect(() => {
@@ -29,7 +32,7 @@ const TabNavigation = () => {
     } else {
       setUserRole(false);
     }
-  }, [useGetUser, data?.getUser?.employer]);
+  }, [data?.getUser?.employer]);
 
   return (
     <Tab.Navigator
@@ -90,8 +93,8 @@ const TabNavigation = () => {
 
       {/*Message*/}
       <Tab.Screen
-        name={'Message'}
-        component={MessageScreen}
+        name={'Chat'}
+        component={ChatScreen}
         options={{
           // eslint-disable-next-line react/no-unstable-nested-components
           tabBarIcon: ({color}) => {
@@ -109,6 +112,8 @@ const TabNavigation = () => {
           tabBarIcon: ({color}) => {
             return <ProfileIcon height={30} fill={color} />;
           },
+          tabBarBadge: notification || undefined,
+          tabBarBadgeStyle: {marginTop: 5},
         }}
       />
     </Tab.Navigator>

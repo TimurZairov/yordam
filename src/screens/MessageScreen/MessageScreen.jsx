@@ -1,10 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {FlatList, Text, View} from 'react-native';
 import styles from './style';
 import Header from '../../Components/Header';
 import dayjs from 'dayjs';
+import ChatInput from '../../Components/ChatInput/ChatInput';
 
 const MessageScreen = () => {
+  const [comment, setComment] = useState('');
   const messages = [
     {
       id: 1,
@@ -31,7 +33,7 @@ const MessageScreen = () => {
   const userId = 1;
   return (
     <View style={styles.container}>
-      <Header />
+      <Header chat />
       <FlatList
         data={messages}
         renderItem={({item}) => {
@@ -51,6 +53,7 @@ const MessageScreen = () => {
         }}
         contentContainerStyle={styles.messageContainer}
       />
+      <ChatInput comment={comment} setComment={setComment} />
     </View>
   );
 };
