@@ -23,7 +23,6 @@ const CreateScreen = () => {
   const {control, handleSubmit, reset} = useForm();
   const [loading, setLoading] = useState(false);
 
-  console.log(category);
   const createPostSubmit = async data => {
     try {
       setLoading(true);

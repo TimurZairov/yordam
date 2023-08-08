@@ -1,4 +1,10 @@
-import {ApolloClient, ApolloLink, ApolloProvider, createHttpLink, InMemoryCache,} from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  createHttpLink,
+  InMemoryCache,
+} from '@apollo/client';
 import {createAuthLink} from 'aws-appsync-auth-link';
 import {createSubscriptionHandshakeLink} from 'aws-appsync-subscription-link';
 import config from '../aws-exports';
